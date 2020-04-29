@@ -1,7 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="beee34cb-34d1-48c6-b83a-88df4b1168d7" name="Default Changelist" comment="" />
+    <list default="true" id="beee34cb-34d1-48c6-b83a-88df4b1168d7" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Entity/Employee.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Migrations/Version20200429020252.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Migrations/Version20200429021503.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Migrations/Version20200429021701.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Migrations/Version20200429023248.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Migrations/Version20200429024851.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Migrations/Version20200429031547.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Migrations/Version20200429032516.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Migrations/Version20200429033036.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Country.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Country.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Currency.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Currency.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/InvoiceType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/InvoiceType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/ParentAccount.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/ParentAccount.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Timezone.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Timezone.php" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,62 +31,68 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.env">
+        <entry file="file://$PROJECT_DIR$/src/Entity/Vendor.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="431">
-              <caret line="31" column="23" selection-start-line="31" selection-start-column="23" selection-end-line="31" selection-end-column="23" />
+            <state relative-caret-position="629">
+              <caret line="52" column="21" selection-start-line="52" selection-start-column="21" selection-end-line="52" selection-end-column="21" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../member-area/admin/list-of-active-students.php">
+        <entry file="file://$PROJECT_DIR$/src/Entity/SalaryPackage.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-4016" />
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../member-area/admin/parent-accounts.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="141">
-              <caret line="471" column="41" selection-start-line="471" selection-start-column="41" selection-end-line="471" selection-end-column="41" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../member-area/admin/add-parent-account-call.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="316">
-              <caret line="414" column="75" selection-start-line="414" selection-start-column="66" selection-end-line="414" selection-end-column="75" />
+            <state relative-caret-position="493">
+              <caret line="29" selection-start-line="29" selection-end-line="29" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Entity/Timezone.php">
+        <entry file="file://$PROJECT_DIR$/src/Entity/Employee.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="34" column="50" selection-start-line="34" selection-start-column="50" selection-end-line="34" selection-end-column="50" />
+            <state relative-caret-position="-959">
+              <caret line="151" selection-start-line="151" selection-end-line="151" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Entity/ParentAccount.php">
+        <entry file="file://$PROJECT_DIR$/../member-area/admin/add-year.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="112" selection-start-line="112" selection-end-line="112" />
+            <state relative-caret-position="401">
+              <caret line="57" column="85" selection-start-line="57" selection-start-column="85" selection-end-line="57" selection-end-column="85" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Repository/TimezoneRepository.php">
+        <entry file="file://$PROJECT_DIR$/../member-area/admin/list-of-teachers.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-153" />
+            <state relative-caret-position="199">
+              <caret line="158" column="65" selection-start-line="158" selection-start-column="48" selection-end-line="158" selection-end-column="65" />
+            </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Entity/InvoiceType.php">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Entity/Currency.php">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Entity/Country.php">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Entity/.gitignore">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -79,36 +102,43 @@
       <find>c_id</find>
       <find>$pcid</find>
       <find>invoice</find>
+      <find>teacher</find>
     </findStrings>
+    <dirStrings>
+      <dir>C:\wamp64\www\jannat\src\Entity</dir>
+    </dirStrings>
   </component>
   <component name="FrameworkCommandLineHistory">
     <commandsHistory>
-      <command text="php bin/console doctrine:database:create" />
-      <command text="php bin/console doctrine:create:entity" />
-      <command text="php bin/console doctrine:mpake:entity" />
-      <command text="php bin/console make:entity" />
-      <command text="city" />
-      <command text="trial_date" />
-      <command text="bank" />
-      <command text="created_at" />
-      <command text="php bin/console make:migration" />
-      <command text="php bin/console migrations:migrate" />
       <command text="php bin/console doctrine:migrations:migrate" />
       <command text="php bin/console make:entity" />
-      <command text="php bin/console doctrine:migrations:migrate" />
+      <command text="salarypackage" />
+      <command text="OneToMany" />
+      <command text="php bin/console make:entity" />
       <command text="php bin/console make:migration" />
       <command text="php bin/console doctrine:migrations:migrate" />
-      <command text="php bin/console doctrine:migrations:diff " />
+      <command text="php bin/console make:entity" />
+      <command text="HeadCategory" />
+      <command text="php bin/console make:entity" />
+      <command text="php bin/console make:migration" />
       <command text="php bin/console doctrine:migrations:migrate" />
       <command text="php bin/console make:entity" />
       <command text="php bin/console make:migration" />
       <command text="php bin/console doctrine:migrations:migrate" />
-      <command text="php bin/console doctrine:migrations:diff " />
-      <command text="php bin/console doctrine:migrations:migrate" />
-      <command text=" php bin/console make:migration" />
+      <command text="php bin/console doctrine:schema:update --force --dump-sql" />
       <command text="php bin/console make:migration" />
-      <command text="php bin/console make:entity --regenerate" />
+      <command text="php bin/console doctrine:migrations:migrate" />
+      <command text="php bin/console doctrine:schema:update --force --dump-sql" />
+      <command text=" php bin/console make:entity --regenerate App" />
+      <command text=" php bin/console doctrine:mapping:import &quot;App\Entity&quot; annotation --path=src/Entity" />
+      <command text="php bin/console make:entity --regenerate App" />
+      <command text="php bin/console make:migration" />
+      <command text="php bin/console doctrine:migrations:migrate" />
+      <command text="php bin/console make:entity" />
     </commandsHistory>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="mock:///Dummy.txt" root0="SKIP_INSPECTION" />
@@ -118,8 +148,13 @@
       <list>
         <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/../member-area/admin/parent-accounts.php" />
-        <option value="$PROJECT_DIR$/src/Entity/ParentAccount.php" />
         <option value="$PROJECT_DIR$/src/Entity/Timezone.php" />
+        <option value="$PROJECT_DIR$/src/Entity/Vendor.php" />
+        <option value="$PROJECT_DIR$/src/Entity/ParentAccount.php" />
+        <option value="$PROJECT_DIR$/src/Entity/Teacher.php" />
+        <option value="$USER_HOME$/Downloads/accounts_head.csv" />
+        <option value="$PROJECT_DIR$/src/Entity/SalaryPackage.php" />
+        <option value="$PROJECT_DIR$/src/Entity/MigrationVersions.php" />
       </list>
     </option>
   </component>
@@ -242,6 +277,7 @@
     <option name="width" value="1242" />
     <option name="height" value="672" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -271,18 +307,6 @@
               <item name="jannat" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Entity" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="jannat" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jannat" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Migrations" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="jannat" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jannat" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Repository" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -318,12 +342,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1588116229114</updated>
-      <workItem from="1588116230458" duration="7858000" />
+      <workItem from="1588116230458" duration="13555000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7858000" />
+    <option name="totallyTimeSpent" value="13555000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-8" width="1936" height="1056" extended-state="6" />
@@ -336,7 +360,7 @@
       <window_info anchor="bottom" id="Version Control" />
       <window_info active="true" anchor="bottom" id="Command Line Tools Console" sideWeight="0.49946696" visible="true" weight="0.32936078" />
       <window_info anchor="bottom" id="Terminal" />
-      <window_info anchor="bottom" id="Event Log" sideWeight="0.50053304" side_tool="true" visible="true" weight="0.32936078" />
+      <window_info anchor="bottom" id="Event Log" sideWeight="0.50053304" side_tool="true" weight="0.32936078" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -373,13 +397,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/ParentAccount.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="112" selection-start-line="112" selection-end-line="112" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Repository/TimezoneRepository.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-153" />
@@ -394,8 +411,79 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Entity/Timezone.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="34" column="50" selection-start-line="34" selection-start-column="50" selection-end-line="34" selection-end-column="50" />
+        <state relative-caret-position="197">
+          <caret line="19" column="59" selection-start-line="19" selection-start-column="44" selection-end-line="19" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/ParentAccount.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="799">
+          <caret line="143" column="21" selection-start-line="143" selection-start-column="21" selection-end-line="143" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/InvoiceType.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Currency.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Country.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/.gitignore">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Vendor.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="629">
+          <caret line="52" column="21" selection-start-line="52" selection-start-column="21" selection-end-line="52" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Downloads/accounts_head.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="36" selection-start-column="36" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../member-area/admin/add-year.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="401">
+          <caret line="57" column="85" selection-start-line="57" selection-start-column="85" selection-end-line="57" selection-end-column="85" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../member-area/admin/list-of-teachers.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="199">
+          <caret line="158" column="65" selection-start-line="158" selection-start-column="48" selection-end-line="158" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/MigrationVersions.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/SalaryPackage.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="29" selection-start-line="29" selection-end-line="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Teacher.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1945">
+          <caret line="9" column="6" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Employee.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-959">
+          <caret line="151" selection-start-line="151" selection-end-line="151" />
         </state>
       </provider>
     </entry>

@@ -5,29 +5,40 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\CurrencyRepository")
+ * Currency
+ *
+ * @ORM\Table(name="currency")
+ * @ORM\Entity
  */
 class Currency
 {
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255, nullable=false)
      */
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=10)
+     * @var string
+     *
+     * @ORM\Column(name="code", type="string", length=10, nullable=false)
      */
     private $code;
 
     /**
-     * @ORM\Column(type="string", length=3, nullable=true)
+     * @var string|null
+     *
+     * @ORM\Column(name="symbol", type="string", length=3, nullable=true)
      */
     private $symbol;
 
@@ -71,4 +82,6 @@ class Currency
 
         return $this;
     }
+
+
 }

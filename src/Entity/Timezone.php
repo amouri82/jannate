@@ -5,35 +5,50 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\TimezoneRepository")
+ * Timezone
+ *
+ * @ORM\Table(name="timezone", indexes={@ORM\Index(name="IDX_3701B297F92F3E70", columns={"country_id"})})
+ * @ORM\Entity
  */
 class Timezone
 {
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=101, nullable=true)
+     * @var string|null
+     *
+     * @ORM\Column(name="timezone_diff", type="string", length=101, nullable=true)
      */
-    private $timezone_diff;
+    private $timezoneDiff;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255, nullable=false)
      */
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="php_timezone", type="string", length=255, nullable=false)
      */
-    private $php_timezone;
+    private $phpTimezone;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Country")
-     * @ORM\JoinColumn(name="country_id", referencedColumnName="id")
+     * @var \Country
+     *
+     * @ORM\ManyToOne(targetEntity="Country")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="country_id", referencedColumnName="id")
+     * })
      */
     private $country;
 
@@ -44,12 +59,12 @@ class Timezone
 
     public function getTimezoneDiff(): ?string
     {
-        return $this->timezone_diff;
+        return $this->timezoneDiff;
     }
 
-    public function setTimezoneDiff(?string $timezone_diff): self
+    public function setTimezoneDiff(?string $timezoneDiff): self
     {
-        $this->timezone_diff = $timezone_diff;
+        $this->timezoneDiff = $timezoneDiff;
 
         return $this;
     }
@@ -68,12 +83,12 @@ class Timezone
 
     public function getPhpTimezone(): ?string
     {
-        return $this->php_timezone;
+        return $this->phpTimezone;
     }
 
-    public function setPhpTimezone(string $php_timezone): self
+    public function setPhpTimezone(string $phpTimezone): self
     {
-        $this->php_timezone = $php_timezone;
+        $this->phpTimezone = $phpTimezone;
 
         return $this;
     }
@@ -89,4 +104,6 @@ class Timezone
 
         return $this;
     }
+
+
 }

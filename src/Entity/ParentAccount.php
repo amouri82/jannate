@@ -5,112 +5,154 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ParentAccountRepository")
+ * ParentAccount
+ *
+ * @ORM\Table(name="parent_account")
+ * @ORM\Entity
  */
 class ParentAccount
 {
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=100, nullable=false)
      */
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=255, nullable=false)
      */
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="username", type="string", length=255, nullable=false)
      */
     private $username;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="password", type="string", length=255, nullable=false)
      */
     private $password;
 
     /**
-     * @ORM\Column(type="string", length=20, nullable=true)
+     * @var string|null
+     *
+     * @ORM\Column(name="telephone", type="string", length=20, nullable=true)
      */
     private $telephone;
 
     /**
-     * @ORM\Column(type="string", length=20, nullable=true)
+     * @var string|null
+     *
+     * @ORM\Column(name="mobile", type="string", length=20, nullable=true)
      */
     private $mobile;
 
     /**
-     * @ORM\Column(type="string", length=30, nullable=true)
+     * @var string|null
+     *
+     * @ORM\Column(name="skype", type="string", length=30, nullable=true)
      */
     private $skype;
 
     /**
-     * @ORM\Column(type="string", length=20, nullable=true)
+     * @var string|null
+     *
+     * @ORM\Column(name="fee", type="string", length=20, nullable=true)
      */
     private $fee;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @var int|null
+     *
+     * @ORM\Column(name="active", type="integer", nullable=true)
      */
     private $active;
 
     /**
-     * @ORM\Column(type="string", length=30, nullable=true)
+     * @var string|null
+     *
+     * @ORM\Column(name="city", type="string", length=30, nullable=true)
      */
     private $city;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @var \DateTime|null
+     *
+     * @ORM\Column(name="trial_date", type="datetime", nullable=true)
      */
-    private $trial_date;
+    private $trialDate;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @var \DateTime|null
+     *
+     * @ORM\Column(name="regular_date", type="datetime", nullable=true)
      */
-    private $regular_date;
+    private $regularDate;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @var \DateTime|null
+     *
+     * @ORM\Column(name="leave_date", type="datetime", nullable=true)
      */
-    private $leave_date;
+    private $leaveDate;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @var \DateTime|null
+     *
+     * @ORM\Column(name="deactivation_date", type="datetime", nullable=true)
      */
-    private $deactivation_date;
+    private $deactivationDate;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @var \DateTime|null
+     *
+     * @ORM\Column(name="suspension_date", type="datetime", nullable=true)
      */
-    private $suspension_date;
+    private $suspensionDate;
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=true)
+     * @var string|null
+     *
+     * @ORM\Column(name="bank", type="string", length=100, nullable=true)
      */
     private $bank;
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=true)
+     * @var string|null
+     *
+     * @ORM\Column(name="student_bank", type="string", length=100, nullable=true)
      */
-    private $student_bank;
+    private $studentBank;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created_at", type="datetime", nullable=false, options={"default"="CURRENT_TIMESTAMP"})
      */
-    private $created_at;
+    private $createdAt = 'CURRENT_TIMESTAMP';
 
     /**
-     * @ORM\Column(type="datetime")
+     * @var \DateTime
+     *
+     * @ORM\Column(name="updated_at", type="datetime", nullable=false, options={"default"="CURRENT_TIMESTAMP"})
      */
-    private $updated_at;
-
+    private $updatedAt = 'CURRENT_TIMESTAMP';
 
     public function getId(): ?int
     {
@@ -239,60 +281,60 @@ class ParentAccount
 
     public function getTrialDate(): ?\DateTimeInterface
     {
-        return $this->trial_date;
+        return $this->trialDate;
     }
 
-    public function setTrialDate(?\DateTimeInterface $trial_date): self
+    public function setTrialDate(?\DateTimeInterface $trialDate): self
     {
-        $this->trial_date = $trial_date;
+        $this->trialDate = $trialDate;
 
         return $this;
     }
 
     public function getRegularDate(): ?\DateTimeInterface
     {
-        return $this->regular_date;
+        return $this->regularDate;
     }
 
-    public function setRegularDate(?\DateTimeInterface $regular_date): self
+    public function setRegularDate(?\DateTimeInterface $regularDate): self
     {
-        $this->regular_date = $regular_date;
+        $this->regularDate = $regularDate;
 
         return $this;
     }
 
     public function getLeaveDate(): ?\DateTimeInterface
     {
-        return $this->leave_date;
+        return $this->leaveDate;
     }
 
-    public function setLeaveDate(?\DateTimeInterface $leave_date): self
+    public function setLeaveDate(?\DateTimeInterface $leaveDate): self
     {
-        $this->leave_date = $leave_date;
+        $this->leaveDate = $leaveDate;
 
         return $this;
     }
 
     public function getDeactivationDate(): ?\DateTimeInterface
     {
-        return $this->deactivation_date;
+        return $this->deactivationDate;
     }
 
-    public function setDeactivationDate(?\DateTimeInterface $deactivation_date): self
+    public function setDeactivationDate(?\DateTimeInterface $deactivationDate): self
     {
-        $this->deactivation_date = $deactivation_date;
+        $this->deactivationDate = $deactivationDate;
 
         return $this;
     }
 
     public function getSuspensionDate(): ?\DateTimeInterface
     {
-        return $this->suspension_date;
+        return $this->suspensionDate;
     }
 
-    public function setSuspensionDate(?\DateTimeInterface $suspension_date): self
+    public function setSuspensionDate(?\DateTimeInterface $suspensionDate): self
     {
-        $this->suspension_date = $suspension_date;
+        $this->suspensionDate = $suspensionDate;
 
         return $this;
     }
@@ -311,49 +353,39 @@ class ParentAccount
 
     public function getStudentBank(): ?string
     {
-        return $this->student_bank;
+        return $this->studentBank;
     }
 
-    public function setStudentBank(?string $student_bank): self
+    public function setStudentBank(?string $studentBank): self
     {
-        $this->student_bank = $student_bank;
+        $this->studentBank = $studentBank;
 
         return $this;
     }
 
     public function getCreatedAt(): ?\DateTimeInterface
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $created_at): self
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $this->created_at = $created_at;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
 
     public function getUpdatedAt(): ?\DateTimeInterface
     {
-        return $this->updated_at;
+        return $this->updatedAt;
     }
 
-    public function setUpdatedAt(\DateTimeInterface $updated_at): self
+    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $this->updated_at = $updated_at;
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
 
-    public function getTimezone(): ?string
-    {
-        return $this->timezone;
-    }
 
-    public function setTimezone(string $timezone): self
-    {
-        $this->timezone = $timezone;
-
-        return $this;
-    }
 }

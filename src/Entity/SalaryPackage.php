@@ -5,12 +5,12 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * InvoiceType
+ * SalaryPackage
  *
- * @ORM\Table(name="invoice_type")
+ * @ORM\Table(name="salary_package")
  * @ORM\Entity
  */
-class InvoiceType
+class SalaryPackage
 {
     /**
      * @var int
@@ -24,23 +24,23 @@ class InvoiceType
     /**
      * @var string
      *
-     * @ORM\Column(name="type", type="string", length=255, nullable=false)
+     * @ORM\Column(name="salary", type="string", length=100, nullable=false)
      */
-    private $type;
+    private $salary;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getType(): ?string
+    public function getSalary(): ?string
     {
-        return $this->type;
+        return $this->salary;
     }
 
-    public function setType(string $type): self
+    public function setSalary(string $salary): self
     {
-        $this->type = $type;
+        $this->salary = $salary;
 
         return $this;
     }

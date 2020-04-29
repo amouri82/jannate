@@ -5,12 +5,12 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * InvoiceType
+ * Remark
  *
- * @ORM\Table(name="invoice_type")
+ * @ORM\Table(name="remark")
  * @ORM\Entity
  */
-class InvoiceType
+class Remark
 {
     /**
      * @var int
@@ -24,23 +24,23 @@ class InvoiceType
     /**
      * @var string
      *
-     * @ORM\Column(name="type", type="string", length=255, nullable=false)
+     * @ORM\Column(name="remark", type="string", length=100, nullable=false)
      */
-    private $type;
+    private $remark;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getType(): ?string
+    public function getRemark(): ?string
     {
-        return $this->type;
+        return $this->remark;
     }
 
-    public function setType(string $type): self
+    public function setRemark(string $remark): self
     {
-        $this->type = $type;
+        $this->remark = $remark;
 
         return $this;
     }

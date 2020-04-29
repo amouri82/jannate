@@ -5,29 +5,40 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\CountryRepository")
+ * Country
+ *
+ * @ORM\Table(name="country")
+ * @ORM\Entity
  */
 class Country
 {
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=10)
+     * @var string
+     *
+     * @ORM\Column(name="iso_code", type="string", length=10, nullable=false)
      */
-    private $iso_code;
+    private $isoCode;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255, nullable=false)
      */
     private $name;
 
     /**
-     * @ORM\Column(type="integer")
+     * @var int
+     *
+     * @ORM\Column(name="position", type="integer", nullable=false)
      */
     private $position;
 
@@ -38,12 +49,12 @@ class Country
 
     public function getIsoCode(): ?string
     {
-        return $this->iso_code;
+        return $this->isoCode;
     }
 
-    public function setIsoCode(string $iso_code): self
+    public function setIsoCode(string $isoCode): self
     {
-        $this->iso_code = $iso_code;
+        $this->isoCode = $isoCode;
 
         return $this;
     }
@@ -71,4 +82,6 @@ class Country
 
         return $this;
     }
+
+
 }
