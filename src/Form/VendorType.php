@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Vendor;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,11 +14,11 @@ class VendorType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('contact')
-            ->add('address')
-            ->add('createdAt')
-            ->add('updatedAt')
-        ;
+            ->add('contact', null, [
+                'required' => false
+            ])
+            ->add('address', TextareaType::class,
+                ['label' => 'Address', 'required' => false, 'attr' => ['rows' => 10]]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
