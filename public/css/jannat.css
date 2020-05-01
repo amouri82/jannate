@@ -1,0 +1,17 @@
+ul.pagination {
+    float: right;
+}
+
+.required::after {
+    content: ' *';
+    color: red;
+}
+
+.form-check-label {
+    font-weight: bold;
+}
+
+.add-block {
+    text-align: right;
+    margin-bottom: 20px;
+}

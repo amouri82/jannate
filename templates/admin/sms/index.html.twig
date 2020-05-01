@@ -1,0 +1,130 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sms Services list{% endblock %}
+{% block body %}
+
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Sms Services</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="{{ path('home') }}">Home</a></li>
+                        <li class="breadcrumb-item active">Sms Services</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+        <div class="col-xs-12 add-block">
+            <a href="{{ path('admin.sms.new') }}" class="btn btn-info" title="Add new">
+                <i class="fa fa-plus-circle"></i>
+                Add New Sms Service
+            </a>
+        </div>
+        <!-- Default box -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Sms</h3>
+            </div>
+            <div class="card-body p-0">
+                <table class="table table-striped projects">
+                    <thead>
+                    <tr>
+                        <th style="width: 1%">
+                            #
+                        </th>
+                        <th style="width: 20%">
+                            Service Name
+                        </th>
+                        <th style="width: 30%">
+                            Service Number
+                        </th>
+                        <th>
+                            Device
+                        </th>
+                        <th>
+                            Sms User
+                        </th>
+                        <th>
+                            Sms Pass
+                        </th>
+                        <th>
+                            Status
+                        </th>
+                        <th style="width: 20%"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for sms_service in sms_services %}
+                        <tr>
+                            <td>
+                                #
+                            </td>
+                            <td>
+                                <a>
+                                    {{ sms_service.serviceName }}
+                                </a>
+                            </td>
+                            <td>
+                                {{ sms_service.serviceNumber }}
+                            </td>
+                            <td>
+                                {{ sms_service.deviceId }}
+                            </td>
+                            <td>
+                                {{ sms_service.smsUser }}
+                            </td>
+                            <td>
+                                {{ sms_service.smsPass }}
+                            </td>
+                            <td>
+                                {% if  sms_service.serviceStatus == 1 %}
+                                    <span class="badge bg-success">Enabled</span>
+                                {% else %}
+                                    <span class="badge bg-danger">Disabled</span>
+                                {% endif %}
+                            </td>
+                            <td class="project-actions text-right">
+                                <a class="btn btn-info btn-sm" href="{{ path('admin.sms.edit', {'id': sms_service.id}) }}">
+                                    <i class="fas fa-pencil-alt">
+                                    </i>
+                                    Edit
+                                </a>
+                                <form method="post" action="{{ path('admin.sms.delete', {id: sms_service.id}) }}" style="display: inline-block" onsubmit="return confirm('Are you sure to delete ?')">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <input type="hidden" name="token" value="{{ csrf_token('delete') }}">
+                                    <button class="btn btn-danger btn-sm">
+                                        <i class="fas fa-trash">
+                                        </i>
+                                        Delete
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="card-footer clearfix">
+                {{ knp_pagination_render(sms_services) }}
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+
+    </section>
+    <!-- /.content -->
+{% endblock %}
