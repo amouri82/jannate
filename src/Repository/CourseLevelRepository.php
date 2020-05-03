@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Level;
+use App\Entity\CourseLevel;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method Level|null find($id, $lockMode = null, $lockVersion = null)
- * @method Level|null findOneBy(array $criteria, array $orderBy = null)
- * @method Level[]    findAll()
- * @method Level[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method CourseLevel|null find($id, $lockMode = null, $lockVersion = null)
+ * @method CourseLevel|null findOneBy(array $criteria, array $orderBy = null)
+ * @method CourseLevel[]    findAll()
+ * @method CourseLevel[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class LevelRepository extends ServiceEntityRepository
+class CourseLevelRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Level::class);
+        parent::__construct($registry, CourseLevel::class);
     }
 
     // /**
-    //  * @return Level[] Returns an array of Level objects
+    //  * @return CourseLevel[] Returns an array of CourseLevel objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class LevelRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Level
+    public function findOneBySomeField($value): ?CourseLevel
     {
         return $this->createQueryBuilder('l')
             ->andWhere('l.exampleField = :val')

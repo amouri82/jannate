@@ -1,0 +1,114 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Courses Material{% endblock %}
+{% block body %}
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Courses Material</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="{{ path('home') }}">Home</a></li>
+                        <li class="breadcrumb-item active">Courses Material</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            {% for message in app.flashes('success') %}
+                <div class="row">
+                    <div class="alert alert-success">
+                        {{ message }}
+                    </div>
+                </div>
+            {% endfor %}
+            <div class="row">
+                <div class="col-xs-12 add-block">
+                    <a href="{{ path('admin.course.new') }}" class="btn btn-info" title="Add new">
+                        <i class="fa fa-plus-circle"></i>
+                        Add New Course
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-sm-12">
+                    <div class="card card-info card-tabs">
+                        <div class="card-header p-0 pt-1">
+                            <ul class="nav nav-tabs" id="custom-tabs-0-tab" role="tablist">
+                                {% set index = 0 %}
+                                {% for item in items %}
+                                    <li class="nav-item">
+                                        <a class="nav-link {{ index == 0 ? 'active' : '' }}"
+                                           id="custom-tabs-one-{{ index }}-tab" data-toggle="pill"
+                                           href="#custom-tabs-one-{{ index }}" role="tab"
+                                           aria-controls="custom-tabs-one-{{ index }}"
+                                           aria-selected="true">{{ item.category.name }}</a>
+                                    </li>
+                                    {% set index = index + 1 %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="card-body pb-0">
+                            <div class="tab-content" id="custom-tabs-one-tabContent">
+                                {% set index = 0 %}
+                                {% for item in items %}
+                                    <div class="tab-pane fade {{ index == 0 ? 'active show' : '' }}" id="custom-tabs-one-{{ index }}" role="tabpanel"
+                                         aria-labelledby="custom-tabs-one-{{ index }}-tab">
+                                        <div class="row d-flex align-items-stretch">
+                                            {% for course in item.courses %}
+                                                <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
+                                                    <div class="card bg-light">
+                                                        <div class="card-header text-muted border-bottom-0">
+                                                            {{ course.name }}
+                                                        </div>
+                                                        <div class="card-body pt-0">
+                                                            <div class="row">
+                                                                <div class="col-7">
+                                                                    <h2 class="lead"><b>{{ course.displayName }}</b>
+                                                                    </h2>
+                                                                    <p class="text-muted text-sm">
+                                                                        Minimum Age: {{ course.age }}</p>
+                                                                    <p class="text-muted text-sm"><b>About: </b> {{ course.description }} </p>
+                                                                      </div>
+                                                                <div class="col-5 text-center">
+                                                                    <img src="/img/user1-128x128.jpg" alt=""
+                                                                         class="img-circle img-fluid">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-footer">
+                                                            <div class="text-right">
+                                                                <a href="{{ path('admin.course.edit', {'id': course.id} ) }}" class="btn btn-sm bg-teal">
+                                                                    <i class="fas fa-edit"></i> Edit Course
+                                                                </a>
+                                                                <a href="#" class="btn btn-sm btn-primary">
+                                                                    <i class="fas fa-plus"></i> Add Lesson
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                    {% set index = index + 1 %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+{% endblock %}

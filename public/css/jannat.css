@@ -15,3 +15,7 @@ ul.pagination {
     text-align: right;
     margin-bottom: 20px;
 }
+
+.lead{
+    width: 200px
+}

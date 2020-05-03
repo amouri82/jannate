@@ -13,7 +13,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class VendorController extends AbstractController
 {
-
     /**
      * @var VendorRepository
      */
@@ -82,7 +81,8 @@ class VendorController extends AbstractController
             return $this->redirectToRoute('admin.vendor.index');
         }
         return $this->render('admin/vendor/create.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'new' => $new
         ]);
     }
 

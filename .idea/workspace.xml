@@ -2,50 +2,28 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="beee34cb-34d1-48c6-b83a-88df4b1168d7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/config/packages/knp_paginator.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/jannat.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Controller/Admin/SmsController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Entity/Sms.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Form/SmsType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Repository/SmsRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/admin/sms/create.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/admin/sms/index.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/admin/vendor/create.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jannat.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jannat.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Controller/Admin/CourseController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Form/CourseType.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Migrations/Version20200501224154.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Migrations/Version20200501225003.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Migrations/Version20200501225418.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Migrations/Version20200501235124.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Migrations/Version20200503020538.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/admin/course/create.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/admin/course/index.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/twig.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/twig.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/adminlte.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/adminlte.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/jannat.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/jannat.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Admin/SmsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Admin/SmsController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/Admin/VendorController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Admin/VendorController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Department.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Course.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Level.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/CourseLevel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Student.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Student.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/Vendor.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Vendor.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/VendorType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/VendorType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200429001934.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200429004359.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200429004614.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200429005946.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200429014836.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200429015945.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20200501162558.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200429020252.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200429021503.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200429021701.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200429023248.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200429024851.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200429031547.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20200501183046.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200429032516.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200429033036.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200429033440.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200429133520.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200429135537.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200429143714.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200429145732.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200429151658.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200429152244.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200429152845.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/vendor/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/vendor/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/DepartmentRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/CourseRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/LevelRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/CourseLevelRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/QRepository.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/sms/create.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/sms/create.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/vendor/create.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/vendor/create.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -74,10 +52,85 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/admin/course/index.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="164">
+              <caret line="79" column="97" selection-start-line="79" selection-start-column="97" selection-end-line="79" selection-end-column="97" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../member-area/admin/edit-lesson.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-550">
+              <caret line="40" column="45" selection-start-line="40" selection-start-column="33" selection-end-line="40" selection-end-column="45" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Entity/Lesson.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-17">
+              <caret line="8" column="29" selection-start-line="8" selection-start-column="29" selection-end-line="8" selection-end-column="29" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/css/jannat.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="323">
+              <caret line="19" column="16" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/admin/course/create.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" column="67" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="67" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/admin/sms/create.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="77" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/admin/vendor/create.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" column="63" selection-start-line="2" selection-start-column="63" selection-end-line="2" selection-end-column="63" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Entity/Course.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-306">
+              <caret line="24" column="18" selection-start-line="24" selection-start-column="18" selection-end-line="24" selection-end-column="18" />
+              <folding>
+                <element signature="e#30#78#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Entity/Vendor.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="99">
-              <caret line="40" column="7" selection-start-line="40" selection-start-column="7" selection-end-line="40" selection-end-column="7" />
+            <state relative-caret-position="1819">
+              <caret line="134" column="48" selection-start-line="134" selection-start-column="48" selection-end-line="134" selection-end-column="48" />
               <folding>
                 <element signature="e#30#62#0#PHP" expanded="true" />
               </folding>
@@ -86,91 +139,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Controller/Admin/VendorController.php">
+        <entry file="file://$PROJECT_DIR$/../member-area/admin/course-material.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="586">
-              <caret line="80" column="13" selection-start-line="80" selection-start-column="13" selection-end-line="80" selection-end-column="13" />
-              <folding>
-                <element signature="e#40#62#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/css/jannat.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" column="1" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Form/VendorType.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="27" column="11" selection-start-line="27" selection-start-column="11" selection-end-line="27" selection-end-column="11" />
-              <folding>
-                <element signature="e#28#50#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Entity/Sms.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1593">
-              <caret line="123" column="5" selection-start-line="123" selection-start-column="5" selection-end-line="123" selection-end-column="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/admin/sms/index.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="29" selection-start-line="29" selection-end-line="34" selection-end-column="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/templates/admin/vendor/index.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="32" column="30" selection-start-line="32" selection-start-column="30" selection-end-line="32" selection-end-column="30" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Form/SmsType.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="24" column="14" selection-start-line="24" selection-start-column="14" selection-end-line="24" selection-end-column="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/admin/sms/create.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="362">
-              <caret line="29" column="22" selection-start-line="29" selection-start-column="22" selection-end-line="29" selection-end-column="22" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Controller/Admin/SmsController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="50" column="25" selection-start-line="50" selection-start-column="13" selection-end-line="50" selection-end-column="25" />
-              <folding>
-                <element signature="e#40#62#0#PHP" expanded="true" />
-              </folding>
+            <state relative-caret-position="383">
+              <caret line="113" column="99" selection-start-line="113" selection-start-column="91" selection-end-line="113" selection-end-column="103" />
             </state>
           </provider>
         </entry>
@@ -186,16 +158,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>c_id</find>
-      <find>$pcid</find>
-      <find>invoice</find>
-      <find>teacher</find>
-      <find>pay_type</find>
-      <find>$pman</find>
-      <find>$t_csr</find>
-      <find>Regula</find>
-      <find>create table student</find>
-      <find>nature</find>
       <find>$parent</find>
       <find>$p_id</find>
       <find>Hours</find>
@@ -209,40 +171,64 @@
       <find>repository</find>
       <find>vendor</find>
       <find>vend</find>
+      <find>Table</find>
+      <find>Level</find>
+      <find>level</find>
+      <find>LessonCategory</find>
+      <find>lesson</find>
+      <find>depar</find>
+      <find>LessonLevel</find>
+      <find>Department</find>
+      <find>Nav Tabs inside Card</find>
+      <find>one</find>
+      <find>custom-tabs-one-</find>
+      <find>Nav Tabs inside Card Header</find>
+      <find>home</find>
+      <find>?</find>
+      <find>Minimum Age</find>
+      <find>age</find>
+      <find>display_name</find>
     </findStrings>
+    <replaceStrings>
+      <replace>LessonLevel</replace>
+      <replace>CourseLevel</replace>
+      <replace>Course</replace>
+      <replace>CourseCategory</replace>
+    </replaceStrings>
     <dirStrings>
-      <dir>C:\wamp64\www\jannat\src\Entity</dir>
       <dir>C:\wamp64\www\jannat\src\Migrations</dir>
       <dir>C:\wamp64\www\jannat\vendor\twig</dir>
+      <dir>C:\wamp64\www\jannat\src\Entity</dir>
+      <dir>C:\wamp64\www\jannat\src\Repository</dir>
     </dirStrings>
   </component>
   <component name="FrameworkCommandLineHistory">
     <commandsHistory>
-      <command text="php bin/console doctrine:migrations:diff" />
-      <command text="php bin/console doctrine:migrations:migrate" />
-      <command text="php bin/console doctrine:migrations:diff" />
-      <command text="php bin/console doctrine:migrations:migrate" />
-      <command text="php bin/console doctrine:migrations:diff" />
-      <command text="php bin/console doctrine:migrations:migrate" />
-      <command text=" php bin/console doctrine:schema:update --force" />
-      <command text="php bin/console doctrine:migrations:diff" />
       <command text="php bin/console make:migration" />
-      <command text="php bin/console doctrine:migrations:diff" />
-      <command text="php bin/console doctrine:migrations:migrate" />
-      <command text="php bin/symfony make:controller" />
-      <command text="php bin/console make:controller" />
-      <command text="php bin/console make:Form" />
       <command text=" php bin/console doctrine:schema:update --force" />
-      <command text="php bin/console make:migration" />
-      <command text="php bin/console doctrine:migrations:migrate" />
       <command text="git branch" />
-      <command text="git branch feature-sms" />
-      <command text="git add ." />
-      <command text="php bin/console doctrine:migrations:diff" />
-      <command text="php bin/console doctrine:migrations:migrate" />
-      <command text="php bin/console doctrine:migrations:diff" />
+      <command text="git checkout feature-lessons" />
+      <command text="git checkout -b feature-lessons" />
+      <command text="git branch" />
+      <command text="php bin/console make:entity" />
       <command text="php bin/console make:migration" />
-      <command text=" php bin/console doctrine:schema:update --force" />
+      <command text="php bin/console doctrine:migrations:migrate" />
+      <command text="php bin/console make:migration" />
+      <command text="php bin/console doctrine:migrations:migrate" />
+      <command text="php bin/console make:entity" />
+      <command text="php bin/console make:migration" />
+      <command text="php bin/console doctrine:migrations:migrate" />
+      <command text="php bin/console make:controller" />
+      <command text="php bin/console make:migration" />
+      <command text="php bin/console doctrine:migrations:migrate" />
+      <command text="symfony server:start" />
+      <command text="php bin/console make:form" />
+      <command text=" php bin/console debug:form FooType" />
+      <command text="php bin/console debug:form FooType" />
+      <command text="php bin/console make:entity" />
+      <command text="ManyToOne" />
+      <command text="php bin/console make:migration" />
+      <command text="php bin/console doctrine:migrations:migrate" />
     </commandsHistory>
   </component>
   <component name="Git.Settings">
@@ -263,26 +249,39 @@
         <option value="$PROJECT_DIR$/src/Entity/SalaryPackage.php" />
         <option value="$PROJECT_DIR$/src/Entity/MigrationVersions.php" />
         <option value="$PROJECT_DIR$/src/Entity/Employee.php" />
-        <option value="$PROJECT_DIR$/src/Entity/Student.php" />
         <option value="$PROJECT_DIR$/src/Controller/HomeController.php" />
         <option value="$PROJECT_DIR$/templates/pages/home.html..twig" />
         <option value="$PROJECT_DIR$/templates/home/index.html.twig" />
         <option value="$PROJECT_DIR$/config/packages/knp_paginator.yaml" />
         <option value="$PROJECT_DIR$/public/css/adminlte.css" />
-        <option value="$PROJECT_DIR$/templates/base.html.twig" />
         <option value="$PROJECT_DIR$/config/packages/twig.yaml" />
-        <option value="$PROJECT_DIR$/src/Entity/Vendor.php" />
         <option value="$PROJECT_DIR$/src/Form/VendorType.php" />
         <option value="$PROJECT_DIR$/config/routes.yaml" />
-        <option value="$PROJECT_DIR$/templates/admin/vendor/create.html.twig" />
-        <option value="$PROJECT_DIR$/src/Controller/Admin/VendorController.php" />
-        <option value="$PROJECT_DIR$/src/Controller/Admin/SmsController.php" />
         <option value="$PROJECT_DIR$/src/Entity/Sms.php" />
         <option value="$PROJECT_DIR$/src/Form/SmsType.php" />
-        <option value="$PROJECT_DIR$/public/css/jannat.css" />
         <option value="$PROJECT_DIR$/templates/admin/sms/index.html.twig" />
-        <option value="$PROJECT_DIR$/templates/admin/sms/create.html.twig" />
         <option value="$PROJECT_DIR$/templates/admin/vendor/index.html.twig" />
+        <option value="$PROJECT_DIR$/src/Entity/Level.php" />
+        <option value="$PROJECT_DIR$/src/Repository/LessonLevelRepository.php" />
+        <option value="$PROJECT_DIR$/src/Repository/CourseRepository.php" />
+        <option value="$PROJECT_DIR$/src/Repository/CourseCategoryRepository.php" />
+        <option value="$PROJECT_DIR$/src/Entity/CourseCategory.php" />
+        <option value="$PROJECT_DIR$/src/Entity/CourseLevel.php" />
+        <option value="$PROJECT_DIR$/src/Repository/CourseLevelRepository.php" />
+        <option value="$PROJECT_DIR$/src/Entity/Student.php" />
+        <option value="$PROJECT_DIR$/templates/base.html.twig" />
+        <option value="$PROJECT_DIR$/src/Controller/Admin/VendorController.php" />
+        <option value="$PROJECT_DIR$/src/Controller/Admin/SmsController.php" />
+        <option value="$PROJECT_DIR$/src/Controller/Admin/CourseController.php" />
+        <option value="$PROJECT_DIR$/src/Form/CourseType.php" />
+        <option value="$PROJECT_DIR$/src/Entity/Course.php" />
+        <option value="$PROJECT_DIR$/templates/admin/course/create.html.twig" />
+        <option value="$PROJECT_DIR$/templates/admin/sms/create.html.twig" />
+        <option value="$PROJECT_DIR$/templates/admin/vendor/create.html.twig" />
+        <option value="$PROJECT_DIR$/src/Entity/Vendor.php" />
+        <option value="$PROJECT_DIR$/public/css/jannat.css" />
+        <option value="$PROJECT_DIR$/templates/admin/course/index.html.twig" />
+        <option value="$PROJECT_DIR$/src/Entity/Lesson.php" />
       </list>
     </option>
   </component>
@@ -402,10 +401,10 @@
     </include_path>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-23" />
-    <option name="y" value="-18" />
-    <option name="width" value="1944" />
-    <option name="height" value="1103" />
+    <option name="x" value="2054" />
+    <option name="y" value="51" />
+    <option name="width" value="1556" />
+    <option name="height" value="882" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -423,25 +422,48 @@
             <path>
               <item name="jannat" type="b2602c69:ProjectViewProjectNode" />
               <item name="jannat" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jannat" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jannat" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jannat" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jannat" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jannat" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jannat" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="jannat" type="b2602c69:ProjectViewProjectNode" />
               <item name="jannat" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Controller" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="jannat" type="b2602c69:ProjectViewProjectNode" />
               <item name="jannat" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Controller" type="462c0819:PsiDirectoryNode" />
+              <item name="Admin" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="jannat" type="b2602c69:ProjectViewProjectNode" />
               <item name="jannat" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
-              <item name="vendor" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Entity" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jannat" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jannat" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Form" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -459,6 +481,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\jannat\templates\admin\course" />
+      <recent name="C:\wamp64\www\jannat\public\plugins\jquery" />
       <recent name="C:\wamp64\www\jannat\templates\admin\sms" />
       <recent name="C:\wamp64\www\jannat\templates\admin\vendor" />
     </key>
@@ -496,17 +520,17 @@
       <workItem from="1588258306771" duration="3498000" />
       <workItem from="1588269432453" duration="14862000" />
       <workItem from="1588348660985" duration="6948000" />
+      <workItem from="1588425987897" duration="15365000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="59981000" />
+    <option name="totallyTimeSpent" value="85591000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
+    <frame x="1912" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.33020133" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15565032" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -519,9 +543,9 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Command Line Tools Console" order="10" sideWeight="0.4989339" weight="0.509915" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.32577905" />
-      <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.5010661" side_tool="true" weight="0.32936078" />
+      <window_info active="true" anchor="bottom" id="Command Line Tools Console" order="10" sideWeight="0.49840087" visible="true" weight="0.4084507" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.32502708" />
+      <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.50159913" side_tool="true" weight="0.4084507" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -532,147 +556,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/Desktop/AdminLTE-master/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="552">
-          <caret line="1341" column="25" selection-start-line="1341" selection-start-column="25" selection-end-line="1341" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../MaSuperAgence/templates/base.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="32" selection-start-line="32" selection-end-line="33" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../MaSuperAgence/config/routes.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../MaSuperAgence/config/services.yaml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../MaSuperAgence/src/Controller/HomeController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="31" column="1" selection-start-line="31" selection-start-column="1" selection-end-line="31" selection-end-column="1" />
-          <folding>
-            <element signature="e#123#161#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Desktop/AdminLTE-master/pages/examples/projects.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="469">
-          <caret line="704" column="30" selection-start-line="704" selection-start-column="30" selection-end-line="704" selection-end-column="30" />
-          <folding>
-            <element signature="n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/home/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="3" selection-end-column="16" />
-          <folding>
-            <element signature="e#1832#1855#0#HTML" expanded="true" />
-            <element signature="e#5070#5112#0#HTML" expanded="true" />
-            <element signature="e#5197#5219#0#HTML" expanded="true" />
-            <element signature="e#5383#5425#0#HTML" expanded="true" />
-            <element signature="e#5508#5530#0#HTML" expanded="true" />
-            <element signature="e#18794#18801#1#HTML" expanded="true" />
-            <element signature="e#19196#19203#1#HTML" expanded="true" />
-            <element signature="e#27967#28002#0#HTML" expanded="true" />
-            <element signature="e#30291#30368#0#HTML" expanded="true" />
-            <element signature="e#34287#34306#0#HTML" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../belleseglises/src/Euphor/ChurchesBundle/Controller/ChurcheController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="91" column="33" selection-start-line="91" selection-start-column="25" selection-end-line="91" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../MaSuperAgence/templates/admin/property/new.html.twig">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../MaSuperAgence/templates/admin/property/_form.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="6" selection-start-line="20" selection-end-line="20" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../belleseglises/src/Euphor/ChurchesBundle/Resources/views/Advertisement/add.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="41" column="42" selection-start-line="41" selection-end-line="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../MaSuperAgence/templates/admin/property/edit.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="14" selection-start-line="8" selection-end-line="8" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../MaSuperAgence/src/Entity/Property.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="98" selection-start-line="98" selection-end-line="98" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../belleseglises/src/Euphor/ChurchesBundle/Resources/views/Churche/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-577" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../belleseglises/src/Euphor/ChurchesBundle/Resources/views/Churche/add.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1683" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../belleseglises/src/Euphor/ChurchesBundle/Resources/views/Advertisement/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="26" column="21" selection-start-line="26" selection-start-column="21" selection-end-line="26" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/services.yaml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Kernel.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/bundles.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" selection-start-line="16" selection-end-line="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../MaSuperAgence/src/Repository/PropertyRepository.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/packages/knp_paginator.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="62" selection-start-line="10" selection-start-column="62" selection-end-line="10" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Desktop/AdminLTE-master/dist/css/adminlte.min.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-89672" />
@@ -689,13 +572,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="293">
           <caret line="22" selection-start-line="22" selection-end-line="26" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/base.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="28" column="48" selection-start-line="28" selection-start-column="48" selection-end-line="28" selection-end-column="48" />
         </state>
       </provider>
     </entry>
@@ -740,45 +616,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Migrations/Version20200429152845.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Migrations/Version20200429152244.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Migrations/Version20200429151658.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Migrations/Version20200429145732.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/admin/vendor/create.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" selection-start-line="14" selection-end-line="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Migrations/Version20200429032516.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Migrations/Version20200429033036.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-153" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Migrations/Version20200429001934.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-204" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Migrations/Version20200501035909.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="393">
-          <caret line="37" selection-start-line="37" selection-end-line="37" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Migrations/Version20200429152845.php" />
+    <entry file="file://$PROJECT_DIR$/src/Migrations/Version20200429152244.php" />
+    <entry file="file://$PROJECT_DIR$/src/Migrations/Version20200429151658.php" />
+    <entry file="file://$PROJECT_DIR$/src/Migrations/Version20200429145732.php" />
+    <entry file="file://$PROJECT_DIR$/src/Migrations/Version20200429032516.php" />
+    <entry file="file://$PROJECT_DIR$/src/Migrations/Version20200429033036.php" />
+    <entry file="file://$PROJECT_DIR$/src/Migrations/Version20200429001934.php" />
+    <entry file="file://$PROJECT_DIR$/src/Migrations/Version20200501035909.php" />
     <entry file="file://$PROJECT_DIR$/config/routes.yaml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
@@ -788,16 +633,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Migrations/Version20200501162558.php">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Vendor.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="99">
-          <caret line="40" column="7" selection-start-line="40" selection-start-column="7" selection-end-line="40" selection-end-column="7" />
-          <folding>
-            <element signature="e#30#62#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Form/VendorType.php">
       <provider selected="true" editor-type-id="text-editor">
@@ -809,37 +644,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Admin/VendorController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="586">
-          <caret line="80" column="13" selection-start-line="80" selection-start-column="13" selection-end-line="80" selection-end-column="13" />
-          <folding>
-            <element signature="e#40#62#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Admin/SmsController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="50" column="25" selection-start-line="50" selection-start-column="13" selection-end-line="50" selection-end-column="25" />
-          <folding>
-            <element signature="e#40#62#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Form/SmsType.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
           <caret line="24" column="14" selection-start-line="24" selection-start-column="14" selection-end-line="24" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/css/jannat.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="1" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
         </state>
       </provider>
     </entry>
@@ -850,24 +658,224 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/admin/sms/create.html.twig">
+    <entry file="file://$PROJECT_DIR$/templates/admin/vendor/index.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="362">
-          <caret line="29" column="22" selection-start-line="29" selection-start-column="22" selection-end-line="29" selection-end-column="22" />
+        <state relative-caret-position="391">
+          <caret line="32" column="30" selection-start-line="32" selection-start-column="30" selection-end-line="32" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../member-area/admin/edit-course.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="205" column="89" selection-start-line="205" selection-start-column="89" selection-end-line="205" selection-end-column="89" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Shift.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="121">
+          <caret line="9" selection-start-line="9" selection-end-line="10" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Repository/CourseCategoryRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="663">
+          <caret line="39" column="63" selection-start-line="39" selection-start-column="63" selection-end-line="39" selection-end-column="63" />
+          <folding>
+            <element signature="e#34#64#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/CourseLevel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" column="7" selection-start-line="21" selection-start-column="7" selection-end-line="21" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Repository/CourseLevelRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="6" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="6" />
+          <folding>
+            <element signature="e#34#61#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/plugins/jquery/jquery.min.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/CourseCategory.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="7" selection-start-line="18" selection-start-column="7" selection-end-line="18" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/base.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="12325">
+          <caret line="725" column="32" selection-start-line="725" selection-start-column="32" selection-end-line="725" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/AdminLTE-master/pages/examples/contacts.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Repository/CourseRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="10" column="32" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/EmployeeCategory.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/Admin/VendorController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="84" column="12" selection-start-line="84" selection-start-column="12" selection-end-line="84" selection-end-column="25" />
+          <folding>
+            <element signature="e#40#62#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Student.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="864">
+          <caret line="100" column="80" selection-start-line="100" selection-start-column="80" selection-end-line="100" selection-end-column="80" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/AdminLTE-master/pages/UI/navbar.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="281">
+          <caret line="931" column="44" selection-start-line="931" selection-start-column="16" selection-end-line="931" selection-end-column="44" />
+          <folding>
+            <element signature="n#div#0;n#div#0;n#section#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#2;n#div#0;n#section#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/Admin/SmsController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="11">
+          <caret line="54" selection-start-line="54" selection-end-line="62" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../belleseglises/src/Euphor/ChurchesBundle/Form/ChurcheType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1122" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Form/CourseType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="23" column="31" selection-start-line="23" selection-start-column="19" selection-end-line="23" selection-end-column="31" />
+          <folding>
+            <element signature="e#28#50#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/admin/sms/index.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="29" selection-start-line="29" selection-end-line="34" selection-end-column="14" />
+        <state relative-caret-position="-655">
+          <caret line="45" column="29" selection-start-line="45" selection-start-column="29" selection-end-line="45" selection-end-column="29" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/admin/vendor/index.html.twig">
+    <entry file="file://$PROJECT_DIR$/src/Controller/Admin/CourseController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="32" column="30" selection-start-line="32" selection-start-column="30" selection-end-line="32" selection-end-column="30" />
+        <state relative-caret-position="246">
+          <caret line="70" column="34" selection-start-line="70" selection-start-column="34" selection-end-line="70" selection-end-column="34" />
+          <folding>
+            <element signature="e#40#64#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/admin/course/create.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="67" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/admin/sms/create.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="77" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/admin/vendor/create.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="63" selection-start-line="2" selection-start-column="63" selection-end-line="2" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Vendor.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1819">
+          <caret line="134" column="48" selection-start-line="134" selection-start-column="48" selection-end-line="134" selection-end-column="48" />
+          <folding>
+            <element signature="e#30#62#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../member-area/admin/course-material.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="383">
+          <caret line="113" column="99" selection-start-line="113" selection-start-column="91" selection-end-line="113" selection-end-column="103" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/css/jannat.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="16" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/admin/course/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="164">
+          <caret line="79" column="97" selection-start-line="79" selection-start-column="97" selection-end-line="79" selection-end-column="97" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../member-area/admin/edit-lesson.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-550">
+          <caret line="40" column="45" selection-start-line="40" selection-start-column="33" selection-end-line="40" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Lesson.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-17">
+          <caret line="8" column="29" selection-start-line="8" selection-start-column="29" selection-end-line="8" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Course.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-306">
+          <caret line="24" column="18" selection-start-line="24" selection-start-column="18" selection-end-line="24" selection-end-column="18" />
+          <folding>
+            <element signature="e#30#78#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

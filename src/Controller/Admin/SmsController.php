@@ -81,7 +81,8 @@ class SmsController extends AbstractController
             return $this->redirectToRoute('admin.sms.index');
         }
         return $this->render('admin/sms/create.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'new' => $new
         ]);
     }
 

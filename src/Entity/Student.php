@@ -93,16 +93,6 @@ class Student
     private $teacher;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Department")
-     */
-    private $department;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Level")
-     */
-    private $level;
-
-    /**
      * @ORM\Column(type="string", length=30, nullable=true)
      */
     private $class_type;
@@ -294,30 +284,6 @@ class Student
     public function setTeacher(?Employee $teacher): self
     {
         $this->teacher = $teacher;
-
-        return $this;
-    }
-
-    public function getDepartment(): ?Department
-    {
-        return $this->department;
-    }
-
-    public function setDepartment(?Department $department): self
-    {
-        $this->department = $department;
-
-        return $this;
-    }
-
-    public function getLevel(): ?Level
-    {
-        return $this->level;
-    }
-
-    public function setLevel(?Level $level): self
-    {
-        $this->level = $level;
 
         return $this;
     }
