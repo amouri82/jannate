@@ -2,7 +2,10 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\LessonRepository")
@@ -47,6 +50,21 @@ class Lesson
      * @ORM\Column(type="datetime")
      */
     private $updated_at;
+
+    /**
+     * @var ArrayCollection $lesson_images
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\LessonImage", mappedBy="lesson", cascade={"persist", "remove", "merge"}, orphanRemoval=true)
+     * @ORM\OrderBy({"position" = "ASC"})
+     * @Assert\Valid()
+     */
+    private $lesson_images;
+
+    public function __construct()
+    {
+        $this->lesson_images = new ArrayCollection();
+    }
+
 
     public function getId(): ?int
     {
@@ -145,4 +163,36 @@ class Lesson
     {
         $this->updated_at = new \DateTime("now");
     }
+
+    /**
+     * @return Collection|LessonImage[]
+     */
+    public function getLessonImages(): Collection
+    {
+        return $this->lesson_images;
+    }
+
+    public function addLessonImage(LessonImage $lessonImage): self
+    {
+        if (!$this->lesson_images->contains($lessonImage)) {
+            $this->lesson_images[] = $lessonImage;
+            $lessonImage->setLesson($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLessonImage(LessonImage $lessonImage): self
+    {
+        if ($this->lesson_images->contains($lessonImage)) {
+            $this->lesson_images->removeElement($lessonImage);
+            // set the owning side to null (unless already changed)
+            if ($lessonImage->getLesson() === $this) {
+                $lessonImage->setLesson(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

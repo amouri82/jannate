@@ -1,0 +1,50 @@
+{% block _lesson_lesson_images_widget %}
+        <div class="collection">
+            <div {{ block('widget_container_attributes') }}>
+                {{ form_errors(form) }}
+                <a href="#" id="add_another_image" class="add_new"><i class="fa fa-plus-circle"></i> Ajouter une image</a>
+                <ul class="images my-selector" id="images-fields-list" data-prototype="{{ _self.image_template(form.vars.prototype)|e }}">
+
+                    {% for rows in form %}
+                        <li>
+                            {{ _self.image_template(rows) }}
+                        </li>
+                    {% endfor %}
+                </ul>
+                {{ form_rest(form) }}
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+{% endblock _lesson_lesson_images_widget %}
+
+{% macro image_template(fields) %}
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    {% for row in fields %}
+                        <div class="form-group">
+                            {{ form_label(row) }}
+                            {{ form_widget(row) }}
+                        </div>
+                        {% if row.vars.name == 'image' %}
+                            <p class="help-block">< 1Mo, Jpeg/Jpg/Gif/Png.</p>
+                            <div class="image">
+                                <a class="dialog" href="#">
+                                    <img src="{{ asset('/uploads/images/' ~ row.vars.value ) }}" />
+                                </a>
+                                <div class="image_preview">
+                                    <img src="{{ absolute_url(asset('uploads/images/' ~ row.vars.value )) }}" />
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                    <div class="clear"></div>
+                </div>
+
+            </div>
+        </div>
+{% endmacro %}
+
+
+

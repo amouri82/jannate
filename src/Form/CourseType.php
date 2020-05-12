@@ -9,6 +9,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 
 class CourseType extends AbstractType
 {
@@ -19,7 +20,12 @@ class CourseType extends AbstractType
             ->add('display_name')
             ->add('position')
             ->add('age')
-            ->add('image')
+            ->add('imageFile', VichFileType::class, [
+                'required' => false,
+                'allow_delete' => true,
+                'asset_helper' => true,
+            ])
+
             ->add('description')
             ->add('course_level', EntityType::class, [
                 'class' => CourseLevel::class,
