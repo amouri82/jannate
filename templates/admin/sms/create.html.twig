@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ new == true ? 'New Sms Service' : 'Update Sms Service' }}{% endblock %}
+{% block body %}
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Sms Service</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="{{ path('home') }}">Home</a></li>
+                        <li class="breadcrumb-item active">Sms</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+        <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="card card-warning">
+                <div class="card-header">
+                    <h3 class="card-title">{{ new == true ? 'Add new Sms Service' : 'Update Sms Service' }}</h3>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                {{ form_start(form) }}
+                    <div class="card-body">
+                        <div class="form-group">
+                            {{ form_row(form.service_name) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_row(form.service_number) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_row(form.device_id) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_row(form.sms_user) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_row(form.sms_pass) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_row(form.service_status) }}
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-warning">Submit</button>
+                        <button type="submit" onclick="history.back()" class="btn btn-default">Back</button>
+                    </div>
+                {{ form_end(form) }}
+            </div>
+            <!-- /.card -->
+        </div>
+    </section>
+    <!-- /.content -->
+{% endblock %}
