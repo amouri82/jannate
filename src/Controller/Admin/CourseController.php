@@ -40,7 +40,7 @@ class CourseController extends AbstractController
     }
 
     /**
-     * @Route("/admin/course", name="admin.course.index")
+     * @Route("/admin/courses", name="admin.courses.index")
      * @param PaginatorInterface $paginator
      * @param Request            $request
      *
@@ -91,7 +91,7 @@ class CourseController extends AbstractController
             } else {
                 $this->addFlash('success', "Course successfully updated");
             }
-            return $this->redirectToRoute('admin.course.index');
+            return $this->redirectToRoute('admin.courses.index');
         }
         return $this->render('admin/course/create.html.twig', [
             'form' => $form->createView(),

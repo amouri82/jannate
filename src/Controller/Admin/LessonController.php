@@ -46,26 +46,23 @@ class LessonController extends AbstractController
         $this->em = $em;
     }
 
-    public function index()
-    {
-        return $this->render('admin/lesson/index.html.twig', [
-            'controller_name' => 'LessonController',
-        ]);
-    }
-
     /**
-     * @Route("/admin/lesson/new/{course_id}/{id}", name="admin.lesson.new")
-     * @Route("/admin/lesson/{id}", name="admin.lesson.edit")
+     * @Route("/admin/lesson/new/{course_id}", name="admin.lesson.new")
+     * @Route("/admin/lesson/{course_id}/{id}", name="admin.lesson.edit")
      * @param Request     $request
      * @param             $course_id
-     * @param null        $id
+     * @param Lesson|null $lesson
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function create(Request $request, $course_id, $id = null)
+    public function create(Request $request, $course_id, Lesson $lesson = null)
     {
-        $new = true;
-        $lesson = new Lesson();
+        $new = false;
+        if (!$lesson) {
+            $lesson = new Lesson();
+            $new = true;
+        }
+
         $course = $this->courseRepository->find($course_id);
         $form = $this->createForm(LessonType::class, $lesson,
             ['attr' => ['course_id' => $course_id]]);
@@ -89,7 +86,7 @@ class LessonController extends AbstractController
     }
 
     /**
-     * @Route("/admin/delete/{id}", name="admin.lesson.delete", methods="DELETE")
+     * @Route("/admin/lesson/delete/{id}", name="admin.lesson.delete", methods="DELETE")
      * @param Lesson  $lesson
      * @param Request $request
      *
@@ -97,11 +94,12 @@ class LessonController extends AbstractController
      */
     public function delete(Lesson $lesson, Request $request){
         $submittedToken = $request->request->get('token');
+        $course_id = $request->request->get('course_id');
         if($this->isCsrfTokenValid('delete', $submittedToken)){
             $this->em->remove($lesson);
             $this->em->flush();
             $this->addFlash('success' , "Record Successfully deleted");
         }
-        return $this->redirectToRoute('admin.course.index');
+        return $this->redirectToRoute('admin.course.lessons', ['id' => $course_id ]);
     }
 }

@@ -41,14 +41,17 @@ class SmsController extends AbstractController
      */
     public function index(PaginatorInterface $paginator, Request $request)
     {
+        $count = $this->repository->count([]);
+
         $sms_services = $paginator->paginate(
             $this->repository->findAll(),
             $request->query->getInt('page', 1), /*page number*/
-            10 /*limit per page*/
+            20 /*limit per page*/
         );
         // parameters to template
         return $this->render('admin/sms/index.html.twig', [
-            'sms_services' => $sms_services
+            'sms_services' => $sms_services,
+            'count' => $count
         ]);
     }
 
@@ -87,7 +90,7 @@ class SmsController extends AbstractController
     }
 
     /**
-     * @Route("/admin/delete/{id}", name="admin.sms.delete", methods="DELETE")
+     * @Route("/admin/sms/delete/{id}", name="admin.sms.delete", methods="DELETE")
      * @param Sms  $sms
      * @param Request $request
      *

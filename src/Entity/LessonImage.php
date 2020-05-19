@@ -56,7 +56,7 @@ class LessonImage
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Lesson", inversedBy="lesson_images", cascade={"persist", "merge"})
-     * @ORM\JoinColumn(name="lesson_id", referencedColumnName="id" , nullable=false)
+     * @ORM\JoinColumn(name="lesson_id", referencedColumnName="id" , nullable=true)
      */
     private $lesson;
 
@@ -91,7 +91,7 @@ class LessonImage
         return $this->image;
     }
 
-    public function setImage(string $image): self
+    public function setImage(?string $image): self
     {
         $this->image = $image;
 

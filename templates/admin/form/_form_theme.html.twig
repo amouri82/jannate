@@ -19,31 +19,39 @@
 {% endblock _lesson_lesson_images_widget %}
 
 {% macro image_template(fields) %}
-        <div class="col-md-6">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    {% for row in fields %}
-                        <div class="form-group">
-                            {{ form_label(row) }}
-                            {{ form_widget(row) }}
-                        </div>
-                        {% if row.vars.name == 'image' %}
-                            <p class="help-block">< 1Mo, Jpeg/Jpg/Gif/Png.</p>
-                            <div class="image">
-                                <a class="dialog" href="#">
-                                    <img src="{{ asset('/uploads/images/' ~ row.vars.value ) }}" />
-                                </a>
-                                <div class="image_preview">
-                                    <img src="{{ absolute_url(asset('uploads/images/' ~ row.vars.value )) }}" />
-                                </div>
+    <div class="col-md-12">
+        <!-- general form elements -->
+        <div class="card card-info">
+            <div class="card-header">
+                <h3 class="card-title">Image</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        {% for row in fields %}
+                            <div class="form-group">
+                                {{ form_label(row) }}
+                                {{ form_widget(row) }}
                             </div>
-                        {% endif %}
-                    {% endfor %}
-                    <div class="clear"></div>
+                            {% if row.vars.name == 'image' %}
+                                <p class="help-block">< 1Mo, Jpeg/Jpg/Gif/Png.</p>
+                                <div class="image">
+                                    <a class="dialog" href="#">
+                                        <img src="{{ asset('/uploads/images/lessons/' ~ row.vars.value ) }}" />
+                                    </a>
+                                    <div class="image_preview">
+                                        <img src="{{ absolute_url(asset('uploads/images/lessons/' ~ row.vars.value )) }}" />
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
                 </div>
-
             </div>
         </div>
+    </div>
 {% endmacro %}
 
 
