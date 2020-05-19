@@ -36,25 +36,25 @@
         <!-- Default box -->
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Sms</h3>
+                <h3 class="card-title">Total Number of SMS Services: {{ count }}</h3>
             </div>
             <div class="card-body p-0">
                 <table class="table table-striped projects">
                     <thead>
                     <tr>
-                        <th style="width: 1%">
+                        <th style="width: 7%">
                             #
                         </th>
                         <th style="width: 20%">
                             Service Name
                         </th>
-                        <th style="width: 30%">
+                        <th>
                             Service Number
                         </th>
                         <th>
                             Device
                         </th>
-                        <th>
+                        <th style="width: 18%">
                             Sms User
                         </th>
                         <th>
@@ -70,7 +70,7 @@
                     {% for sms_service in sms_services %}
                         <tr>
                             <td>
-                                #
+                                # {{ sms_service.id }}
                             </td>
                             <td>
                                 <a>

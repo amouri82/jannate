@@ -1,0 +1,58 @@
+{% block _lesson_lesson_images_widget %}
+        <div class="collection">
+            <div {{ block('widget_container_attributes') }}>
+                {{ form_errors(form) }}
+                <a href="#" id="add_another_image" class="add_new"><i class="fa fa-plus-circle"></i> Ajouter une image</a>
+                <ul class="images my-selector" id="images-fields-list" data-prototype="{{ _self.image_template(form.vars.prototype)|e }}">
+
+                    {% for rows in form %}
+                        <li>
+                            {{ _self.image_template(rows) }}
+                        </li>
+                    {% endfor %}
+                </ul>
+                {{ form_rest(form) }}
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+{% endblock _lesson_lesson_images_widget %}
+
+{% macro image_template(fields) %}
+    <div class="col-md-12">
+        <!-- general form elements -->
+        <div class="card card-info">
+            <div class="card-header">
+                <h3 class="card-title">Image</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        {% for row in fields %}
+                            <div class="form-group">
+                                {{ form_label(row) }}
+                                {{ form_widget(row) }}
+                            </div>
+                            {% if row.vars.name == 'image' %}
+                                <p class="help-block">< 1Mo, Jpeg/Jpg/Gif/Png.</p>
+                                <div class="image">
+                                    <a class="dialog" href="#">
+                                        <img src="{{ asset('/uploads/images/lessons/' ~ row.vars.value ) }}" />
+                                    </a>
+                                    <div class="image_preview">
+                                        <img src="{{ absolute_url(asset('uploads/images/lessons/' ~ row.vars.value )) }}" />
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endmacro %}
+
+
+

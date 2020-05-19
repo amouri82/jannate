@@ -5,9 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\LevelRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\CourseCategoryRepository")
  */
-class Level
+class CourseCategory
 {
     /**
      * @ORM\Id()
@@ -17,23 +17,23 @@ class Level
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=30)
+     * @ORM\Column(type="string", length=100)
      */
-    private $level;
+    private $name;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getLevel(): ?string
+    public function getName(): ?string
     {
-        return $this->level;
+        return $this->name;
     }
 
-    public function setLevel(string $level): self
+    public function setName(string $name): self
     {
-        $this->level = $level;
+        $this->name = $name;
 
         return $this;
     }

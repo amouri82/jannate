@@ -13,7 +13,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class VendorController extends AbstractController
 {
-
     /**
      * @var VendorRepository
      */
@@ -33,7 +32,7 @@ class VendorController extends AbstractController
     }
 
     /**
-     * @Route("/admin/vendor", name="admin.vendor.index")
+     * @Route("/admin/vendors", name="admin.vendors.index")
      * @param PaginatorInterface $paginator
      * @param Request            $request
      *
@@ -41,15 +40,17 @@ class VendorController extends AbstractController
      */
     public function index(PaginatorInterface $paginator, Request $request)
     {
+        $count = $this->repository->count([]);
         $vendors = $paginator->paginate(
             $this->repository->findAll(),
             $request->query->getInt('page', 1), /*page number*/
-            10 /*limit per page*/
+            20 /*limit per page*/
         );
 
         // parameters to template
         return $this->render('admin/vendor/index.html.twig', [
-            'vendors' => $vendors
+            'vendors' => $vendors,
+            'count' => $count
         ]);
     }
 
@@ -79,15 +80,16 @@ class VendorController extends AbstractController
             } else {
                 $this->addFlash('success' , "Vendor successfully updated");
             }
-            return $this->redirectToRoute('admin.vendor.index');
+            return $this->redirectToRoute('admin.vendors.index');
         }
         return $this->render('admin/vendor/create.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'new' => $new
         ]);
     }
 
     /**
-     * @Route("/admin/delete/{id}", name="admin.vendor.delete", methods="DELETE")
+     * @Route("/admin/vendor/delete/{id}", name="admin.vendor.delete", methods="DELETE")
      * @param Vendor  $vendor
      * @param Request $request
      *
@@ -100,7 +102,7 @@ class VendorController extends AbstractController
             $this->em->flush();
             $this->addFlash('success' , "Record Successfully deleted");
         }
-        return $this->redirectToRoute('admin.vendor.index');
+        return $this->redirectToRoute('admin.vendors.index');
     }
 
 }

@@ -721,27 +721,20 @@
     <div class="content-wrapper">
         {% block body %}{% endblock %}
     </div>
+
     <!-- /.content-wrapper -->
     <footer class="main-footer">
-        <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong>
+        <strong>Copyright &copy; 2020 <a href="https://www.jannatalquran.com/" target="_blank">JannatAlQuran</a>.</strong>
         All rights reserved.
-        <div class="float-right d-none d-sm-inline-block">
-            <b>Version</b> 3.0.4
-        </div>
     </footer>
 
-    <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-
-    </aside>
-    <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
 {% block javascripts %}
     <!-- jQuery -->
-    <script src="plugins/jquery/jquery.min.js"></script>
+    <script src="/plugins/jquery/jquery.min.js"></script>
     <!-- jQuery UI 1.11.4 -->
-    <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
+    <script src="/plugins/jquery-ui/jquery-ui.min.js"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
         $.widget.bridge('uibutton', $.ui.button)
@@ -766,12 +759,25 @@
     <script src="/plugins/summernote/summernote-bs4.min.js"></script>
     <!-- overlayScrollbars -->
     <script src="/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <!-- ekko-lightbox -->
+    <script src="/plugins/ekko-lightbox/ekko-lightbox.min.js"></script>
+
     <!-- AdminLTE App -->
     <script src="/js/adminlte.js"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="/js/pages/dashboard.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="/js/demo.js"></script>
+
+    <script src="/js/add-collection-widget.js"></script>
+    <script>
+        $(document).on('click', '[data-toggle="lightbox"]', function(event) {
+            event.preventDefault();
+            $(this).ekkoLightbox();
+        });
+    </script>
 {% endblock %}
+
+
 </body>
 </html>

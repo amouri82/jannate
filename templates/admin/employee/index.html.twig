@@ -1,0 +1,129 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Employees list{% endblock %}
+{% block body %}
+
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Employees</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="{{ path('home') }}">Home</a></li>
+                        <li class="breadcrumb-item active">Employees</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+        <div class="col-xs-12 add-block">
+            <a href="{{ path('admin.employee.new') }}" class="btn btn-info" title="Add new">
+                <i class="fa fa-plus-circle"></i>
+                Add New Employee
+            </a>
+        </div>
+        <!-- Default box -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Total Number of Active Employees: {{ count }}</h3>
+            </div>
+            <div class="card-body p-0">
+                <table class="table table-striped projects">
+                    <thead>
+                    <tr>
+                        <th style="width: 5%">
+                            #
+                        </th>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            Designation
+                        </th>
+                        <th>
+                            Email
+                        </th>
+                        <th>
+                            Mobile
+                        </th>
+                        <th>
+                            Status
+                        </th>
+                        <th style="width: 30%"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for employee in employees %}
+                        <tr>
+                            <td>
+                                # {{ employee.id }}
+                            </td>
+                            <td>
+                                <a href="{{ path('admin.employee.edit', {'id': employee.id}) }}">
+                                     {{ employee.name }}
+                                </a>
+                            </td>
+                            <td>
+                                {{ employee.category.name }}
+                            </td>
+                            <td>
+                                {{ employee.email }}
+                            </td>
+                            <td>
+                                {{ employee.mobile }}
+                            </td>
+                            <td>
+                                {% if  employee.active == 1 %}
+                                    <span class="badge bg-success">Enabled</span>
+                                {% else %}
+                                    <span class="badge bg-danger">Disabled</span>
+                                {% endif %}
+                            </td>
+                            <td class="project-actions text-right">
+                                <a class="btn btn-info btn-sm" href="{{ path('admin.employee.edit', {'id': employee.id}) }}">
+                                    <i class="fas fa-street-view">
+                                    </i>
+                                    View
+                                </a>
+                                <a class="btn btn-info btn-sm" href="{{ path('admin.employee.edit', {'id': employee.id}) }}">
+                                    <i class="fas fa-pencil-alt">
+                                    </i>
+                                    Edit profile
+                                </a>
+                                <form method="post" action="{{ path('admin.employee.delete', {id: employee.id}) }}" style="display: inline-block" onsubmit="return confirm('Are you sure to delete ?')">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <input type="hidden" name="token" value="{{ csrf_token('delete') }}">
+                                    <button class="btn btn-danger btn-sm">
+                                        <i class="fas fa-trash">
+                                        </i>
+                                        Delete
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="card-footer clearfix">
+                {{ knp_pagination_render(employees) }}
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+
+    </section>
+    <!-- /.content -->
+{% endblock %}

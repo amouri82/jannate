@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ new == true ? 'New Course' : 'Update Course' }}{% endblock %}
+{% block body %}
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Course</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="{{ path('home') }}">Home</a></li>
+                        <li class="breadcrumb-item active">Courses</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+        <div class="col-md-12">
+            <!-- form start -->
+            {{ form_start(form) }}
+            <!-- general form elements -->
+            <div class="card card-info">
+                <div class="card-header">
+                    <h3 class="card-title">{{ new == true ? 'Add new Employee' : 'Update Employee' }}</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form_row(form.name) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(form.display_name) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(form.description) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(form.age) }}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form_row(form.course_level) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(form.course_category) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(form.position) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(form.imageFile) }}
+                            </div>
+                            {% if vich_uploader_asset(course, 'imageFile') is not null %}
+                                <a href="{{ vich_uploader_asset(course, 'imageFile') }}" data-toggle="lightbox" data-title="{{ course.name }}">
+                                    <img src="{{ vich_uploader_asset(course, 'imageFile') | imagine_filter('thumb') }}" />
+                                </a>
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+            <div class="card-footer">
+                <button type="submit" class="btn btn-info">Submit</button>
+                <button type="submit" onclick="history.back()" class="btn btn-default">Back</button>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </section>
+    <!-- /.content -->
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ new == true ? 'New Country' : 'Update Country' }}{% endblock %}
+{% block body %}
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Countries</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="{{ path('home') }}">Home</a></li>
+                        <li class="breadcrumb-item active">Countries</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+        <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="card card-blue">
+                <div class="card-header">
+                    <h3 class="card-title">{{ new == true ? 'Add new Country' : 'Update Country' }}</h3>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                {{ form_start(form) }}
+                    <div class="card-body">
+                        <div class="form-group">
+                            {{ form_row(form.name) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_row(form.isoCode) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_row(form.position) }}
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-info">Submit</button>
+                        <button type="submit" onclick="history.back()" class="btn btn-default">Back</button>
+                    </div>
+                {{ form_end(form) }}
+            </div>
+            <!-- /.card -->
+        </div>
+    </section>
+    <!-- /.content -->
+{% endblock %}
