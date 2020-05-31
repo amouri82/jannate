@@ -3,12 +3,19 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * Employee
  *
  * @ORM\Table(name="employee", indexes={@ORM\Index(name="IDX_B0F6A6D5E03A62C5", columns={"salary_package_id"})})
  * @ORM\Entity
+ * @UniqueEntity(fields="email", message="Email already taken")
+ * @UniqueEntity(fields="username", message="Username already taken")
+ * @Vich\Uploadable
  */
 class Employee
 {
@@ -52,7 +59,9 @@ class Employee
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=255, nullable=false)
+     * @ORM\Column(name="email", type="string", length=255, nullable=false, unique=true)
+     * @Assert\NotBlank()
+     * @Assert\Email()
      */
     private $email;
 
@@ -94,9 +103,15 @@ class Employee
     /**
      * @var string
      *
-     * @ORM\Column(name="username", type="string", length=100, nullable=false)
+     * @ORM\Column(name="username", type="string", length=100, nullable=false, unique=true)
+     * @Assert\NotBlank()
      */
     private $username;
+
+    /**
+     * @Assert\Length(max=4096)
+     */
+    private $plainPassword;
 
     /**
      * @var string
@@ -151,6 +166,23 @@ class Employee
     private $joining_at;
 
     /**
+     * NOTE: This is not a mapped field of entity metadata, just a simple property.
+     *
+     * @Vich\UploadableField(mapping="profile", fileNameProperty="avatar")
+     *
+     * @var File
+     * @Assert\Image(
+     *     maxSize = "1M",
+     *     maxSizeMessage = "La taille de l'image ne doit pas dépasser 1M",
+     *     mimeTypes = {"image/jpeg", "image/jpg", "image/gif", "image/png"},
+     *     mimeTypesMessage = "Le fichier choisi n'est pas une image valide",
+     *     notFoundMessage = "Le fichier n'a pas été trouvé sur le disque",
+     *     uploadErrorMessage = "Erreur dans l'upload du fichier"
+     * )
+     */
+    private $avatarFile;
+
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $avatar;
@@ -196,32 +228,38 @@ class Employee
     private $zoom;
 
     /**
-     * @ORM\Column(type="string", length=10, nullable=true)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Time")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $start_time1;
 
     /**
-     * @ORM\Column(type="string", length=10, nullable=true)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Time")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $end_time1;
 
     /**
-     * @ORM\Column(type="string", length=10, nullable=true)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Time")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $start_time2;
 
     /**
-     * @ORM\Column(type="string", length=10, nullable=true)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Time")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $end_time2;
 
     /**
-     * @ORM\Column(type="string", length=10, nullable=true)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Time")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $start_time3;
 
     /**
-     * @ORM\Column(type="string", length=10, nullable=true)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Time")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $end_time3;
 
@@ -284,6 +322,16 @@ class Employee
      * @ORM\Column(type="string", length=60, nullable=true)
      */
     private $hour_rate;
+
+    /**
+     * @ORM\Column(type="string", length=10, nullable=true)
+     */
+    private $memorization;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $tax;
 
     public function getId(): ?int
     {
@@ -422,6 +470,16 @@ class Employee
         return $this;
     }
 
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword($password)
+    {
+        $this->plainPassword = $password;
+    }
+
     public function getPassword(): ?string
     {
         return $this->password;
@@ -499,7 +557,7 @@ class Employee
         return $this->deactivate_at;
     }
 
-    public function setDeactivateAt(\DateTimeInterface $deactivate_at): self
+    public function setDeactivateAt(\DateTimeInterface $deactivate_at = null): self
     {
         $this->deactivate_at = $deactivate_at;
 
@@ -516,6 +574,32 @@ class Employee
         $this->joining_at = $joining_at;
 
         return $this;
+    }
+
+    /*
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $avatar
+     *
+     * @return Avatar
+     */
+    public function setAvatarFile(File $avatarFile = null)
+    {
+        $this->avatarFile = $avatarFile;
+
+        if (null !== $avatarFile) {
+
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+        return $this;
+    }
+
+    /**
+     * @return File|null
+     */
+    public function getAvatarFile(): ?File
+    {
+        return $this->avatarFile;
     }
 
     public function getAvatar(): ?string
@@ -626,72 +710,72 @@ class Employee
         return $this;
     }
 
-    public function getStartTime1(): ?string
+    public function getStartTime1(): ?Time
     {
         return $this->start_time1;
     }
 
-    public function setStartTime1(?string $start_time1): self
+    public function setStartTime1(?Time $start_time1): self
     {
         $this->start_time1 = $start_time1;
 
         return $this;
     }
 
-    public function getEndTime1(): ?string
+    public function getEndTime1(): ?Time
     {
         return $this->end_time1;
     }
 
-    public function setEndTime1(?string $end_time1): self
+    public function setEndTime1(?Time $end_time1): self
     {
         $this->end_time1 = $end_time1;
 
         return $this;
     }
 
-    public function getStartTime2(): ?string
+    public function getStartTime2(): ?Time
     {
         return $this->start_time2;
     }
 
-    public function setStartTime2(?string $start_time2): self
+    public function setStartTime2(?Time $start_time2): self
     {
         $this->start_time2 = $start_time2;
 
         return $this;
     }
 
-    public function getEndTime2(): ?string
+    public function getEndTime2(): ?Time
     {
         return $this->end_time2;
     }
 
-    public function setEndTime2(?string $end_time2): self
+    public function setEndTime2(?Time $end_time2): self
     {
         $this->end_time2 = $end_time2;
 
         return $this;
     }
 
-    public function getStartTime3(): ?string
+    public function getStartTime3(): ?Time
     {
         return $this->start_time3;
     }
 
-    public function setStartTime3(?string $start_time3): self
+    public function setStartTime3(?Time $start_time3): self
     {
         $this->start_time3 = $start_time3;
 
         return $this;
     }
 
-    public function getEndTime3(): ?string
+    public function getEndTime3(): ?Time
     {
         return $this->end_time3;
     }
 
-    public function setEndTime3(string $end_time3): self
+    public function setEndTime3(Time $end_time3): self
     {
         $this->end_time3 = $end_time3;
 
@@ -838,6 +922,30 @@ class Employee
     public function setHourRate(?string $hour_rate): self
     {
         $this->hour_rate = $hour_rate;
+
+        return $this;
+    }
+
+    public function getMemorization(): ?string
+    {
+        return $this->memorization;
+    }
+
+    public function setMemorization(?string $memorization): self
+    {
+        $this->memorization = $memorization;
+
+        return $this;
+    }
+
+    public function getTax(): ?string
+    {
+        return $this->tax;
+    }
+
+    public function setTax(?string $tax): self
+    {
+        $this->tax = $tax;
 
         return $this;
     }

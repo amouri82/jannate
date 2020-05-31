@@ -39,10 +39,10 @@
                                 <p class="help-block">< 1Mo, Jpeg/Jpg/Gif/Png.</p>
                                 <div class="image">
                                     <a class="dialog" href="#">
-                                        <img src="{{ asset('/uploads/images/lessons/' ~ row.vars.value ) }}" />
+                                        <img src="{{ asset('/images/lessons/' ~ row.vars.value ) }}" />
                                     </a>
                                     <div class="image_preview">
-                                        <img src="{{ absolute_url(asset('uploads/images/lessons/' ~ row.vars.value )) }}" />
+                                        <img src="{{ absolute_url(asset('/images/lessons/' ~ row.vars.value )) }}" />
                                     </div>
                                 </div>
                             {% endif %}
