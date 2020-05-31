@@ -40,3 +40,14 @@ ul.pagination {
     margin-bottom: 2px;
     font-weight: 700;
 }
+
+.list-inline > li {
+    display: inline-block;
+    color: #6b6b6b;
+    margin-right: 15px;
+    margin-bottom: 5px;
+}
+.user-block .comment, .user-block .description, .user-block .username {
+    margin-left: 0;
+    font-size: 20px;
+}

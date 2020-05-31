@@ -16,6 +16,7 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 
 class EmployeeType extends AbstractType
 {
@@ -44,7 +45,11 @@ class EmployeeType extends AbstractType
                 'label' => 'Skype ID'
             ])
             ->add('username')
-            ->add('password', PasswordType::class)
+            ->add('plainPassword', RepeatedType::class, array(
+                'type' => PasswordType::class,
+                'first_options'  => array('label' => 'Password'),
+                'second_options' => array('label' => 'Repeat Password'),
+            ))
             ->add('joining_at', DateType::class, [
                 'label' => 'Joining Date',
                 'placeholder' => [
@@ -65,6 +70,7 @@ class EmployeeType extends AbstractType
             ->add('institute_email')
             ->add('experience')
             ->add('qualification')
+            ->add('memorization')
             ->add('gender', ChoiceType::class, [
                 'choices' => [
                     '' => '',
@@ -85,7 +91,7 @@ class EmployeeType extends AbstractType
                 'label' => 'Designation',
                 'placeholder' => 'Designation'
             ])
-            ->add('startTime1', ChoiceType::class, [
+            ->add('startTime1', EntityType::class, [
                 'label' => 'Start Time 1',
                 'choice_label' => 'list',
                 'class' => Time::class,
