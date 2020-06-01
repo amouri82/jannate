@@ -98,10 +98,10 @@ class Student
     private $class_type;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\ParentAccount", inversedBy="students")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Family", inversedBy="students")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $parent;
+    private $family;
 
     public function getId(): ?int
     {
@@ -300,14 +300,14 @@ class Student
         return $this;
     }
 
-    public function getParent(): ?ParentAccount
+    public function getFamiliy(): ?Familiy
     {
-        return $this->parent;
+        return $this->family;
     }
 
-    public function setParent(?ParentAccount $parent): self
+    public function setParent(?Familiy $familiy): self
     {
-        $this->parent = $parent;
+        $this->family = $familiy;
 
         return $this;
     }

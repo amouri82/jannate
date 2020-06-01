@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\ParentAccount;
+use App\Entity\Family;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method ParentAccount|null find($id, $lockMode = null, $lockVersion = null)
- * @method ParentAccount|null findOneBy(array $criteria, array $orderBy = null)
- * @method ParentAccount[]    findAll()
- * @method ParentAccount[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Family|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Family|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Family[]    findAll()
+ * @method Family[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ParentAccountRepository extends ServiceEntityRepository
+class FamilyRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, ParentAccount::class);
+        parent::__construct($registry, Family::class);
     }
 
     // /**
-    //  * @return ParentAccount[] Returns an array of ParentAccount objects
+    //  * @return Family[] Returns an array of Family objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class ParentAccountRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?ParentAccount
+    public function findOneBySomeField($value): ?Family
     {
         return $this->createQueryBuilder('p')
             ->andWhere('p.exampleField = :val')

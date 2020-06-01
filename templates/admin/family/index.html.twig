@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Employees list{% endblock %}
+{% block title %}Families list{% endblock %}
 {% block body %}
 
     <!-- Content Header (Page header) -->
@@ -8,12 +8,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Employees</h1>
+                    <h1>Families</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{ path('home') }}">Home</a></li>
-                        <li class="breadcrumb-item active">Employees</li>
+                        <li class="breadcrumb-item active">Families</li>
                     </ol>
                 </div>
             </div>
@@ -28,15 +28,15 @@
             </div>
         {% endfor %}
         <div class="col-xs-12 add-block">
-            <a href="{{ path('admin.employee.new') }}" class="btn btn-info" title="Add new">
+            <a href="{{ path('admin.family.new') }}" class="btn btn-info" title="Add new">
                 <i class="fa fa-plus-circle"></i>
-                Add New Employee
+                Add New Family
             </a>
         </div>
         <!-- Default box -->
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Total Number of Active Employees: {{ count }}</h3>
+                <h3 class="card-title">Total Number of Active Families: {{ count }}</h3>
             </div>
             <div class="card-body p-0">
                 <table class="table table-striped projects">
@@ -49,10 +49,7 @@
                             Name
                         </th>
                         <th>
-                            Gender
-                        </th>
-                        <th>
-                            Designation
+                            Fee
                         </th>
                         <th>
                             Email
@@ -67,27 +64,24 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for employee in employees %}
+                    {% for family in families %}
                         <tr>
                             <td>
-                                # {{ employee.id }}
+                                # {{ family.id }}
                             </td>
                             <td>
-                                <a href="{{ path('admin.employee.edit', {'id': employee.id}) }}">
-                                     {{ employee.name }}
+                                <a href="{{ path('admin.family.edit', {'id': family.id}) }}">
+                                     {{ family.name }}
                                 </a>
                             </td>
                             <td>
-                                {{ employee.gender }}
+                                {{ family.fee }}
                             </td>
                             <td>
-                                {{ employee.category.name }}
+                                {{ family.email }}
                             </td>
                             <td>
-                                {{ employee.email }}
-                            </td>
-                            <td>
-                                {{ employee.mobile }}
+                                {{ family.status }}
                             </td>
                             <td>
                                 {% if  employee.active == 1 %}
@@ -97,17 +91,17 @@
                                 {% endif %}
                             </td>
                             <td class="project-actions text-right">
-                                <a class="btn btn-info btn-sm" href="{{ path('admin.employee.view', {'id': employee.id}) }}">
+                                <a class="btn btn-info btn-sm" href="{{ path('admin.family.view', {'id': employee.id}) }}">
                                     <i class="fas fa-street-view">
                                     </i>
                                     View
                                 </a>
-                                <a class="btn btn-info btn-sm" href="{{ path('admin.employee.edit', {'id': employee.id}) }}">
+                                <a class="btn btn-info btn-sm" href="{{ path('admin.family.edit', {'id': employee.id}) }}">
                                     <i class="fas fa-pencil-alt">
                                     </i>
                                     Edit profile
                                 </a>
-                                <form method="post" action="{{ path('admin.employee.delete', {id: employee.id}) }}" style="display: inline-block" onsubmit="return confirm('Are you sure to delete ?')">
+                                <form method="post" action="{{ path('admin.family.delete', {id: family.id}) }}" style="display: inline-block" onsubmit="return confirm('Are you sure to delete ?')">
                                     <input type="hidden" name="_method" value="DELETE">
                                     <input type="hidden" name="token" value="{{ csrf_token('delete') }}">
                                     <button class="btn btn-danger btn-sm">
@@ -124,7 +118,7 @@
 
             </div>
             <div class="card-footer clearfix">
-                {{ knp_pagination_render(employees) }}
+                {{ knp_pagination_render(families) }}
             </div>
             <!-- /.card-body -->
         </div>

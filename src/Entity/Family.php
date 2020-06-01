@@ -5,14 +5,15 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * ParentAccount
+ * Family
  *
- * @ORM\Table(name="parent_account")
+ * @ORM\Table(name="family")
  * @ORM\Entity
  */
-class ParentAccount
+class Family
 {
     /**
      * @var int
@@ -45,9 +46,14 @@ class ParentAccount
     private $username;
 
     /**
+     * @Assert\Length(max=4096)
+     */
+    private $plainPassword;
+
+    /**
      * @var string
      *
-     * @ORM\Column(name="password", type="string", length=255, nullable=false)
+     * @ORM\Column(name="password", type="string", length=100, nullable=false)
      */
     private $password;
 
@@ -167,9 +173,34 @@ class ParentAccount
     private $invoice_type;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Student", mappedBy="parent")
+     * @ORM\OneToMany(targetEntity="App\Entity\Student", mappedBy="family")
      */
     private $students;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Timezone")
+     */
+    private $timezone;
+
+    /**
+     * @ORM\Column(type="string", length=30, nullable=true)
+     */
+    private $payment_mode;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Country")
+     */
+    private $country;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Currency")
+     */
+    private $currency;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $zoom;
 
     public function __construct()
     {
@@ -215,6 +246,16 @@ class ParentAccount
         $this->username = $username;
 
         return $this;
+    }
+
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword($password)
+    {
+        $this->plainPassword = $password;
     }
 
     public function getPassword(): ?string
@@ -464,5 +505,84 @@ class ParentAccount
         return $this;
     }
 
+    public function getTimezone(): ?timezone
+    {
+        return $this->timezone;
+    }
 
+    public function setTimezone(?timezone $timezone): self
+    {
+        $this->timezone = $timezone;
+
+        return $this;
+    }
+
+    public function getPaymentMode(): ?string
+    {
+        return $this->payment_mode;
+    }
+
+    public function setPaymentMode(?string $payment_mode): self
+    {
+        $this->payment_mode = $payment_mode;
+
+        return $this;
+    }
+
+    public function getCountry(): ?Country
+    {
+        return $this->country;
+    }
+
+    public function setCountry(?Country $country): self
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    public function getCurrency(): ?Currency
+    {
+        return $this->currency;
+    }
+
+    public function setCurrency(?Currency $currency): self
+    {
+        $this->currency = $currency;
+
+        return $this;
+    }
+
+    public function getZoom(): ?string
+    {
+        return $this->zoom;
+    }
+
+    public function setZoom(?string $zoom): self
+    {
+        $this->zoom = $zoom;
+
+        return $this;
+    }
+
+    /**
+     * Gets triggered only on insert
+
+     * @ORM\PrePersist
+     */
+    public function onPrePersist()
+    {
+        $this->createdAt = new \DateTime("now");
+        $this->updatedAt = new \DateTime("now");
+    }
+
+    /**
+     * Gets triggered every time on update
+
+     * @ORM\PreUpdate
+     */
+    public function onPreUpdate()
+    {
+        $this->updatedAt = new \DateTime("now");
+    }
 }
