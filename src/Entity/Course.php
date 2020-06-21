@@ -88,9 +88,15 @@ class Course
      */
     private $lessons;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Student", mappedBy="course")
+     */
+    private $students;
+
     public function __construct()
     {
         $this->lessons = new ArrayCollection();
+        $this->students = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -289,6 +295,34 @@ class Course
             if ($lesson->getCourse() === $this) {
                 $lesson->setCourse(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Student[]
+     */
+    public function getStudents(): Collection
+    {
+        return $this->students;
+    }
+
+    public function addStudent(Student $student): self
+    {
+        if (!$this->students->contains($student)) {
+            $this->students[] = $student;
+            $student->addCourse($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStudent(Student $student): self
+    {
+        if ($this->students->contains($student)) {
+            $this->students->removeElement($student);
+            $student->removeCourse($this);
         }
 
         return $this;

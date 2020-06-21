@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -45,11 +47,6 @@ class Student
      * @ORM\Column(type="date")
      */
     private $joining_date;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $active;
 
     /**
      * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
@@ -102,6 +99,33 @@ class Student
      * @ORM\JoinColumn(nullable=false)
      */
     private $family;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Employee")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $manager;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $regular_date;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Course", inversedBy="students")
+     */
+    private $course;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Status")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $status;
+
+    public function __construct()
+    {
+        $this->course = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -176,18 +200,6 @@ class Student
     public function setJoiningDate(\DateTimeInterface $joining_date): self
     {
         $this->joining_date = $joining_date;
-
-        return $this;
-    }
-
-    public function getActive(): ?int
-    {
-        return $this->active;
-    }
-
-    public function setActive(int $active): self
-    {
-        $this->active = $active;
 
         return $this;
     }
@@ -308,6 +320,68 @@ class Student
     public function setFamily(?Familiy $familiy): self
     {
         $this->family = $familiy;
+
+        return $this;
+    }
+
+    public function getManager(): ?Employee
+    {
+        return $this->manager;
+    }
+
+    public function setManager(?Employee $manager): self
+    {
+        $this->manager = $manager;
+
+        return $this;
+    }
+
+    public function getRegularDate(): ?\DateTimeInterface
+    {
+        return $this->regular_date;
+    }
+
+    public function setRegularDate(?\DateTimeInterface $regular_date): self
+    {
+        $this->regular_date = $regular_date;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Course[]
+     */
+    public function getCourse(): Collection
+    {
+        return $this->course;
+    }
+
+    public function addCourse(Course $course): self
+    {
+        if (!$this->course->contains($course)) {
+            $this->course[] = $course;
+        }
+
+        return $this;
+    }
+
+    public function removeCourse(Course $course): self
+    {
+        if ($this->course->contains($course)) {
+            $this->course->removeElement($course);
+        }
+
+        return $this;
+    }
+
+    public function getStatus(): ?Status
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?Status $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }

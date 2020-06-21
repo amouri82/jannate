@@ -61,11 +61,10 @@ class StudentController extends AbstractController
      * @param Student                     $student
      * @param Request                      $request
      *
-     * @param UserPasswordEncoderInterface $passwordEncoder
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function create(Student $student = null, Request $request,  UserPasswordEncoderInterface $passwordEncoder)
+    public function create(Student $student = null, Request $request)
     {
         $new = false;
         if(!$student) {
@@ -76,11 +75,6 @@ class StudentController extends AbstractController
         $form = $this->createForm(StudentType::class, $student);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
-            // 3) Encode the password (you could also do this via Doctrine listener)
-            //$password = $passwordEncoder->encodePassword($student, $student->getPlainPassword());
-            $password = $student->getPlainPassword();
-            $student->setPassword($password);
-
             $this->em->persist($student);
             $this->em->flush();
             if($new) {
