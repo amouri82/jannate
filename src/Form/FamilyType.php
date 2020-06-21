@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class FamilyType extends AbstractType
 {
@@ -31,8 +32,14 @@ class FamilyType extends AbstractType
             ->add('telephone')
             ->add('mobile')
             ->add('city')
-            ->add('trialDate')
-            ->add('bank')
+            ->add('trialDate', DateType::class, [
+                'label' => 'Joining Date',
+                'placeholder' => [
+                    'year' => 'Year',
+                    'month' => 'Month',
+                    'day' => 'Day',
+                ]
+            ])            ->add('bank')
             ->add('studentBank')
             ->add('payment_mode', ChoiceType::class, [
                 'choices' => [

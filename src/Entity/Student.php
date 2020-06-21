@@ -305,7 +305,7 @@ class Student
         return $this->family;
     }
 
-    public function setParent(?Familiy $familiy): self
+    public function setFamily(?Familiy $familiy): self
     {
         $this->family = $familiy;
 

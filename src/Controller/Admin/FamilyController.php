@@ -77,7 +77,8 @@ class FamilyController extends AbstractController
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
             // 3) Encode the password (you could also do this via Doctrine listener)
-            $password = $passwordEncoder->encodePassword($family, $family->getPlainPassword());
+            //$password = $passwordEncoder->encodePassword($family, $family->getPlainPassword());
+            $password = $family->getPlainPassword();
             $family->setPassword($password);
 
             $this->em->persist($family);
@@ -87,7 +88,7 @@ class FamilyController extends AbstractController
             } else {
                 $this->addFlash('success' , "Family successfully updated");
             }
-            return $this->redirectToRoute('admin.familys.index');
+            return $this->redirectToRoute('admin.families.index');
         }
         return $this->render('admin/family/create.html.twig', [
             'form' => $form->createView(),
@@ -109,7 +110,7 @@ class FamilyController extends AbstractController
             $this->em->flush();
             $this->addFlash('success' , "Record Successfully deleted");
         }
-        return $this->redirectToRoute('admin.familys.index');
+        return $this->redirectToRoute('admin.families.index');
     }
 
     /**
@@ -121,26 +122,8 @@ class FamilyController extends AbstractController
      */
     public function view(Family $family, Request $request)
     {
-        $form = $this->createFormBuilder($family)
-            ->add('avatarFile', VichFileType::class, [
-                'required' => false,
-                'allow_delete' => true,
-                'asset_helper' => true,
-            ])
-            ->getForm();
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $family->setAvatarFile(($form['avatarFile']->getData()));
-            $this->em->persist($family);
-            $this->em->flush();
-            $this->addFlash('success' , "Profile image successfully updated");
-        }
-
         return $this->render('admin/family/view.html.twig', [
-            'family' => $family,
-            'form' => $form->createView()
+            'family' => $family
         ]);
     }
 

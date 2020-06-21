@@ -79,13 +79,6 @@ class Family
     private $skype;
 
     /**
-     * @var string|null
-     *
-     * @ORM\Column(name="fee", type="string", length=20, nullable=true)
-     */
-    private $fee;
-
-    /**
      * @var int|null
      *
      * @ORM\Column(name="active", type="integer", nullable=true)
@@ -151,16 +144,16 @@ class Family
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="created_at", type="datetime", nullable=false, options={"default"="CURRENT_TIMESTAMP"})
+     * @ORM\Column(name="created_at", type="datetime", nullable=true)
      */
-    private $createdAt = 'CURRENT_TIMESTAMP';
+    private $createdAt;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="updated_at", type="datetime", nullable=false, options={"default"="CURRENT_TIMESTAMP"})
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
-    private $updatedAt = 'CURRENT_TIMESTAMP';
+    private $updatedAt;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Status")
@@ -302,18 +295,6 @@ class Family
     public function setSkype(?string $skype): self
     {
         $this->skype = $skype;
-
-        return $this;
-    }
-
-    public function getFee(): ?string
-    {
-        return $this->fee;
-    }
-
-    public function setFee(?string $fee): self
-    {
-        $this->fee = $fee;
 
         return $this;
     }

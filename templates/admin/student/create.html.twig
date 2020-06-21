@@ -1,18 +1,19 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Family Account Profile{% endblock %}
+{% block title %}Student Account Profile{% endblock %}
 {% block body %}
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Parent Account</h1>
+                    <h1>Student Account</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{ path('home') }}">Home</a></li>
-                        <li class="breadcrumb-item active">Families</li>
+                        <li class="breadcrumb-item active"><a href="{{ path('admin.families.index') }}">Families</a></li>
+                        <li class="breadcrumb-item active">Students</li>
                     </ol>
                 </div>
             </div>
@@ -41,38 +42,29 @@
                                 {{ form_row(form.name) }}
                             </div>
                             <div class="form-group">
-                                {{ form_row(form.telephone) }}
+                                {{ form_row(form.skype) }}
                             </div>
 
                             <div class="form-group">
-                                {{ form_row(form.country) }}
+                                {{ form_row(form.language) }}
                             </div>
                             <div class="form-group">
-                                {{ form_row(form.timezone) }}
-                            </div>
-                            <div class="form-group">
-                                {{ form_row(form.payment_mode) }}
-                            </div>
-                            <div class="form-group">
-                                {{ form_row(form.bank) }}
-                            </div>
-                            <div class="form-group">
-                                {{ form_row(form.zoom) }}
+                                {{ form_row(form.email) }}
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                {{ form_row(form.email) }}
+                                {{ form_row(form.age) }}
                             </div>
                             <div class="form-group">
-                                {{ form_row(form.mobile) }}
+                                {{ form_row(form.gender) }}
                             </div>
 
                             <div class="form-group">
-                                {{ form_row(form.city) }}
+                                {{ form_row(form.joining_date) }}
                             </div>
                             <div class="form-group">
-                                {{ form_row(form.trialDate) }}
+                                {{ form_row(form.student_rate) }}
                             </div>
                             <div class="form-group">
                                 {{ form_row(form.currency) }}
