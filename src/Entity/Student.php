@@ -2,10 +2,13 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\StudentRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class Student
 {
@@ -47,12 +50,7 @@ class Student
     private $joining_date;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $active;
-
-    /**
-     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $teacher_rate;
 
@@ -98,10 +96,42 @@ class Student
     private $class_type;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\ParentAccount", inversedBy="students")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Family", inversedBy="students")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $parent;
+    private $family;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Employee")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $manager;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $regular_date;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Course", inversedBy="students")
+     */
+    private $course;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Status")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $status;
+
+    /**
+     * @ORM\Column(type="string", length=30)
+     */
+    private $level;
+
+    public function __construct()
+    {
+        $this->course = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -176,18 +206,6 @@ class Student
     public function setJoiningDate(\DateTimeInterface $joining_date): self
     {
         $this->joining_date = $joining_date;
-
-        return $this;
-    }
-
-    public function getActive(): ?int
-    {
-        return $this->active;
-    }
-
-    public function setActive(int $active): self
-    {
-        $this->active = $active;
 
         return $this;
     }
@@ -300,14 +318,109 @@ class Student
         return $this;
     }
 
-    public function getParent(): ?ParentAccount
+    public function getFamily(): ?Family
     {
-        return $this->parent;
+        return $this->family;
     }
 
-    public function setParent(?ParentAccount $parent): self
+    public function setFamily(?Family $family): self
     {
-        $this->parent = $parent;
+        $this->family = $family;
+
+        return $this;
+    }
+
+    public function getManager(): ?Employee
+    {
+        return $this->manager;
+    }
+
+    public function setManager(?Employee $manager): self
+    {
+        $this->manager = $manager;
+
+        return $this;
+    }
+
+    public function getRegularDate(): ?\DateTimeInterface
+    {
+        return $this->regular_date;
+    }
+
+    public function setRegularDate(?\DateTimeInterface $regular_date): self
+    {
+        $this->regular_date = $regular_date;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Course[]
+     */
+    public function getCourse(): Collection
+    {
+        return $this->course;
+    }
+
+    public function addCourse(Course $course): self
+    {
+        if (!$this->course->contains($course)) {
+            $this->course[] = $course;
+        }
+
+        return $this;
+    }
+
+    public function removeCourse(Course $course): self
+    {
+        if ($this->course->contains($course)) {
+            $this->course->removeElement($course);
+        }
+
+        return $this;
+    }
+
+    public function getStatus(): ?Status
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?Status $status): self
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Gets triggered only on insert
+
+     * @ORM\PrePersist
+     */
+    public function onPrePersist()
+    {
+        $this->created_at = new \DateTime("now");
+        $this->updated_at = new \DateTime("now");
+    }
+
+    /**
+     * Gets triggered every time on update
+
+     * @ORM\PreUpdate
+     */
+    public function onPreUpdate()
+    {
+        $this->updated_at = new \DateTime("now");
+    }
+
+    public function getLevel(): ?string
+    {
+        return $this->level;
+    }
+
+    public function setLevel(string $level): self
+    {
+        $this->level = $level;
 
         return $this;
     }

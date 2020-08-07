@@ -13,10 +13,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 
 class EmployeeType extends AbstractType
 {
@@ -28,6 +26,7 @@ class EmployeeType extends AbstractType
             ->add('cnic', null, [
                 'label' => 'Occupation'
             ])
+            ->add('user', UserType::class)
             ->add('address')
             ->add('email')
             ->add('mobile')
@@ -44,12 +43,6 @@ class EmployeeType extends AbstractType
             ->add('skype', null, [
                 'label' => 'Skype ID'
             ])
-            ->add('username')
-            ->add('plainPassword', RepeatedType::class, array(
-                'type' => PasswordType::class,
-                'first_options'  => array('label' => 'Password'),
-                'second_options' => array('label' => 'Repeat Password'),
-            ))
             ->add('joining_at', DateType::class, [
                 'label' => 'Joining Date',
                 'placeholder' => [

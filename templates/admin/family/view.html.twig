@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Employee profile{% endblock %}
+{% block title %}Family profile{% endblock %}
 {% block body %}
 
     <!-- Content Header (Page header) -->
@@ -8,12 +8,14 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Employees</h1>
+                    <h1>
+                        Parent Account Profile
+                    </h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{ path('home') }}">Home</a></li>
-                        <li class="breadcrumb-item active">Employees</li>
+                        <li class="breadcrumb-item active">Families</li>
                     </ol>
                 </div>
             </div>
@@ -33,55 +35,28 @@
                     <!-- Profile Image -->
                     <div class="card card-primary card-outline">
                         <div class="card-body box-profile">
-                            <div class="text-center">
-                                {% if employee.avatar %}
-                                    <img class="profile-user-img img-fluid img-circle"
-                                         src="{{ vich_uploader_asset(employee, 'avatarFile' ) }}" alt="{{ employee.name }}"/>
-
-                                {% else %}
-                                    <img class="profile-user-img img-fluid img-circle"
-                                         src="{{ asset('images/profile-img.png') }}" alt="{{ employee.name }}">
-                                {% endif %}
-                            </div>
-
-                            <h3 class="profile-username text-center">{{ employee.name }}</h3>
-
-                            <p class="text-muted text-center">{{ employee.category.name }}</p>
-
                             <ul class="list-group list-group-unbordered mb-3">
-                                <li class="list-group-item">
-                                    {{ form_start(form) }}
-                                    {{ form_widget(form) }}
-                                    <button type="submit" class="btn btn-primary btn-block">Change Profile Picture
-                                    </button>
-                                    {{ form_end(form) }}
+                                <li class="list-group-item family-avatar">
+                                    <img src="{{ asset('images/profile-img.png') }}" alt="{{ family.name }}">
                                 </li>
                                 <li class="list-group-item">
-                                    <a href="{{ path('admin.employee.edit', {'id': employee.id}) }}">Edit Profile</a>
+                                    <b>Invoice Details</b>
                                 </li>
                                 <li class="list-group-item">
-                                    <b>Upload Docs</b>
+                                    <a href="{{ path('admin.student.new', {'family_id': family.id}) }}"><b>Add New
+                                            Student</b></a>
                                 </li>
                                 <li class="list-group-item">
-                                    <b>Student Details</b>
+                                    <b>Instant Invoice</b>
                                 </li>
                                 <li class="list-group-item">
-                                    <b>Salary Record</b>
+                                    <a href="{{ path('admin.family.edit', {'id': family.id}) }}">Edit Profile</a>
                                 </li>
                                 <li class="list-group-item">
-                                    <b>Schedule</b>
+                                    <b>Add Invoice</b>
                                 </li>
                                 <li class="list-group-item">
-                                    <b>Salary Adjustment</b>
-                                </li>
-                                <li class="list-group-item">
-                                    {% if employee.active == 1 %}
-                                        <a href="{{ path('admin.employee.status', {'id': employee.id}) }}"
-                                           class="btn btn-danger btn-block"><b>Deactivate Account</b></a>
-                                    {% else %}
-                                        <a href="{{ path('admin.employee.status', {'id': employee.id}) }}"
-                                           class="btn btn-success btn-block"><b>Activate Account</b></a>
-                                    {% endif %}
+                                    <b>Suspend Classes</b>
                                 </li>
                             </ul>
 
@@ -96,6 +71,93 @@
                         <div class="card-body">
                             <div class="tab-content">
                                 <div class="tab-pane active" id="activity">
+                                    <div class="post">
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <h2>{{ family.name }}</h2>
+                                                <ul class="list-inline">
+                                                    <li>
+                                                        Invoice type: <font color="#44B6AE">
+                                                            <b>{{ family.invoiceType.type }}</b></font>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="portlet sale-summary">
+                                                    <div class="portlet-title">
+                                                        <div class="caption">
+                                                            Status:
+                                                            {% if family.status.name == 'On Trial' %}
+                                                                <span class="label label-warning"><strong>{{ family.status.name }}</strong></span>
+                                                            {% elseif family.status.name == 'On Holidays' %}
+                                                                <span class="label label-info"><strong>{{ family.status.name }}</strong></span>
+                                                            {% elseif family.status.name == 'Deactived' %}
+                                                                <span class="label label-danger"><strong>{{ family.status.name }}</strong></span>
+                                                            {% elseif family.status.name == 'Suspended' %}
+                                                                <span class="label label-danger"><strong>{{ family.status.name }}</strong></span>
+                                                            {% else %}
+                                                                <span class="label label-success"><strong>{{ family.status.name }}</strong></span>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                    <div class="portlet-body">
+                                                        <ul class="list-unstyled">
+                                                            <li>
+                                                                <span class="sale-num">
+                                                                    {% if family.status.name == 'On Trial' or family.status.name == 'On Holidays' or family.status.name == 'Deactived' or family.status.name == 'Regular' %}
+                                                                        <a data-toggle="modal" href="#deactivation">
+                                                                            <button type="button"
+                                                                                    class="btn btn-danger"><i
+                                                                                        class="fa fa-ban"></i> Deactivate</button>
+                                                                        </a>
+                                                                    {% endif %}
+                                                                    {% if family.status.name == 'Deactived' %}
+                                                                        <a href=""
+                                                                           onclick="return confirm('Are you sure about activation of Account');">
+                                                                            <button type="button"
+                                                                                    class="btn btn-info"><i
+                                                                                        class="fa fa-user"></i> Activate</button>
+                                                                        </a>
+                                                                    {% endif %}
+                                                                </span>
+                                                            </li>
+                                                            <li>
+                                                                <span class="sale-num">
+                                                                    {% if family.status.name == 'On Trial' %}
+                                                                        <a href="">
+                                                                            <button type="button"
+                                                                                    class="btn btn-success"><i
+                                                                                        class="fa fa-user"></i> Make Regular</button>
+                                                                        </a>
+                                                                    {% endif %}
+
+                                                                    {% if family.status.name == 'Make on Holiday' %}
+                                                                        <a href="make-off-leave?t_id=<?php echo $pid; ?>">
+                                                                            <button type="button"
+                                                                                    class="btn btn-success"><i
+                                                                                        class="fa fa-user"></i> Make off Holiday</button>
+                                                                        </a>
+                                                                    {% endif %}
+
+                                                                    {% if family.status.name == 'Regular' %}
+                                                                        <a data-toggle="modal" href="#leave">
+                                                                            <button type="button"
+                                                                                    class="btn btn-info"><i
+                                                                                        class="fa fa-user"></i> Make on Holiday</button>
+                                                                        </a>
+                                                                    {% endif %}
+
+                                                                    {% if family.status.name == 'Deactived' %}
+                                                                        <span class="label label-warning"><strong>Not Applicable</strong></span>
+                                                                    {% endif %}
+                                                                </span>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <!-- Post -->
                                     <div class="post">
                                         <div class="user-block">
@@ -105,222 +167,79 @@
                                         </div>
                                         <ul class="list-inline">
                                             <li>
-                                                Gender: <font color="#44B6AE"> <b>{{ employee.gender }}</b></font>
+                                                Name: <font color="#44B6AE">
+                                                    <b>{{ family.name }}</b></font>
                                             </li>
                                             <li>
-                                                Status: <font color="#44B6AE">
-                                                    <b>{{ employee.maritalStatus }}</b></font>
-                                            </li>
-                                            <li>
-                                                Father Name: <font color="#44B6AE">
-                                                    <b>{{ employee.fatherName }}</b></font>
-                                            </li>
-                                            <li>
-                                                Nationality: <font color="#44B6AE">
-                                                    <b>{{ employee.nationality }}</b></font>
-                                            </li>
-                                            <li>
-                                                Occupation: <font color="#44B6AE">
-                                                    <b>{{ employee.category.name }}</b></font>
+                                                Email: <font color="#44B6AE">
+                                                    <b>{{ family.email }}</b></font>
                                             </li>
                                         </ul>
                                         <ul class="list-inline">
                                             <li>
-                                                Institute Email: <font color="#44B6AE">
-                                                    <b>{{ employee.instituteEmail }}</b></font>
+                                                Telephone: <font color="#44B6AE">
+                                                    <b>{{ family.studentBank }}</b></font>
                                             </li>
                                             <li>
-                                                Personal Email: <font color="#44B6AE">
-                                                    <b>dinaessam22@gmail.com</b></font>
+                                                Student Bank: <font color="#44B6AE">
+                                                    <b>{{ family.telephone }}</b></font>
                                             </li>
                                             <li>
-                                                Phone: <font color="#44B6AE"> <b>{{ employee.telephone }}</b></font>
+                                                Admin Bank: <font color="#44B6AE">
+                                                    <b>{{ family.bank }}</b></font>
                                             </li>
-                                            <li>
-                                                Mobile: <font color="#44B6AE"> <b>{{ employee.mobile }}</b></font>
-                                            </li>
-
                                         </ul>
                                         <ul class="list-inline">
                                             <li>
-                                                Ijaazah In: <font color="#44B6AE"> <b>{{ employee.ijaazah }}</b></font>
+                                                Mobile: <font color="#44B6AE">
+                                                    <b>{{ family.mobile }}</b></font>
                                             </li>
                                             <li>
-                                                Qualification: <font color="#44B6AE">
-                                                    <b>{{ employee.qualification }}</b></font>
+                                                Zoom: <font color="#44B6AE">
+                                                    <b>{{ family.zoom }}</b></font>
                                             </li>
                                             <li>
-                                                Experience: <font color="#44B6AE">
-                                                    <b>{{ employee.experience }}</b></font>
+                                                Skype: <font color="#44B6AE"> <b>{{ family.skype }}</b></font>
+                                            </li>
+                                        </ul>
+                                        <ul class="list-inline">
+                                            <li>
+                                                Hours: <font color="#44B6AE">
+                                                    <b>*******</b></font>
                                             </li>
                                             <li>
-                                                Memorization: <font color="#44B6AE"> <b>{{ employee.memorization }}</b></font>
+                                                Fee: <font color="#44B6AE">
+                                                    <b>***** / {{ family.currency.code }}</b></font>
+                                            </li>
+                                        </ul>
+                                        <ul class="list-inline">
+                                            <li>
+                                                Country: <font color="#44B6AE">
+                                                    <b>{{ family.country.name }}</b></font>
+                                            </li>
+                                            <li>
+                                                City: <font color="#44B6AE">
+                                                    <b>{{ family.city }}</b></font>
+                                            </li>
+                                            <li>
+                                                City: <font color="#44B6AE">
+                                                    <b>{{ family.timezone.name }}</b></font>
+                                            </li>
+                                        </ul>
+                                        <ul class="list-inline">
+                                            <li>
+                                                Username: <font color="#44B6AE">
+                                                    <b>{# family.username #}</b></font>
+                                            </li>
+                                            <li>
+                                                Password: <font color="#44B6AE">
+                                                    <b>{# family.password #}</b></font>
                                             </li>
                                         </ul>
                                         <!-- /.user-block -->
                                     </div>
                                     <!-- /.post -->
 
-                                    <!-- Post -->
-                                    <div class="post clearfix">
-                                        <div class="user-block">
-                                            <span class="username">
-                                              <a href="#">Official Details</a>
-                                            </span>
-                                        </div>
-                                        <ul class="list-inline">
-                                            <li>
-                                                Job: <font color="#44B6AE"> <b></b></font>
-                                            </li>
-                                            <li>
-                                                Skype: <font color="#44B6AE"> <b>{{ employee.skype }}</b></font>
-                                            </li>
-                                            <li>
-                                                Zoom-Link: <font color="#44B6AE">
-                                                    <b>{{ employee.zoom }}</b></font>
-                                            </li>
-                                            <li>
-                                                Group ID: <font color="#44B6AE">
-                                                    <b>{{ employee.whatsupGroup }}</b></font>
-                                            </li>
-                                        </ul>
-                                        <ul class="list-inline">
-                                            <li>
-                                                Salary: <font color="#44B6AE">
-                                                    <b>{{ employee.salaryPackage.salary }}</b></font>
-                                            </li>
-                                            <li>
-                                                Username: <font color="#44B6AE"> <b>{{ employee.username }}</b></font>
-                                            </li>
-                                        </ul>
-                                        <ul class="list-inline">
-                                            <li>
-                                                Timezone: <font color="#44B6AE">
-                                                    <b>{{ employee.accountTitle }}</b></font>
-                                            </li>
-                                            <li>
-                                                Difference: <font color="#44B6AE"> <b></b></font>
-                                            </li>
-                                            <li>
-                                                Date of Birth: <font color="#44B6AE">
-                                                    <b>{{ employee.birthday.format('Y-m-d') }}</b></font>
-                                            </li>
-                                            <li>
-                                                Date of Joining: <font color="#44B6AE">
-                                                    <b>{{ employee.joiningAt.format('Y-m-d') }}</b></font>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <!-- /.post -->
-
-                                    <!-- Post -->
-                                    <div class="post clearfix">
-                                        <div class="user-block">
-                                            <span class="username">
-                                              <a href="#">Edit Rights</a>
-                                            </span>
-                                        </div>
-                                        <ul class="list-inline">
-                                            <li>
-                                                <a href="csr_rights?a_id=1&amp;link=/member-area/admin/teacher-accounts-profile?profile_no=MQ==&amp;sts=2">
-                                                    <button type="button" class="btn green btn-xs">HR Rights
-                                                    </button>
-                                                </a></li>
-                                            <li>
-                                                <a href="teacher_rights?a_id=1&amp;link=/member-area/admin/teacher-accounts-profile?profile_no=MQ==&amp;sts=2">
-                                                    <button type="button" class="btn green btn-xs">Teaching Rights
-                                                    </button>
-                                                </a></li>
-                                            <li>
-                                                <a href="manager_rights?a_id=1&amp;link=/member-area/admin/teacher-accounts-profile?profile_no=MQ==&amp;sts=2">
-                                                    <button type="button" class="btn green btn-xs">Support Rights
-                                                    </button>
-                                                </a></li>
-                                            <li>
-                                                <a href="s_manager_rights?a_id=1&amp;link=/member-area/admin/teacher-accounts-profile?profile_no=MQ==&amp;sts=2">
-                                                    <button type="button" class="btn green btn-xs">Quality Control
-                                                        Rights
-                                                    </button>
-                                                </a></li>
-                                        </ul>
-                                    </div>
-                                    <!-- /.post -->
-
-                                    <!-- Post -->
-                                    <div class="post clearfix">
-                                        <div class="user-block">
-                                            <span class="username">
-                                              <a href="#">Time Allocation</a>
-                                            </span>
-                                        </div>
-                                        <ul class="list-inline">
-                                            <li>
-                                                1st Time Allocation: <font color="#44B6AE">
-                                                    <b>{{ employee.startTime1.name }}to {{ employee.endTime1.name }}</b></font>
-                                            </li>
-                                            <li>
-                                                2nd Time Allocation: <font color="#44B6AE">
-                                                    <b>{{ employee.startTime2.name }}to {{ employee.endTime2.name }}</b></font>
-                                            </li>
-                                            <li>
-                                                3rd Time Allocation: <font color="#44B6AE">
-                                                    <b>{{ employee.startTime3.name }}to {{ employee.endTime3.name }}</b></font>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <!-- /.post -->
-
-                                    <!-- Post -->
-                                    <div class="post clearfix">
-                                        <div class="user-block">
-                                            <span class="username">
-                                              <a href="#">Salary Details</a>
-                                            </span>
-                                        </div>
-                                        <ul class="list-inline">
-                                            <li>
-                                                Account Title: <font color="#44B6AE"> <b>{{ employee.accountTitle }}</b></font>
-                                            </li>
-                                            <li>
-                                                Residence ALW: <font color="#44B6AE"> <b>0</b></font>
-                                            </li>
-                                            <li>
-                                                Tax: <font color="#44B6AE"> <b>0</b></font>
-                                            </li>
-                                            <li>
-                                                EOBI: <font color="#44B6AE"> <b>{{ employee.eobi }}</b></font>
-                                            </li>
-                                        </ul>
-                                        <ul class="list-inline">
-                                            <li>
-                                                Monthly Salary Fixed: <font color="#44B6AE"> <b>0</b></font>
-                                            </li>
-                                        </ul>
-                                        <ul class="list-inline">
-                                            <li>
-                                                Medical ALW: <font color="#44B6AE"> <b>{{ employee.medical }}</b></font>
-                                            </li>
-                                            <li>
-                                                Entertainment ALW: <font color="#44B6AE">
-                                                    <b>{{ employee.entertainment }}</b></font>
-                                            </li>
-                                            <li>
-                                                Misc. ALW: <font color="#44B6AE"> <b>{{ employee.misc }}</b></font>
-                                            </li>
-                                        </ul>
-                                        <ul class="list-inline">
-                                            <li>
-                                                Bank: <font color="#44B6AE"> <b>{{ employee.bank }}</b></font>
-                                            </li>
-                                            <li>
-                                                Branch: <font color="#44B6AE"> <b>{{ employee.branch }}</b></font>
-                                            </li>
-                                            <li>
-                                                A/C No.: <font color="#44B6AE"> <b>{{ employee.accountNo }}</b></font>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <!-- /.post -->
                                 </div>
                                 <!-- /.tab-pane -->
                             </div>
@@ -328,6 +247,97 @@
                         </div><!-- /.card-body -->
                     </div>
                     <!-- /.nav-tabs-custom -->
+                    <table class="table table-striped projects">
+                        <thead>
+                        <tr>
+                            <th style="width: 5%">
+                                #
+                            </th>
+                            <th>
+                                Name
+                            </th>
+                            <th>
+                                Subscription
+                            </th>
+                            <th>
+                                Teacher
+                            </th>
+                            <th>
+                                (Rate x Hours) Fee
+                            </th>
+                            <th style="width: 30%"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for student in family.students %}
+                            <tr>
+                                <td>
+                                    # {{ student.id }}
+                                </td>
+                                <td>
+                                    <a href="{{ path('admin.family.edit', {'id': student.id}) }}">
+                                        {{ student.name }}
+                                    </a>
+                                </td>
+                                <td>
+                                    <a class="addsubs" href="#invoice" data-toggle="modal" data-target="#invoice"
+                                       data-id="29">
+                                        <span class="label label-sm label-danger">Add</span>
+                                    </a>
+                                </td>
+                                <td>
+                                    <span class="label label-sm label-success"
+                                          title="Teacher Rate"><b>{{ student.teacherRate }}</b></span>
+                                    {{ student.teacher.name }}
+                                </td>
+                                <td>
+                                    (7 x 6) {{ student.family.currency.code }}
+                                </td>
+                                <td class="project-actions text-right">
+                                    <a class="btn btn-info btn-sm"
+                                       href="{{ path('admin.family.view', {'id': family.id}) }}"
+                                       title="Quarterly Report">
+                                        QR
+                                    </a>
+                                    <a class="btn btn-info btn-sm"
+                                       href="{{ path('admin.family.view', {'id': family.id}) }}" title="Test Results">
+                                        TR
+                                    </a>
+                                    <a class="btn btn-info btn-sm"
+                                       href="{{ path('admin.family.view', {'id': family.id}) }}" title="Class Summary">
+                                        CS
+                                    </a>
+                                    <a class="btn btn-info btn-sm"
+                                       href="{{ path('admin.student.edit', {'id': student.id, 'family_id': family.id}) }}"
+                                       title="Edit Student Data">
+                                        <i class="fas fa-pencil-alt">
+                                        </i>
+                                    </a>
+                                    <form method="post" action="{{ path('admin.family.delete', {id: family.id}) }}"
+                                          style="display: inline-block"
+                                          onsubmit="return confirm('Are you sure about Suspension of Student {{ student.name }} ?')">
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <input type="hidden" name="token" value="{{ csrf_token('delete') }}">
+                                        <button class="btn btn-danger btn-sm" title="Suspend this student">
+                                            <i class="fa fa-thumbs-o-down">
+                                            </i>
+                                        </button>
+                                    </form>
+                                    <form method="post" action="{{ path('admin.family.delete', {id: family.id}) }}"
+                                          style="display: inline-block"
+                                          onsubmit="return confirm('Are you sure about Un-Suspension of Student {{ student.name }} ?')">
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <input type="hidden" name="token" value="{{ csrf_token('delete') }}">
+                                        <button class="btn btn-danger btn-sm" title="Deactivate this student">
+                                            <i class="fas fa-ban">
+                                            </i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
                 </div>
                 <!-- /.col -->
             </div>
@@ -335,5 +345,91 @@
         </div><!-- /.container-fluid -->
     </section>    <!-- Main content -->
 
+
+    <!-- DEACTIVATION NOTE -->
+    <div class="modal fade" id="deactivation">
+        <div class="modal-dialog modal-lg">
+            <form id="makeOnHolidayForm" name="onHoliday" role="form">>
+                <div class="modal-content">
+                    <div class="modal-header bg-danger">
+                        <h4 class="modal-title">Add Note About Deactivation of {{ family.name }}</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Why are you deactivating {{ family.name }} ?</p>
+                        <div class="form-body">
+                            <div class="form-group">
+                                <label class="control-label col-4"><strong>Parent Name</strong></label>
+                                <div class="col-8">
+                                    <input type="text" placeholder="{{ family.name }}" name="parent_name"
+                                           id="parent_name" class="form-control input-circle" readonly/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-4 control-label">
+                                    <strong>Your Comments</strong>
+                                </label>
+                                <div class="col-12">
+                                            <textarea class="form-control input-circle" cols="10"
+                                                      placeholder="Enter Your Comments" name="comment"
+                                                      id="comment"></textarea>
+                                </div>
+                            </div>
+                            <input type="hidden" value="{{ family.id }}" name="parent_id" id="parent_id"
+                                   class="form-control input-circle"/>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+    </div>
+
+    <!-- MAKE ON HOLIDAY -->
+    <div class="modal fade" id="leave">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-info">
+                    <h4 class="modal-title">Enter Date When Will {{ family.name }} Return For Classes</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Add date for </p>
+                    <div class="form-body">
+                        <div class="form-group">
+                            <div class="col-8">
+                                <input type="date" name="date" id="date" class="form-control input-circle" required="">
+                            </div>
+                        </div>
+                        <input type="hidden" value="{{ family.id }}" name="parent_id" id="parent_id"
+                               class="form-control input-circle"></input>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
     <!-- /.content -->
+    <script>
+        let statusForm = '{{ path('admin.family.status') }}';
+    </script>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="/js/family-status.js"></script>
 {% endblock %}

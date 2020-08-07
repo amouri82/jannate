@@ -5,10 +5,13 @@ namespace App\Controller\Admin;
 use App\Entity\Employee;
 use App\Form\EmployeeType;
 use App\Repository\EmployeeRepository;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Vich\UploaderBundle\Form\Type\VichFileType;
@@ -39,7 +42,7 @@ class EmployeeController extends AbstractController
      * @param PaginatorInterface $paginator
      * @param Request            $request
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function index(PaginatorInterface $paginator, Request $request)
     {
@@ -64,29 +67,33 @@ class EmployeeController extends AbstractController
      *
      * @param UserPasswordEncoderInterface $passwordEncoder
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @return RedirectResponse|Response
      */
-    public function create(Employee $employee = null, Request $request,  UserPasswordEncoderInterface $passwordEncoder)
-    {
+    public function create(
+        Employee $employee = null,
+        Request $request,
+        UserPasswordEncoderInterface $passwordEncoder
+    ) {
         $new = false;
-        if(!$employee) {
+        if (!$employee) {
             $employee = new Employee();
             $new = true;
         }
 
         $form = $this->createForm(EmployeeType::class, $employee);
         $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
             // 3) Encode the password (you could also do this via Doctrine listener)
-            $password = $passwordEncoder->encodePassword($employee, $employee->getPlainPassword());
-            $employee->setPassword($password);
+            $password = $passwordEncoder->encodePassword($employee->getUser(),
+                $employee->getUser()->getPlainPassword());
+            $employee->getUser()->setPassword($password);
 
             $this->em->persist($employee);
             $this->em->flush();
-            if($new) {
-                $this->addFlash('success' , "Employee successfully created");
+            if ($new) {
+                $this->addFlash('success', "Employee successfully created");
             } else {
-                $this->addFlash('success' , "Employee successfully updated");
+                $this->addFlash('success', "Employee successfully updated");
             }
             return $this->redirectToRoute('admin.employees.index');
         }
@@ -101,14 +108,15 @@ class EmployeeController extends AbstractController
      * @param Employee $employee
      * @param Request  $request
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
-    public function delete(Employee $employee, Request $request){
+    public function delete(Employee $employee, Request $request)
+    {
         $submittedToken = $request->request->get('token');
-        if($this->isCsrfTokenValid('delete', $submittedToken)){
+        if ($this->isCsrfTokenValid('delete', $submittedToken)) {
             $this->em->remove($employee);
             $this->em->flush();
-            $this->addFlash('success' , "Record Successfully deleted");
+            $this->addFlash('success', "Record Successfully deleted");
         }
         return $this->redirectToRoute('admin.employees.index');
     }
@@ -116,9 +124,9 @@ class EmployeeController extends AbstractController
     /**
      * @Route("/admin/employee/view/{id}", name="admin.employee.view")
      * @param Employee $employee
-     * @param Request $request
+     * @param Request  $request
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @return RedirectResponse|Response
      */
     public function view(Employee $employee, Request $request)
     {
@@ -136,7 +144,7 @@ class EmployeeController extends AbstractController
             $employee->setAvatarFile(($form['avatarFile']->getData()));
             $this->em->persist($employee);
             $this->em->flush();
-            $this->addFlash('success' , "Profile image successfully updated");
+            $this->addFlash('success', "Profile image successfully updated");
         }
 
         return $this->render('admin/employee/view.html.twig', [
@@ -150,13 +158,14 @@ class EmployeeController extends AbstractController
      * @param Employee $employee
      * @param Request  $request
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
-    public function status(Employee $employee, Request $request){
+    public function status(Employee $employee, Request $request)
+    {
 
         if ($employee->getActive()) {
             $employee->setActive(0);
-            $employee->setDeactivateAt(new \DateTime('now'));
+            $employee->setDeactivateAt(new DateTime('now'));
             $message = "Employee account successfully deactivated";
         } else {
             $employee->setActive(1);
@@ -167,9 +176,10 @@ class EmployeeController extends AbstractController
 
         $this->em->persist($employee);
         $this->em->flush();
-        $this->addFlash('success' , $message);
+        $this->addFlash('success', $message);
 
-        return $this->redirectToRoute('admin.employee.view', array('id' => $employee->getId()));
+        return $this->redirectToRoute('admin.employee.view',
+            ['id' => $employee->getId()]);
     }
 
 }
