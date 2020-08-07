@@ -6,12 +6,11 @@ use App\Entity\Country;
 use App\Entity\Currency;
 use App\Entity\Family;
 use App\Entity\InvoiceType;
+use App\Entity\Status;
 use App\Entity\Timezone;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -23,12 +22,7 @@ class FamilyType extends AbstractType
         $builder
             ->add('name')
             ->add('email')
-            ->add('username')
-            ->add('plainPassword', RepeatedType::class, array(
-                'type' => PasswordType::class,
-                'first_options'  => array('label' => 'Password'),
-                'second_options' => array('label' => 'Repeat Password'),
-            ))
+            ->add('user', UserType::class)
             ->add('telephone')
             ->add('mobile')
             ->add('city')
@@ -72,6 +66,12 @@ class FamilyType extends AbstractType
                 'class' => Currency::class,
                 'choice_label' => 'code',
                 'placeholder' => 'Currency'
+            ])
+            ->add('status', EntityType::class, [
+                // looks for choices from this entity
+                'class' => Status::class,
+                'choice_label' => 'name',
+                'placeholder' => 'Status'
             ]);
     }
 

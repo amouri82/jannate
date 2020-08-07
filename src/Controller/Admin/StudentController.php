@@ -4,13 +4,16 @@ namespace App\Controller\Admin;
 
 use App\Entity\Student;
 use App\Form\StudentType;
+use App\Repository\FamilyRepository;
 use App\Repository\StudentRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Exception as ExceptionAlias;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class StudentController extends AbstractController
 {
@@ -25,12 +28,19 @@ class StudentController extends AbstractController
      */
     private $em;
 
+    /**
+     * @var FamilyRepository
+     */
+    private $familyRepository;
+
     public function __construct(
         StudentRepository $repository,
-        EntityManagerInterface $em
+        EntityManagerInterface $em,
+        FamilyRepository $familyRepository
     ) {
         $this->repository = $repository;
         $this->em = $em;
+        $this->familyRepository = $familyRepository;
     }
 
     /**
@@ -38,49 +48,62 @@ class StudentController extends AbstractController
      * @param PaginatorInterface $paginator
      * @param Request            $request
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function index(PaginatorInterface $paginator, Request $request)
     {
-        $count = $this->repository->count([]);
         $students = $paginator->paginate(
-            $this->repository->findAll(),
+            $this->repository->findBy(['status' => 1]),
             $request->query->getInt('page', 1), /*page number*/
             10 /*limit per page*/
         );
+
+        $inActivestudents = $paginator->paginate(
+            $this->repository->findBy(['status' => 0]),
+            $request->query->getInt('page', 1), /*page number*/
+            10 /*limit per page*/
+        );
+
         // parameters to template
         return $this->render('admin/student/index.html.twig', [
             'students' => $students,
-            'count' => $count
+            'inActiveStudents' => $inActivestudents
         ]);
     }
 
     /**
-     * @Route("/admin/student/new", name="admin.student.new")
-     * @Route("/admin/student/{id}", name="admin.student.edit")
-     * @param Student                     $student
-     * @param Request                      $request
+     * @Route("/admin/student/new/{family_id}", name="admin.student.new")
+     * @Route("/admin/student/{family_id}/{id}", name="admin.student.edit")
+     * @param         $family_id
+     * @param Student $student
+     * @param Request $request
      *
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @return RedirectResponse|Response
      */
-    public function create(Student $student = null, Request $request)
-    {
+
+    public function create(
+        Request $request,
+        $family_id,
+        Student $student = null
+    ) {
         $new = false;
-        if(!$student) {
+        if (!$student) {
             $student = new Student();
             $new = true;
         }
 
+        $family = $this->familyRepository->find($family_id);
         $form = $this->createForm(StudentType::class, $student);
         $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
+            $student->setFamily($family);
             $this->em->persist($student);
             $this->em->flush();
-            if($new) {
-                $this->addFlash('success' , "Student successfully created");
+            if ($new) {
+                $this->addFlash('success', "Student successfully created");
             } else {
-                $this->addFlash('success' , "Student successfully updated");
+                $this->addFlash('success', "Student successfully updated");
             }
             return $this->redirectToRoute('admin.students.index');
         }
@@ -93,60 +116,49 @@ class StudentController extends AbstractController
     /**
      * @Route("/admin/student/delete/{id}", name="admin.student.delete", methods="DELETE")
      * @param Student $student
-     * @param Request  $request
+     * @param Request $request
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
-    public function delete(Student $student, Request $request){
+    public function delete(Student $student, Request $request)
+    {
         $submittedToken = $request->request->get('token');
-        if($this->isCsrfTokenValid('delete', $submittedToken)){
+        if ($this->isCsrfTokenValid('delete', $submittedToken)) {
             $this->em->remove($student);
             $this->em->flush();
-            $this->addFlash('success' , "Record Successfully deleted");
+            $this->addFlash('success', "Record Successfully deleted");
         }
         return $this->redirectToRoute('admin.students.index');
     }
 
-    /**
-     * @Route("/admin/student/view/{id}", name="admin.student.view")
-     * @param Student $student
-     * @param Request $request
-     *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     */
-    public function view(Student $student, Request $request)
-    {
-        return $this->render('admin/Student/view.html.twig', [
-            'Student' => $student
-        ]);
-    }
 
     /**
      * @Route("/admin/student/status/{id}", name="admin.student.status")
      * @param Student $student
-     * @param Request $request
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     * @throws \Exception
+     * @return RedirectResponse
+     * @throws ExceptionAlias
      */
-    public function status(Student $student, Request $request){
-
-        if ($student->getActive()) {
-            $student->setActive(0);
-            $student->setDeactivateAt(new \DateTime('now'));
-            $message = "Student account successfully deactivated";
-        } else {
-            $student->setActive(1);
-            $student->setDeactivateAt(null);
-            $message = "Student account successfully activated";
-        }
-
-
+    public function status(Student $student)
+    {
+        /*
+                if ($student->getActive()) {
+                    $student->setActive(0);
+                    $student->setDeactivateAt(new \DateTime('now'));
+                    $message = "Student account successfully deactivated";
+                } else {
+                    $student->setActive(1);
+                    $student->setDeactivateAt(null);
+                    $message = "Student account successfully activated";
+                }
+        */
+        $message = '';
         $this->em->persist($student);
         $this->em->flush();
-        $this->addFlash('success' , $message);
+        $this->addFlash('success', $message);
 
-        return $this->redirectToRoute('admin.Student.view', array('id' => $student->getId()));
+        return $this->redirectToRoute('admin.Student.view',
+            ['id' => $student->getId()]);
     }
 
 }

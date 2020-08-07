@@ -14,8 +14,8 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * @ORM\Table(name="employee", indexes={@ORM\Index(name="IDX_B0F6A6D5E03A62C5", columns={"salary_package_id"})})
  * @ORM\Entity
  * @UniqueEntity(fields="email", message="Email already taken")
- * @UniqueEntity(fields="username", message="Username already taken")
  * @Vich\Uploadable
+ * @ORM\HasLifecycleCallbacks
  */
 class Employee
 {
@@ -101,38 +101,18 @@ class Employee
     private $skype;
 
     /**
-     * @var string
+     * @var \DateTime
      *
-     * @ORM\Column(name="username", type="string", length=100, nullable=false, unique=true)
-     * @Assert\NotBlank()
+     * @ORM\Column(name="created_at", type="datetime", nullable=true, options={"default"="CURRENT_TIMESTAMP"})
      */
-    private $username;
-
-    /**
-     * @Assert\Length(max=4096)
-     */
-    private $plainPassword;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="password", type="string", length=100, nullable=false)
-     */
-    private $password;
+    private $createdAt;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="created_at", type="datetime", nullable=false, options={"default"="CURRENT_TIMESTAMP"})
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true, options={"default"="CURRENT_TIMESTAMP"})
      */
-    private $createdAt = 'CURRENT_TIMESTAMP';
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="updated_at", type="datetime", nullable=false, options={"default"="CURRENT_TIMESTAMP"})
-     */
-    private $updatedAt = 'CURRENT_TIMESTAMP';
+    private $updatedAt;
 
     /**
      * @var \SalaryPackage
@@ -333,6 +313,12 @@ class Employee
      */
     private $tax;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\User", cascade={"persist"}, orphanRemoval=true)
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -454,40 +440,6 @@ class Employee
     public function setSkype(?string $skype): self
     {
         $this->skype = $skype;
-
-        return $this;
-    }
-
-    public function getUsername(): ?string
-    {
-        return $this->username;
-    }
-
-    public function setUsername(string $username): self
-    {
-        $this->username = $username;
-
-        return $this;
-    }
-
-    public function getPlainPassword()
-    {
-        return $this->plainPassword;
-    }
-
-    public function setPlainPassword($password)
-    {
-        $this->plainPassword = $password;
-    }
-
-    public function getPassword(): ?string
-    {
-        return $this->password;
-    }
-
-    public function setPassword(string $password): self
-    {
-        $this->password = $password;
 
         return $this;
     }
@@ -969,6 +921,18 @@ class Employee
     public function onPreUpdate()
     {
         $this->updatedAt = new \DateTime("now");
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
     }
 
 }

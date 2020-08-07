@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\StudentRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class Student
 {
@@ -49,7 +50,7 @@ class Student
     private $joining_date;
 
     /**
-     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $teacher_rate;
 
@@ -121,6 +122,11 @@ class Student
      * @ORM\JoinColumn(nullable=false)
      */
     private $status;
+
+    /**
+     * @ORM\Column(type="string", length=30)
+     */
+    private $level;
 
     public function __construct()
     {
@@ -312,14 +318,14 @@ class Student
         return $this;
     }
 
-    public function getFamiliy(): ?Familiy
+    public function getFamily(): ?Family
     {
         return $this->family;
     }
 
-    public function setFamily(?Familiy $familiy): self
+    public function setFamily(?Family $family): self
     {
-        $this->family = $familiy;
+        $this->family = $family;
 
         return $this;
     }
@@ -382,6 +388,39 @@ class Student
     public function setStatus(?Status $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Gets triggered only on insert
+
+     * @ORM\PrePersist
+     */
+    public function onPrePersist()
+    {
+        $this->created_at = new \DateTime("now");
+        $this->updated_at = new \DateTime("now");
+    }
+
+    /**
+     * Gets triggered every time on update
+
+     * @ORM\PreUpdate
+     */
+    public function onPreUpdate()
+    {
+        $this->updated_at = new \DateTime("now");
+    }
+
+    public function getLevel(): ?string
+    {
+        return $this->level;
+    }
+
+    public function setLevel(string $level): self
+    {
+        $this->level = $level;
 
         return $this;
     }

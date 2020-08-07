@@ -16,6 +16,14 @@ ul.pagination {
     margin-bottom: 20px;
 }
 
+.families-status {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.family-avatar {
+    text-align: center;
+}
 .lead{
     width: 200px
 }
@@ -50,4 +58,72 @@ ul.pagination {
 .user-block .comment, .user-block .description, .user-block .username {
     margin-left: 0;
     font-size: 20px;
+}
+
+.student_courses_list {
+    padding: 0;
+}
+
+.list-unstyled li {
+    margin: 10px 0;
+}
+
+.sale-summary {
+    text-align: right;
+}
+
+.sale-summary li .sale-info {
+    margin-top: 4px;
+    float: left;
+    color: #646464;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+/* Labels variants */
+.label {
+    display:inline-block;
+    padding: 8px;
+    color: #fff;
+}
+.label-default {
+    background-color: #c6c6c6;
+}
+.label-default[href]:hover, .label-default[href]:focus {
+    background-color: #adadad;
+}
+
+.label-primary {
+    background-color: #428bca;
+}
+.label-primary[href]:hover, .label-primary[href]:focus {
+    background-color: #3071a9;
+}
+
+.label-success {
+    background-color: #45B6AF;
+}
+.label-success[href]:hover, .label-success[href]:focus {
+    background-color: #37918b;
+}
+
+.label-info {
+    background-color: #89C4F4;
+}
+.label-info[href]:hover, .label-info[href]:focus {
+    background-color: #5aadf0;
+}
+
+.label-warning {
+    background-color: #dfba49;
+}
+.label-warning[href]:hover, .label-warning[href]:focus {
+    background-color: #d0a625;
+}
+
+.label-danger {
+    background-color: #F3565D;
+}
+.label-danger[href]:hover, .label-danger[href]:focus {
+    background-color: #f0262f;
 }

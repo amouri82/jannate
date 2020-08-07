@@ -12,6 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="family")
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
  */
 class Family
 {
@@ -37,25 +38,6 @@ class Family
      * @ORM\Column(name="email", type="string", length=255, nullable=false)
      */
     private $email;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="username", type="string", length=255, nullable=false)
-     */
-    private $username;
-
-    /**
-     * @Assert\Length(max=4096)
-     */
-    private $plainPassword;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="password", type="string", length=100, nullable=false)
-     */
-    private $password;
 
     /**
      * @var string|null
@@ -195,6 +177,12 @@ class Family
      */
     private $zoom;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\User", cascade={"persist"}, orphanRemoval=true)
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
     public function __construct()
     {
         $this->students = new ArrayCollection();
@@ -225,40 +213,6 @@ class Family
     public function setEmail(string $email): self
     {
         $this->email = $email;
-
-        return $this;
-    }
-
-    public function getUsername(): ?string
-    {
-        return $this->username;
-    }
-
-    public function setUsername(string $username): self
-    {
-        $this->username = $username;
-
-        return $this;
-    }
-
-    public function getPlainPassword()
-    {
-        return $this->plainPassword;
-    }
-
-    public function setPlainPassword($password)
-    {
-        $this->plainPassword = $password;
-    }
-
-    public function getPassword(): ?string
-    {
-        return $this->password;
-    }
-
-    public function setPassword(string $password): self
-    {
-        $this->password = $password;
 
         return $this;
     }
@@ -565,5 +519,17 @@ class Family
     public function onPreUpdate()
     {
         $this->updatedAt = new \DateTime("now");
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
     }
 }

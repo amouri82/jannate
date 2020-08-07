@@ -8,12 +8,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Families</h1>
+                    <h1>Parent Accounts</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{ path('home') }}">Home</a></li>
-                        <li class="breadcrumb-item active">Families</li>
+                        <li class="breadcrumb-item active">List of Parent Accounts </li>
                     </ol>
                 </div>
             </div>
@@ -33,97 +33,442 @@
                 Add New Family
             </a>
         </div>
+        <div class="col-xs-12 families-status">
+            <a href="parent-accounts" class="btn btn-info"><i class="fa fa-user"></i> Active (Active, Free, Trial &amp; Suspended) <b>(No. 10)</b></a>
+            <a href="parent-accounts-deactive" class="btn btn-danger"><i class="fa fa-user-times"></i> Deactivated (Left, Completed, Deactivated &amp; On Leave) <b>(No. 0)</b></a>
+        </div>
         <!-- Default box -->
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Total Number of Active Families: {{ count }}</h3>
+        <div class="card card-info card-tabs">
+            <div class="card-header p-0 pt-1">
+                <ul class="nav nav-tabs" id="custom-tabs-0-tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active"
+                           id="custom-tabs-one-0-tab" data-toggle="pill"
+                           href="#custom-tabs-one-0" role="tab"
+                           aria-controls="custom-tabs-one-0"
+                           aria-selected="true">
+                            Paid (No. {{ regulars|length }})
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link purple"
+                           id="custom-tabs-one-1-tab" data-toggle="pill"
+                           href="#custom-tabs-one-1" role="tab"
+                           aria-controls="custom-tabs-one-1"
+                           aria-selected="true">
+                            Free (No. {{ frees|length }})
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           id="custom-tabs-one-2-tab" data-toggle="pill"
+                           href="#custom-tabs-one-2" role="tab"
+                           aria-controls="custom-tabs-one-2"
+                           aria-selected="true">
+                            Trial (No. {{ trials|length }})
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           id="custom-tabs-one-3-tab" data-toggle="pill"
+                           href="#custom-tabs-one-3" role="tab"
+                           aria-controls="custom-tabs-one-3"
+                           aria-selected="true">
+                            Suspended (No. {{ suspended|length }})
+                        </a>
+                    </li>
+                </ul>
             </div>
             <div class="card-body p-0">
-                <table class="table table-striped projects">
-                    <thead>
-                    <tr>
-                        <th style="width: 5%">
-                            #
-                        </th>
-                        <th>
-                            Name
-                        </th>
-                        <th>
-                            Fee
-                        </th>
-                        <th>
-                            Email
-                        </th>
-                        <th>
-                            Mobile
-                        </th>
-                        <th>
-                            Status
-                        </th>
-                        <th style="width: 30%"></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for family in families %}
-                        <tr>
-                            <td>
-                                # {{ family.id }}
-                            </td>
-                            <td>
-                                <a href="{{ path('admin.family.edit', {'id': family.id}) }}">
-                                     {{ family.name }}
-                                </a>
-                            </td>
-                            <td>
-                                {{ family.currency.code }}
-                            </td>
-                            <td>
-                                {{ family.email }}
-                            </td>
-                            <td>
-                                {{ family.mobile }}
-                            </td>
-                            <td>
-                                {% if  family.active == 1 %}
-                                    <span class="badge bg-success">Enabled</span>
-                                {% else %}
-                                    <span class="badge bg-danger">Disabled</span>
-                                {% endif %}
-                            </td>
-                            <td class="project-actions text-right">
-                                <a class="btn btn-info btn-sm" href="{{ path('admin.family.view', {'id': family.id}) }}">
-                                    <i class="fas fa-street-view">
-                                    </i>
-                                    View
-                                </a>
-                                <a class="btn btn-info btn-sm" href="{{ path('admin.family.edit', {'id': family.id}) }}">
-                                    <i class="fas fa-pencil-alt">
-                                    </i>
-                                    Edit profile
-                                </a>
-                                <form method="post" action="{{ path('admin.family.delete', {id: family.id}) }}" style="display: inline-block" onsubmit="return confirm('Are you sure to delete ?')">
-                                    <input type="hidden" name="_method" value="DELETE">
-                                    <input type="hidden" name="token" value="{{ csrf_token('delete') }}">
-                                    <button class="btn btn-danger btn-sm">
-                                        <i class="fas fa-trash">
-                                        </i>
-                                        Delete
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+                <div class="tab-content" id="custom-tabs-one-tabContent">
+                    <div class="tab-pane fade active show" id="custom-tabs-one-0" role="tabpanel"
+                         aria-labelledby="custom-tabs-one-0-tab">
+                        <table class="table table-striped projects">
+                            <thead>
+                            <tr>
+                                <th style="width: 5%">
+                                    #
+                                </th>
+                                <th>
+                                    Name
+                                </th>
+                                <th>
+                                    Fee
+                                </th>
+                                <th>
+                                    Email
+                                </th>
+                                <th>
+                                    Mobile
+                                </th>
+                                <th>
+                                    Status
+                                </th>
+                                <th>
+                                    Local Time
+                                </th>
+                                <th>
+                                    Invoice Type
+                                </th>
+                                <th>
 
+                                </th>
+                                <th style="width: 30%"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for family in regulars %}
+                                <tr bgcolor="{{ family.status.color }}">
+                                    <td>
+                                        # {{ family.id }}
+                                    </td>
+                                    <td>
+                                        <a href="{{ path('admin.family.edit', {'id': family.id}) }}">
+                                            {{ family.name }}
+                                        </a>
+                                    </td>
+                                    <td>
+                                        {{ family.currency.code }}
+                                    </td>
+                                    <td>
+                                        {{ family.email }}
+                                    </td>
+                                    <td>
+                                        {{ family.mobile }}
+                                    </td>
+                                    <td>
+                                        {{ family.status.name }}
+                                    </td>
+                                    <td>
+                                        {{ family.timezone.phpTimezone|localTime}}
+                                    </td>
+                                    <td>
+                                        <span class="label label-sm label-warning">{{ family.invoiceType.type }}</span>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn red btn-xs">0</button>
+                                    </td>
+                                    <td class="project-actions text-right">
+                                        <a class="btn btn-info btn-sm"
+                                           href="{{ path('admin.family.view', {'id': family.id}) }}">
+                                            <i class="fas fa-street-view">
+                                            </i>
+                                            View
+                                        </a>
+                                        <a class="btn btn-info btn-sm"
+                                           href="{{ path('admin.family.edit', {'id': family.id}) }}">
+                                            <i class="fas fa-pencil-alt">
+                                            </i>
+                                            Edit profile
+                                        </a>
+                                        <form method="post" action="{{ path('admin.family.delete', {id: family.id}) }}"
+                                              style="display: inline-block"
+                                              onsubmit="return confirm('Are you sure to delete ?')">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <input type="hidden" name="token" value="{{ csrf_token('delete') }}">
+                                            <button class="btn btn-danger btn-sm">
+                                                <i class="fas fa-trash">
+                                                </i>
+                                                Delete
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade show" id="custom-tabs-one-1" role="tabpanel"
+                         aria-labelledby="custom-tabs-one-0-tab">
+                        <table class="table table-striped projects">
+                            <thead>
+                            <tr>
+                                <th style="width: 5%">
+                                    #
+                                </th>
+                                <th>
+                                    Name
+                                </th>
+                                <th>
+                                    Fee
+                                </th>
+                                <th>
+                                    Email
+                                </th>
+                                <th>
+                                    Mobile
+                                </th>
+                                <th>
+                                    Status
+                                </th>
+                                <th>
+                                    Local Time
+                                </th>
+                                <th>
+                                    Invoice Type
+                                </th>
+                                <th>
+
+                                </th>
+                                <th style="width: 30%"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for family in frees %}
+                                <tr bgcolor="{{ family.status.color }}">
+                                    <td>
+                                        # {{ family.id }}
+                                    </td>
+                                    <td>
+                                        <a href="{{ path('admin.family.edit', {'id': family.id}) }}">
+                                            {{ family.name }}
+                                        </a>
+                                    </td>
+                                    <td>
+                                        {{ family.currency.code }}
+                                    </td>
+                                    <td>
+                                        {{ family.email }}
+                                    </td>
+                                    <td>
+                                        {{ family.mobile }}
+                                    </td>
+                                    <td>
+                                        {{ family.status.name }}
+                                    </td>
+                                    <td></td>
+                                    <td>
+                                        <span class="label label-sm label-warning">{{ family.invoiceType.type }}</span>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn red btn-xs">0</button>
+                                    </td>
+                                    <td class="project-actions text-right">
+                                        <a class="btn btn-info btn-sm"
+                                           href="{{ path('admin.family.view', {'id': family.id}) }}">
+                                            <i class="fas fa-street-view">
+                                            </i>
+                                            View
+                                        </a>
+                                        <a class="btn btn-info btn-sm"
+                                           href="{{ path('admin.family.edit', {'id': family.id}) }}">
+                                            <i class="fas fa-pencil-alt">
+                                            </i>
+                                            Edit profile
+                                        </a>
+                                        <form method="post" action="{{ path('admin.family.delete', {id: family.id}) }}"
+                                              style="display: inline-block"
+                                              onsubmit="return confirm('Are you sure to delete ?')">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <input type="hidden" name="token" value="{{ csrf_token('delete') }}">
+                                            <button class="btn btn-danger btn-sm">
+                                                <i class="fas fa-trash">
+                                                </i>
+                                                Delete
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade show" id="custom-tabs-one-2" role="tabpanel"
+                         aria-labelledby="custom-tabs-one-0-tab">
+                        <table class="table table-striped projects">
+                            <thead>
+                            <tr>
+                                <th style="width: 5%">
+                                    #
+                                </th>
+                                <th>
+                                    Name
+                                </th>
+                                <th>
+                                    Fee
+                                </th>
+                                <th>
+                                    Email
+                                </th>
+                                <th>
+                                    Mobile
+                                </th>
+                                <th>
+                                    Status
+                                </th>
+                                <th>
+                                    Local Time
+                                </th>
+                                <th>
+                                    Invoice Type
+                                </th>
+                                <th>
+
+                                </th>
+                                <th style="width: 30%"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for family in trials %}
+                                <tr bgcolor="{{ family.status.color }}">
+                                    <td>
+                                        # {{ family.id }}
+                                    </td>
+                                    <td>
+                                        <a href="{{ path('admin.family.edit', {'id': family.id}) }}">
+                                            {{ family.name }}
+                                        </a>
+                                    </td>
+                                    <td>
+                                        {{ family.currency.code }}
+                                    </td>
+                                    <td>
+                                        {{ family.email }}
+                                    </td>
+                                    <td>
+                                        {{ family.mobile }}
+                                    </td>
+                                    <td>
+                                        {{ family.status.name }}
+                                    </td>
+                                    <td></td>
+                                    <td>
+                                        <span class="label label-sm label-warning">{{ family.invoiceType.type }}</span>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn red btn-xs">0</button>
+                                    </td>
+                                    <td class="project-actions text-right">
+                                        <a class="btn btn-info btn-sm"
+                                           href="{{ path('admin.family.view', {'id': family.id}) }}">
+                                            <i class="fas fa-street-view">
+                                            </i>
+                                            View
+                                        </a>
+                                        <a class="btn btn-info btn-sm"
+                                           href="{{ path('admin.family.edit', {'id': family.id}) }}">
+                                            <i class="fas fa-pencil-alt">
+                                            </i>
+                                            Edit profile
+                                        </a>
+                                        <form method="post" action="{{ path('admin.family.delete', {id: family.id}) }}"
+                                              style="display: inline-block"
+                                              onsubmit="return confirm('Are you sure to delete ?')">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <input type="hidden" name="token" value="{{ csrf_token('delete') }}">
+                                            <button class="btn btn-danger btn-sm">
+                                                <i class="fas fa-trash">
+                                                </i>
+                                                Delete
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade show" id="custom-tabs-one-3" role="tabpanel"
+                         aria-labelledby="custom-tabs-one-0-tab">
+                        <table class="table table-striped projects">
+                            <thead>
+                            <tr>
+                                <th style="width: 5%">
+                                    #
+                                </th>
+                                <th>
+                                    Name
+                                </th>
+                                <th>
+                                    Fee
+                                </th>
+                                <th>
+                                    Email
+                                </th>
+                                <th>
+                                    Mobile
+                                </th>
+                                <th>
+                                    Status
+                                </th>
+                                <th>
+                                    Local Time
+                                </th>
+                                <th>
+                                    Invoice Type
+                                </th>
+                                <th>
+
+                                </th>
+                                <th style="width: 30%"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for family in suspended %}
+                                <tr bgcolor="{{ family.status.color }}">
+                                    <td>
+                                        # {{ family.id }}
+                                    </td>
+                                    <td>
+                                        <a href="{{ path('admin.family.edit', {'id': family.id}) }}">
+                                            {{ family.name }}
+                                        </a>
+                                    </td>
+                                    <td>
+                                        {{ family.currency.code }}
+                                    </td>
+                                    <td>
+                                        {{ family.email }}
+                                    </td>
+                                    <td>
+                                        {{ family.mobile }}
+                                    </td>
+                                    <td>
+                                        {{ family.status.name }}
+                                    </td>
+                                    <td></td>
+                                    <td>
+                                        <span class="label label-sm label-warning">{{ family.invoiceType.type }}</span>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn red btn-xs">0</button>
+                                    </td>
+                                    <td class="project-actions text-right">
+                                        <a class="btn btn-info btn-sm"
+                                           href="{{ path('admin.family.view', {'id': family.id}) }}">
+                                            <i class="fas fa-street-view">
+                                            </i>
+                                            View
+                                        </a>
+                                        <a class="btn btn-info btn-sm"
+                                           href="{{ path('admin.family.edit', {'id': family.id}) }}">
+                                            <i class="fas fa-pencil-alt">
+                                            </i>
+                                            Edit profile
+                                        </a>
+                                        <form method="post" action="{{ path('admin.family.delete', {id: family.id}) }}"
+                                              style="display: inline-block"
+                                              onsubmit="return confirm('Are you sure to delete ?')">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <input type="hidden" name="token" value="{{ csrf_token('delete') }}">
+                                            <button class="btn btn-danger btn-sm">
+                                                <i class="fas fa-trash">
+                                                </i>
+                                                Delete
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- /.card-body -->
             </div>
-            <div class="card-footer clearfix">
-                {{ knp_pagination_render(families) }}
-            </div>
-            <!-- /.card-body -->
         </div>
         <!-- /.card -->
-
+        </div>
     </section>
     <!-- /.content -->
 {% endblock %}

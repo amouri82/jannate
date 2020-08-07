@@ -61,14 +61,28 @@ class StudentType extends AbstractType
                     'Female' => 'Female',
                 ]
             ])
+            ->add('level', ChoiceType::class, [
+                'required' => false,
+                'choices' => [
+                    'Level' => '',
+                    'Beginners' => 'Beginners',
+                    'Level 01' => 'Level 01',
+                    'Level 02' => 'Level 02',
+                    'Level 03' => 'Level 03',
+                    'Level 04' => 'Level 04',
+                    'Level 05' => 'Level 05',
+                    'Level 06' => 'Level 06',
+                ]
+            ])
             ->add('class_type', ChoiceType::class, [
                 'choices' => [
                     'Class Type' => '',
                     'Zoom' => 'Zoom',
                     'Others' => 'Others'
                 ]
-            ])            ->add('teacher', EntityType::class, [
-                'required' => false,
+            ])
+            ->add('teacher', EntityType::class, [
+                'required' => true,
                 'label' => 'Teacher',
                 'class' => Employee::class,
                 'choice_label' => 'name'
@@ -87,6 +101,7 @@ class StudentType extends AbstractType
                 'choice_label' => 'name'
             ])
             ->add('regularDate', DateType::class, [
+                'required' => false,
                 'label' => 'Regular Date',
                 'placeholder' => [
                     'year' => 'Year',
@@ -95,6 +110,7 @@ class StudentType extends AbstractType
                 ]
             ])
             ->add('status', EntityType::class, [
+                'required' => false,
                 // looks for choices from this entity
                 'class' => Status::class,
                 'choice_label' => 'name',

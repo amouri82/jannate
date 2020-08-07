@@ -8,7 +8,9 @@ use App\Repository\SmsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class SmsController extends AbstractController
@@ -37,7 +39,7 @@ class SmsController extends AbstractController
      * @param PaginatorInterface $paginator
      * @param Request            $request
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function index(PaginatorInterface $paginator, Request $request)
     {
@@ -58,12 +60,13 @@ class SmsController extends AbstractController
     /**
      * @Route("/admin/sms/new", name="admin.sms.new")
      * @Route("/admin/sms/{id}", name="admin.sms.edit")
-     * @param Sms  $sms
      * @param Request $request
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @param Sms    $sms
+     *
+     * @return RedirectResponse|Response
      */
-    public function create(Sms $sms = null, Request $request)
+    public function create(Request $request, Sms $sms = null)
     {
         $new = false;
         if(!$sms) {
@@ -94,7 +97,7 @@ class SmsController extends AbstractController
      * @param Sms  $sms
      * @param Request $request
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function delete(Sms $sms, Request $request){
         $submittedToken = $request->request->get('token');

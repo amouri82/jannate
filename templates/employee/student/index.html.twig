@@ -1,0 +1,136 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Students list{% endblock %}
+{% block body %}
+
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Students</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="{{ path('home') }}">Home</a></li>
+                        <li class="breadcrumb-item active">Students</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+        <!-- Default box -->
+        <div class="card card-info">
+            <div class="card-body pb-0">
+                <div class="tab-content" id="custom-tabs-one-tabContent">
+                    <div class="tab-pane fade active show" id="custom-tabs-one-0" role="tabpanel"
+                         aria-labelledby="custom-tabs-one-0-tab">
+                        <p>Total Number of Students: {{ students|length }}</p>
+                        <table class="table table-striped projects">
+                            <thead>
+                            <tr>
+                                <th style="width: 5%">
+                                    #
+                                </th>
+                                <th>
+                                    Student Name
+                                </th>
+                                <th>
+                                    Parent
+                                </th>
+                                <th>
+                                    Country
+                                </th>
+                                <th>Language</th>
+                                <th>
+                                    Email
+                                </th>
+                                <th>
+                                    Gender
+                                </th>
+                                <th>
+                                    Age
+                                </th>
+                                <th>
+                                    Courses
+                                </th>
+                                <th style="width: 30%"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for student in students %}
+                                <tr>
+                                    <td width="5%">
+                                        # {{ student.id }}
+                                    </td>
+                                    <td width="12%">
+                                        {{ student.name }}
+                                    </td>
+                                    <td width="12%">
+                                        {{ student.family.name }}
+                                    </td>
+                                    <td width="5%">
+                                        {{ student.family.country.isoCode }}
+                                    </td>
+                                    <td width="5%">
+                                        {{ student.language }}
+                                    </td>
+                                    <td width="5%">
+                                        {{ student.email }}
+                                    </td>
+                                    <td width="5%">
+                                        {{ student.gender }}
+                                    </td>
+                                    <td width="5%">
+                                        {{ student.age }}
+                                    </td>
+                                    <td width="20%">
+                                        <ul style="padding: 0">
+                                            {% for course in student.course %}
+                                                <li>{{ course.name }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    </td>
+                                    <td class="project-actions text-right">
+                                        <a class="btn btn-info btn-sm"
+                                           href="#"
+                                           title="Quarterly Report">
+                                            QR
+                                        </a>
+                                        <a class="btn btn-info btn-sm"
+                                           href="#"
+                                           title="Test Results">
+                                            TR
+                                        </a>
+                                        <a class="btn btn-info btn-sm"
+                                           href="#"
+                                           title="Class Summary">
+                                            <i class="fas fa-comments"></i>
+                                        </a>
+                                        <a class="btn btn-success btn-sm"
+                                           href="#">
+                                            <i class="fas fa-plus">
+                                            </i>
+                                            Add note
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+
+    </section>
+    <!-- /.content -->
+{% endblock %}
