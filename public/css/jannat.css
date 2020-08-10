@@ -127,3 +127,7 @@ ul.pagination {
 .label-danger[href]:hover, .label-danger[href]:focus {
     background-color: #f0262f;
 }
+
+.timeline {
+    margin-top: 30px;
+}

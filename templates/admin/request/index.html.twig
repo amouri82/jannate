@@ -1,0 +1,221 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Requests{% endblock %}
+{% block body %}
+
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>New Requests</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="{{ path('home') }}">Home</a></li>
+                        <li class="breadcrumb-item active">Requests</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card card-default">
+                <div class="card-body">
+                    <div class="col-12">
+                        <a href="list-of-new-request" class="btn btn-primary">Active ()</a>
+                        <a href="list-of-new-request" class="btn btn-danger">Responded ()</a>
+                        <a href="list-of-new-request" class="btn btn-success">Allocated ()</a>
+                        <a href="list-of-new-request" class="btn btn-secondary">Later ()</a>
+                        <a href="list-of-new-request" class="btn btn-light">Teaching Requests ()</a>
+                        <a href="list-of-new-request" class="btn btn-warning">Archives ()</a>
+                    </div>
+                    <div class="row">
+                        <div class="timeline">
+                            {% for request in requests %}
+                                <!-- timeline time label -->
+                                <div class="time-label">
+                                    <span class="bg-red">{{ request.createdAt|date("Y-m-d") }}</span> 
+                                    <span class="time">
+                                        <i class="fas fa-clock"></i> {{ request.time|date("H:i") }}
+                                    </span>                                    
+                                </div>
+                                <!-- /.timeline-label -->
+                                <!-- timeline item -->
+                                <div>
+                                    <i class="fas fa-envelope bg-blue"></i>
+                                    <div class="timeline-item">
+                                        <div class="time">
+                                            <div class="btn-group">
+                                                <button class="btn btn-circle green-haze btn-sm dropdown-toggle" type="button" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                                Actions
+                                                </button>
+                                                <ul class="dropdown-menu pull-right" role="menu">
+                                                    <li>
+                                                        <a href="add-new-request-note?req=<?php echo $arequest_id; ?>&name=<?php echo $aname; ?>">Add Note </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="welcome-email?request=<?php echo $arequest_id; ?>">Send Email </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="allocation" href="#allocation-c" data-toggle="modal" data-target="#allocation-c" data-id="<?php echo $arequest_id; ?>" data-name="<?php echo $aname; ?>">Allocate CSR </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="add-parent-account?req=<?php echo $arequest_id; ?>&name=<?php echo $aname; ?>&email=<?php echo $aemail; ?>&phone=<?php echo $aphone; ?>&skype=<?php echo $askype; ?>&city=<?php echo $acity; ?>">Create Account </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="teaching-request?req=<?php echo $arequest_id; ?>">Teaching </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="remove-request?req=<?php echo $arequest_id; ?>">Archive </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="later-request?req=<?php echo $arequest_id; ?>">Later </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="delete-request?req=<?php echo $arequest_id; ?>">Delete </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <h3 class="timeline-header">
+                                            {% if request.parent %}
+                                                <a href="{{ path('admin.family.view', {'id': request.parent.id }) }} ">
+                                                    {{ request.name }}
+                                                </a>
+                                            {% else %}
+                                                <a href="#">
+                                                    {{ request.name }}
+                                                </a>                                            
+                                            {% endif %}
+                                            sent you an email</h3>
+                                        <div class="timeline-body">
+                                            <div id="mytable" class="table-responsive">
+                                                <table class="table table-hover">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>
+                                                            Email
+                                                        </th>
+                                                        <th>
+                                                            Phone
+                                                        </th>
+                                                        <th>
+                                                            Country
+                                                        </th>
+                                                        <th>
+                                                            City
+                                                        </th>
+                                                        <th>
+                                                            Find Us
+                                                        </th>
+                                                        <th>
+                                                            Newsletter
+                                                        </th>
+                                                        <th>
+                                                            Number
+                                                        </th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr bgcolor="">
+                                                            <td>
+                                                                {{ request.email }}
+                                                            </td>
+                                                            <td>
+                                                                {{ request.phone }}
+                                                            </td>
+                                                            <td>
+                                                                {{ request.country }}
+                                                            </td>
+                                                            <td>
+                                                                {{ request.city }}
+                                                            </td>
+                                                            <td>
+                                                                {{ request.origin }}
+                                                            </td>
+                                                            <td>
+                                                                {{ request.newsletter }}
+                                                            </td>
+                                                            <td>
+                                                                N-A
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <strong>Subject:</strong>
+                                                            </td>
+                                                            <td colspan="6">
+                                                                {{ request.subject }}
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <strong>Message:</strong>
+                                                            </td>
+                                                            <td colspan="6">
+                                                                {{ request.message }}
+                                                            </td>
+                                                        </tr>
+							                            {% if request.origin == 'Evaluation' %}
+                                                            {% for i in 1..4 %}
+                                                                <tr>
+                                                                    <td colspan="7">
+                                                                    <strong>Student 0{{ i }}:</strong>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        {% set student_name = "studentName" ~ i %}
+                                                                        {{ attribute(request, student_name) }}                                                                    
+                                                                    </td>                                                                    
+                                                                    <td>
+                                                                        {% set student_gender = "studentGender" ~ i %}
+                                                                        {{ attribute(request, student_gender) }}                                                                    
+                                                                    </td>                                                                    
+                                                                    <td>
+                                                                        {% set student_age = "studentAge" ~ i %}
+                                                                        {{ attribute(request, student_age) }}                                                                    
+                                                                    </td>                                                                    
+                                                                </tr>                                                                                                                                
+                                                            {% endfor %}                                                         
+                                                        {% endif %}
+
+
+
+                                                        <tr>
+                                                            <td colspan="7">
+                                                                {% if request.sent == 0 %} 
+                                                                    <span class="label label-sm label-warning" title="Email Status"><i class="fa fa-envelope"></i> Not Sent</span>
+                                                                {% else %}    
+                                                                    <span class="label label-sm label-primary" title="Email Status"><i class="fa fa-envelope"></i> Sent</span>
+                                                                {% endif %}                                                                    
+                                                                <a class="notes" href="#notes-d" data-toggle="modal" data-target="#notes-d" data-id="9923" data-name="samantha barrie">
+                                                                    <span class="label label-sm label-success" title="Note Details">
+                                                                        <i class="fa fa-comments"> 0</i>
+                                                                    </span>
+                                                                </a>
+                                                                <span class="label label-sm label-danger" title="Allocation"> Not Allocated</span>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- END timeline item -->
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="card-footer clearfix">
+                        {{ knp_pagination_render(requests) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+{% endblock %}       

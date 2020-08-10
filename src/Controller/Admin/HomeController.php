@@ -4,11 +4,14 @@ namespace App\Controller\Admin;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class HomeController extends AbstractController
 {
     /**
-     * @Route("/admin", name="home")
+     * @Route("/", name="home")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function index()
     {

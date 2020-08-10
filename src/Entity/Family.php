@@ -183,9 +183,15 @@ class Family
      */
     private $user;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Request", mappedBy="parent")
+     */
+    private $requests;
+
     public function __construct()
     {
         $this->students = new ArrayCollection();
+        $this->requests = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -529,6 +535,37 @@ class Family
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Request[]
+     */
+    public function getRequests(): Collection
+    {
+        return $this->requests;
+    }
+
+    public function addRequest(Request $request): self
+    {
+        if (!$this->requests->contains($request)) {
+            $this->requests[] = $request;
+            $request->setParent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRequest(Request $request): self
+    {
+        if ($this->requests->contains($request)) {
+            $this->requests->removeElement($request);
+            // set the owning side to null (unless already changed)
+            if ($request->getParent() === $this) {
+                $request->setParent(null);
+            }
+        }
 
         return $this;
     }
