@@ -40,7 +40,7 @@
 
                                 {% else %}
                                     <img class="profile-user-img img-fluid img-circle"
-                                         src="{{ asset('images/profile-img.png') }}" alt="{{ employee.name }}">
+                                         src="{{ asset('img/profile-img.png') }}" alt="{{ employee.name }}">
                                 {% endif %}
                             </div>
 
@@ -187,13 +187,13 @@
                                                     <b>{{ employee.salaryPackage.salary }}</b></font>
                                             </li>
                                             <li>
-                                                Username: <font color="#44B6AE"> <b>{{ employee.username }}</b></font>
+                                                Username: <font color="#44B6AE"> <b>{{ employee.user.username }}</b></font>
                                             </li>
                                         </ul>
                                         <ul class="list-inline">
                                             <li>
                                                 Timezone: <font color="#44B6AE">
-                                                    <b>{{ employee.accountTitle }}</b></font>
+                                                    <b>c</b></font>
                                             </li>
                                             <li>
                                                 Difference: <font color="#44B6AE"> <b></b></font>
@@ -209,40 +209,7 @@
                                         </ul>
                                     </div>
                                     <!-- /.post -->
-
-                                    <!-- Post -->
-                                    <div class="post clearfix">
-                                        <div class="user-block">
-                                            <span class="username">
-                                              <a href="#">Edit Rights</a>
-                                            </span>
-                                        </div>
-                                        <ul class="list-inline">
-                                            <li>
-                                                <a href="csr_rights?a_id=1&amp;link=/member-area/admin/teacher-accounts-profile?profile_no=MQ==&amp;sts=2">
-                                                    <button type="button" class="btn green btn-xs">HR Rights
-                                                    </button>
-                                                </a></li>
-                                            <li>
-                                                <a href="teacher_rights?a_id=1&amp;link=/member-area/admin/teacher-accounts-profile?profile_no=MQ==&amp;sts=2">
-                                                    <button type="button" class="btn green btn-xs">Teaching Rights
-                                                    </button>
-                                                </a></li>
-                                            <li>
-                                                <a href="manager_rights?a_id=1&amp;link=/member-area/admin/teacher-accounts-profile?profile_no=MQ==&amp;sts=2">
-                                                    <button type="button" class="btn green btn-xs">Support Rights
-                                                    </button>
-                                                </a></li>
-                                            <li>
-                                                <a href="s_manager_rights?a_id=1&amp;link=/member-area/admin/teacher-accounts-profile?profile_no=MQ==&amp;sts=2">
-                                                    <button type="button" class="btn green btn-xs">Quality Control
-                                                        Rights
-                                                    </button>
-                                                </a></li>
-                                        </ul>
-                                    </div>
-                                    <!-- /.post -->
-
+                                
                                     <!-- Post -->
                                     <div class="post clearfix">
                                         <div class="user-block">
@@ -323,6 +290,73 @@
                             </div>
                             <!-- /.tab-content -->
                         </div><!-- /.card-body -->
+                        <table class="table table-striped projects">
+							<thead>
+								<tr>
+									<th style="width: 5%">
+										#
+									</th>
+									<th>
+										Student Name
+									</th>
+									<th>
+										Parent
+									</th>
+									<th>
+										Country
+									</th>
+									<th>
+										Email
+									</th>
+									<th>
+										Gender
+									</th>
+									<th>
+										Courses
+									</th>
+									<th>
+										History
+									</th>																
+								</tr>
+							</thead>
+							<tbody>
+								{% for student in employee.students %}
+									<tr>
+										<td>
+											#
+											{{ student.id }}
+										</td>
+										<td>
+											{{ student.name }}
+										</td>
+										<td>
+											<a href="{{ path('support.family.view', {id :student.family.id}) }}">
+												{{ student.family.name }}
+											</a>
+										</td>
+										<td>
+											{{ student.family.country.isoCode }}
+										</td>
+										<td>
+											{{ student.email }}
+										</td>
+										<td> 
+											{{ student.gender }}
+										</td>
+										<td>
+											<ul style="padding: 0">
+												{% for course in student.course %}
+													<li>{{ course.name }}</li>
+												{% endfor %}
+											</ul>
+										</td>
+										<td>
+											Daily Progress
+										</td>								
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table>                                            
                     </div>
                     <!-- /.nav-tabs-custom -->
                 </div>

@@ -61,13 +61,6 @@ class Family
     private $skype;
 
     /**
-     * @var int|null
-     *
-     * @ORM\Column(name="active", type="integer", nullable=true)
-     */
-    private $active;
-
-    /**
      * @var string|null
      *
      * @ORM\Column(name="city", type="string", length=30, nullable=true)
@@ -126,14 +119,14 @@ class Family
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="created_at", type="datetime", nullable=true)
+     * @ORM\Column(name="created_at", type="datetime", nullable=true, options={"default"="CURRENT_TIMESTAMP"})
      */
     private $createdAt;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true, options={"default"="CURRENT_TIMESTAMP"})
      */
     private $updatedAt;
 
@@ -188,10 +181,34 @@ class Family
      */
     private $requests;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $created_by;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Schedule", mappedBy="family", orphanRemoval=true)
+     */
+    private $schedule;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Task", mappedBy="family")
+     */
+    private $tasks;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Note", mappedBy="family")
+     */
+    private $notes;
+
     public function __construct()
     {
         $this->students = new ArrayCollection();
         $this->requests = new ArrayCollection();
+        $this->schedule = new ArrayCollection();
+        $this->tasks = new ArrayCollection();
+        $this->notes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -255,18 +272,6 @@ class Family
     public function setSkype(?string $skype): self
     {
         $this->skype = $skype;
-
-        return $this;
-    }
-
-    public function getActive(): ?int
-    {
-        return $this->active;
-    }
-
-    public function setActive(?int $active): self
-    {
-        $this->active = $active;
 
         return $this;
     }
@@ -564,6 +569,111 @@ class Family
             // set the owning side to null (unless already changed)
             if ($request->getParent() === $this) {
                 $request->setParent(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getCreatedBy(): ?User
+    {
+        return $this->created_by;
+    }
+
+    public function setCreatedBy(?User $created_by): self
+    {
+        $this->created_by = $created_by;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Schedule[]
+     */
+    public function getSchedule(): Collection
+    {
+        return $this->schedule;
+    }
+
+    public function addSchedule(Schedule $schedule): self
+    {
+        if (!$this->schedule->contains($schedule)) {
+            $this->schedule[] = $schedule;
+            $schedule->setFamily($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSchedule(Schedule $schedule): self
+    {
+        if ($this->schedule->contains($schedule)) {
+            $this->schedule->removeElement($schedule);
+            // set the owning side to null (unless already changed)
+            if ($schedule->getFamily() === $this) {
+                $schedule->setFamily(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Task[]
+     */
+    public function getTasks(): Collection
+    {
+        return $this->tasks;
+    }
+
+    public function addTask(Task $task): self
+    {
+        if (!$this->tasks->contains($task)) {
+            $this->tasks[] = $task;
+            $task->setFamily($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTask(Task $task): self
+    {
+        if ($this->tasks->contains($task)) {
+            $this->tasks->removeElement($task);
+            // set the owning side to null (unless already changed)
+            if ($task->getFamily() === $this) {
+                $task->setFamily(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Note[]
+     */
+    public function getNotes(): Collection
+    {
+        return $this->notes;
+    }
+
+    public function addNote(Note $note): self
+    {
+        if (!$this->notes->contains($note)) {
+            $this->notes[] = $note;
+            $note->setFamily($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNote(Note $note): self
+    {
+        if ($this->notes->contains($note)) {
+            $this->notes->removeElement($note);
+            // set the owning side to null (unless already changed)
+            if ($note->getFamily() === $this) {
+                $note->setFamily(null);
             }
         }
 

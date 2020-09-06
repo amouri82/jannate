@@ -1,0 +1,369 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}teacher profile{% endblock %}
+{% block body %}
+
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>teachers</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="{{ path('home') }}">Home</a></li>
+                        <li class="breadcrumb-item active">teachers</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            <div class="row">
+                <div class="col-md-3">
+
+                    <!-- Profile Image -->
+                    <div class="card card-primary card-outline">
+                        <div class="card-body box-profile">
+                            <div class="text-center">
+                                {% if teacher.avatar %}
+                                    <img class="profile-user-img img-fluid img-circle"
+                                         src="{{ vich_uploader_asset(teacher, 'avatarFile' ) }}" alt="{{ teacher.name }}"/>
+
+                                {% else %}
+                                    <img class="profile-user-img img-fluid img-circle"
+                                         src="{{ asset('img/profile-img.png') }}" alt="{{ teacher.name }}">
+                                {% endif %}
+                            </div>
+
+                            <h3 class="profile-username text-center">{{ teacher.name }}</h3>
+
+                            <p class="text-muted text-center">{{ teacher.category.name }}</p>
+
+                            <ul class="list-group list-group-unbordered mb-3">
+                                <li class="list-group-item">
+                                    {{ form_start(form) }}
+                                    {{ form_widget(form) }}
+                                    <button type="submit" class="btn btn-primary btn-block">Change Profile Picture
+                                    </button>
+                                    {{ form_end(form) }}
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="{{ path('support.teacher.edit', {'id': teacher.id}) }}">Edit Profile</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Student Details</b>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Salary Record</b>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Schedule</b>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Salary Adjustment</b>
+                                </li>
+                                <li class="list-group-item">
+                                    {% if teacher.active == 1 %}
+                                        <a href="{{ path('support.teacher.status', {'id': teacher.id}) }}"
+                                           class="btn btn-danger btn-block"><b>Deactivate Account</b></a>
+                                    {% else %}
+                                        <a href="{{ path('support.teacher.status', {'id': teacher.id}) }}"
+                                           class="btn btn-success btn-block"><b>Activate Account</b></a>
+                                    {% endif %}
+                                </li>
+                            </ul>
+
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+                <div class="col-md-9">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="activity">
+                                    <!-- Post -->
+                                    <div class="post">
+                                        <div class="user-block">
+                                            <span class="username">
+                                              <a href="#">Personal Bio Date</a>
+                                            </span>
+                                        </div>
+                                        <ul class="list-inline">
+                                            <li>
+                                                Gender: <font color="#44B6AE"> <b>{{ teacher.gender }}</b></font>
+                                            </li>
+                                            <li>
+                                                Status: <font color="#44B6AE">
+                                                    <b>{{ teacher.maritalStatus }}</b></font>
+                                            </li>
+                                            <li>
+                                                Father Name: <font color="#44B6AE">
+                                                    <b>{{ teacher.fatherName }}</b></font>
+                                            </li>
+                                            <li>
+                                                Nationality: <font color="#44B6AE">
+                                                    <b>{{ teacher.nationality }}</b></font>
+                                            </li>
+                                            <li>
+                                                Occupation: <font color="#44B6AE">
+                                                    <b>{{ teacher.category.name }}</b></font>
+                                            </li>
+                                        </ul>
+                                        <ul class="list-inline">
+                                            <li>
+                                                Institute Email: <font color="#44B6AE">
+                                                    <b>{{ teacher.instituteEmail }}</b></font>
+                                            </li>
+                                            <li>
+                                                Personal Email: <font color="#44B6AE">
+                                                    <b>dinaessam22@gmail.com</b></font>
+                                            </li>
+                                            <li>
+                                                Phone: <font color="#44B6AE"> <b>{{ teacher.telephone }}</b></font>
+                                            </li>
+                                            <li>
+                                                Mobile: <font color="#44B6AE"> <b>{{ teacher.mobile }}</b></font>
+                                            </li>
+
+                                        </ul>
+                                        <ul class="list-inline">
+                                            <li>
+                                                Ijaazah In: <font color="#44B6AE"> <b>{{ teacher.ijaazah }}</b></font>
+                                            </li>
+                                            <li>
+                                                Qualification: <font color="#44B6AE">
+                                                    <b>{{ teacher.qualification }}</b></font>
+                                            </li>
+                                            <li>
+                                                Experience: <font color="#44B6AE">
+                                                    <b>{{ teacher.experience }}</b></font>
+                                            </li>
+                                            <li>
+                                                Memorization: <font color="#44B6AE"> <b>{{ teacher.memorization }}</b></font>
+                                            </li>
+                                        </ul>
+                                        <!-- /.user-block -->
+                                    </div>
+                                    <!-- /.post -->
+
+                                    <!-- Post -->
+                                    <div class="post clearfix">
+                                        <div class="user-block">
+                                            <span class="username">
+                                              <a href="#">Official Details</a>
+                                            </span>
+                                        </div>
+                                        <ul class="list-inline">
+                                            <li>
+                                                Job: <font color="#44B6AE"> <b></b></font>
+                                            </li>
+                                            <li>
+                                                Skype: <font color="#44B6AE"> <b>{{ teacher.skype }}</b></font>
+                                            </li>
+                                            <li>
+                                                Zoom-Link: <font color="#44B6AE">
+                                                    <b>{{ teacher.zoom }}</b></font>
+                                            </li>
+                                            <li>
+                                                Group ID: <font color="#44B6AE">
+                                                    <b>{{ teacher.whatsupGroup }}</b></font>
+                                            </li>
+                                        </ul>
+                                        <ul class="list-inline">
+                                            <li>
+                                                Salary: <font color="#44B6AE">
+                                                    <b>{{ teacher.salaryPackage.salary }}</b></font>
+                                            </li>
+                                            <li>
+                                                Username: <font color="#44B6AE"> <b>{{ teacher.user.username }}</b></font>
+                                            </li>
+                                        </ul>
+                                        <ul class="list-inline">
+                                            <li>
+                                                Timezone: <font color="#44B6AE">
+                                                    <b>{{ teacher.timezone.name }}</b></font>
+                                            </li>
+                                            <li>
+                                                Difference: <font color="#44B6AE"> <b></b></font>
+                                            </li>
+                                            <li>
+                                                Date of Birth: <font color="#44B6AE">
+                                                    <b>{{ teacher.birthday.format('Y-m-d') }}</b></font>
+                                            </li>
+                                            <li>
+                                                Date of Joining: <font color="#44B6AE">
+                                                    <b>{{ teacher.joiningAt.format('Y-m-d') }}</b></font>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <!-- /.post -->
+                                    <!-- Post -->
+                                    <div class="post clearfix">
+                                        <div class="user-block">
+                                            <span class="username">
+                                              <a href="#">Time Allocation</a>
+                                            </span>
+                                        </div>
+                                        <ul class="list-inline">
+                                            <li>
+                                                1st Time Allocation: <font color="#44B6AE">
+                                                    <b>{{ teacher.startTime1.name }}to {{ teacher.endTime1.name }}</b></font>
+                                            </li>
+                                            <li>
+                                                2nd Time Allocation: <font color="#44B6AE">
+                                                    <b>{{ teacher.startTime2.name }}to {{ teacher.endTime2.name }}</b></font>
+                                            </li>
+                                            <li>
+                                                3rd Time Allocation: <font color="#44B6AE">
+                                                    <b>{{ teacher.startTime3.name }}to {{ teacher.endTime3.name }}</b></font>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <!-- /.post -->
+
+                                    <!-- Post -->
+                                    <div class="post clearfix">
+                                        <div class="user-block">
+                                            <span class="username">
+                                              <a href="#">Salary Details</a>
+                                            </span>
+                                        </div>
+                                        <ul class="list-inline">
+                                            <li>
+                                                Account Title: <font color="#44B6AE"> <b>{{ teacher.accountTitle }}</b></font>
+                                            </li>
+                                            <li>
+                                                Residence ALW: <font color="#44B6AE"> <b>0</b></font>
+                                            </li>
+                                            <li>
+                                                Tax: <font color="#44B6AE"> <b>0</b></font>
+                                            </li>
+                                            <li>
+                                                EOBI: <font color="#44B6AE"> <b>{{ teacher.eobi }}</b></font>
+                                            </li>
+                                        </ul>
+                                        <ul class="list-inline">
+                                            <li>
+                                                Monthly Salary Fixed: <font color="#44B6AE"> <b>0</b></font>
+                                            </li>
+                                        </ul>
+                                        <ul class="list-inline">
+                                            <li>
+                                                Medical ALW: <font color="#44B6AE"> <b>{{ teacher.medical }}</b></font>
+                                            </li>
+                                            <li>
+                                                Entertainment ALW: <font color="#44B6AE">
+                                                    <b>{{ teacher.entertainment }}</b></font>
+                                            </li>
+                                            <li>
+                                                Misc. ALW: <font color="#44B6AE"> <b>{{ teacher.misc }}</b></font>
+                                            </li>
+                                        </ul>
+                                        <ul class="list-inline">
+                                            <li>
+                                                Bank: <font color="#44B6AE"> <b>{{ teacher.bank }}</b></font>
+                                            </li>
+                                            <li>
+                                                Branch: <font color="#44B6AE"> <b>{{ teacher.branch }}</b></font>
+                                            </li>
+                                            <li>
+                                                A/C No.: <font color="#44B6AE"> <b>{{ teacher.accountNo }}</b></font>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <!-- /.post -->
+                                </div>
+                                <!-- /.tab-pane -->
+                            </div>
+                            <!-- /.tab-content -->
+                        </div><!-- /.card-body -->
+                        <table class="table table-striped projects">
+							<thead>
+								<tr>
+									<th style="width: 5%">
+										#
+									</th>
+									<th>
+										Student Name
+									</th>
+									<th>
+										Parent
+									</th>
+									<th>
+										Country
+									</th>
+									<th>
+										Email
+									</th>
+									<th>
+										Gender
+									</th>
+									<th>
+										Courses
+									</th>
+									<th>
+										History
+									</th>																
+								</tr>
+							</thead>
+							<tbody>
+								{% for student in teacher.students %}
+									<tr>
+										<td>
+											#
+											{{ student.id }}
+										</td>
+										<td>
+											{{ student.name }}
+										</td>
+										<td>
+											<a href="{{ path('support.family.view', {id :student.family.id}) }}">
+												{{ student.family.name }}
+											</a>
+										</td>
+										<td>
+											{{ student.family.country.isoCode }}
+										</td>
+										<td>
+											{{ student.email }}
+										</td>
+										<td> 
+											{{ student.gender }}
+										</td>
+										<td>
+											<ul style="padding: 0">
+												{% for course in student.course %}
+													<li>{{ course.name }}</li>
+												{% endfor %}
+											</ul>
+										</td>
+										<td>
+											Daily Progress
+										</td>								
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table>                        
+                    </div>
+                    <!-- /.nav-tabs-custom -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </section>    <!-- Main content -->
+
+    <!-- /.content -->
+{% endblock %}

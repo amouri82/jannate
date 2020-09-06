@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Teacher;
+use App\Entity\Task;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method Teacher|null find($id, $lockMode = null, $lockVersion = null)
- * @method Teacher|null findOneBy(array $criteria, array $orderBy = null)
- * @method Teacher[]    findAll()
- * @method Teacher[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Task|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Task|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Task[]    findAll()
+ * @method Task[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class TeacherRepository extends ServiceEntityRepository
+class TaskRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Teacher::class);
+        parent::__construct($registry, Task::class);
     }
 
     // /**
-    //  * @return Teacher[] Returns an array of Teacher objects
+    //  * @return Task[] Returns an array of Task objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class TeacherRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Teacher
+    public function findOneBySomeField($value): ?Task
     {
         return $this->createQueryBuilder('t')
             ->andWhere('t.exampleField = :val')

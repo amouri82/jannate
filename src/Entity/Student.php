@@ -103,7 +103,7 @@ class Student
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Employee")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $manager;
 
@@ -118,19 +118,24 @@ class Student
     private $course;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Status")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $status;
-
-    /**
      * @ORM\Column(type="string", length=30)
      */
     private $level;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true, options={"default"=1})
+     */
+    private $active;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Schedule", mappedBy="student", orphanRemoval=true)
+     */
+    private $schedules;
+
     public function __construct()
     {
         $this->course = new ArrayCollection();
+        $this->schedules = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -380,18 +385,6 @@ class Student
         return $this;
     }
 
-    public function getStatus(): ?Status
-    {
-        return $this->status;
-    }
-
-    public function setStatus(?Status $status): self
-    {
-        $this->status = $status;
-
-        return $this;
-    }
-
     /**
      * Gets triggered only on insert
 
@@ -421,6 +414,49 @@ class Student
     public function setLevel(string $level): self
     {
         $this->level = $level;
+
+        return $this;
+    }
+
+    public function getActive(): ?bool
+    {
+        return $this->active;
+    }
+
+    public function setActive(?bool $active): self
+    {
+        $this->active = $active;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Schedule[]
+     */
+    public function getSchedules(): Collection
+    {
+        return $this->schedules;
+    }
+
+    public function addSchedule(Schedule $schedule): self
+    {
+        if (!$this->schedules->contains($schedule)) {
+            $this->schedules[] = $schedule;
+            $schedule->setStudent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSchedule(Schedule $schedule): self
+    {
+        if ($this->schedules->contains($schedule)) {
+            $this->schedules->removeElement($schedule);
+            // set the owning side to null (unless already changed)
+            if ($schedule->getStudent() === $this) {
+                $schedule->setStudent(null);
+            }
+        }
 
         return $this;
     }

@@ -76,6 +76,9 @@ class LessonController extends AbstractController
             } else {
                 $this->addFlash('success', "Lesson successfully updated");
             }
+
+            return $this->redirectToRoute('admin.courses.index');
+
         }
         return $this->render('admin/lesson/create.html.twig', [
             'controller_name' => 'LessonController',

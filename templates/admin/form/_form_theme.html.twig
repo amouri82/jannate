@@ -2,7 +2,7 @@
         <div class="collection">
             <div {{ block('widget_container_attributes') }}>
                 {{ form_errors(form) }}
-                <a href="#" id="add_another_image" class="add_new"><i class="fa fa-plus-circle"></i> Ajouter une image</a>
+                <a href="#" id="add_another_image" class="add_new"><i class="fa fa-plus-circle"></i> Add a picture</a>
                 <ul class="images my-selector" id="images-fields-list" data-prototype="{{ _self.image_template(form.vars.prototype)|e }}">
 
                     {% for rows in form %}

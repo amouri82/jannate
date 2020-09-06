@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -318,6 +320,44 @@ class Employee
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Student", mappedBy="teacher")
+     */
+    private $students;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Timezone")
+     */
+    private $timezone;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true, options={"default" = 1})
+     */
+    private $schedule_status;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Schedule", mappedBy="teacher")
+     */
+    private $schedule;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Task", mappedBy="employee")
+     */
+    private $tasks;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Note", mappedBy="teacher")
+     */
+    private $notes;    
+
+    public function __construct()
+    {
+        $this->students = new ArrayCollection();
+        $this->schedule = new ArrayCollection();
+        $this->tasks = new ArrayCollection();
+        $this->notes = new ArrayCollection();
+    }    
 
     public function getId(): ?int
     {
@@ -931,6 +971,131 @@ class Employee
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Student[]
+     */
+    public function getStudents(): Collection
+    {
+        return $this->students;
+    }
+
+    public function getTimezone(): ?Timezone
+    {
+        return $this->timezone;
+    }
+
+    public function setTimezone(?Timezone $timezone): self
+    {
+        $this->timezone = $timezone;
+
+        return $this;
+    }
+
+    public function getScheduleStatus(): ?int
+    {
+        return $this->schedule_status;
+    }
+
+    public function setScheduleStatus(?int $schedule_status): self
+    {
+        $this->schedule_status = $schedule_status;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Schedule[]
+     */
+    public function getSchedule(): Collection
+    {
+        return $this->schedule;
+    }
+
+    public function addSchedule(Schedule $schedule): self
+    {
+        if (!$this->schedule->contains($schedule)) {
+            $this->schedule[] = $schedule;
+            $schedule->setTeacher($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSchedule(Schedule $schedule): self
+    {
+        if ($this->schedule->contains($schedule)) {
+            $this->schedule->removeElement($schedule);
+            // set the owning side to null (unless already changed)
+            if ($schedule->getTeacher() === $this) {
+                $schedule->setTeacher(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Task[]
+     */
+    public function getTasks(): Collection
+    {
+        return $this->tasks;
+    }
+
+    public function addTask(Task $task): self
+    {
+        if (!$this->tasks->contains($task)) {
+            $this->tasks[] = $task;
+            $task->setEmployee($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTask(Task $task): self
+    {
+        if ($this->tasks->contains($task)) {
+            $this->tasks->removeElement($task);
+            // set the owning side to null (unless already changed)
+            if ($task->getEmployee() === $this) {
+                $task->setEmployee(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Note[]
+     */
+    public function getNotes(): Collection
+    {
+        return $this->notes;
+    }
+
+    public function addNote(Note $note): self
+    {
+        if (!$this->notes->contains($note)) {
+            $this->notes[] = $note;
+            $note->setTeacher($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNote(Note $note): self
+    {
+        if ($this->notes->contains($note)) {
+            $this->notes->removeElement($note);
+            // set the owning side to null (unless already changed)
+            if ($note->getTeacher() === $this) {
+                $note->setTeacher(null);
+            }
+        }
 
         return $this;
     }

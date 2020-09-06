@@ -1,0 +1,27 @@
+<ul class="feeds">
+	{% for note in family.notes %}
+		<li>
+			<div class="col1">
+				<div class="cont">
+					<div class="cont-col1">
+						<div class="label label-info">
+							{{ note.createdAt|date("Y-m-d") }}
+						</div>
+					</div>
+					<div class="cont-col2">
+						<div class="desc">
+							{{ note.comment }}
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col2">
+				<div class="date">
+					<a href="">
+						<span class="label label-sm label-warning">Pending</span>
+					</a>
+				</div>
+			</div>
+		</li>
+	{% endfor %}
+</ul>

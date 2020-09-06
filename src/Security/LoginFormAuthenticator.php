@@ -20,6 +20,7 @@ use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticato
 use Symfony\Component\Security\Guard\PasswordAuthenticatedInterface;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
+
 class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements
     PasswordAuthenticatedInterface
 {
@@ -31,17 +32,22 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements
     private $urlGenerator;
     private $csrfTokenManager;
     private $passwordEncoder;
+    private $security;
+
 
     public function __construct(
         EntityManagerInterface $entityManager,
         UrlGeneratorInterface $urlGenerator,
         CsrfTokenManagerInterface $csrfTokenManager,
-        UserPasswordEncoderInterface $passwordEncoder
+        UserPasswordEncoderInterface $passwordEncoder,
+        Security $security
     ) {
         $this->entityManager = $entityManager;
         $this->urlGenerator = $urlGenerator;
         $this->csrfTokenManager = $csrfTokenManager;
         $this->passwordEncoder = $passwordEncoder;
+        $this->security = $security;
+
     }
 
     public function supports(Request $request)
@@ -109,7 +115,13 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements
         }
 
         // redirect to some "app_homepage" route - of wherever you want
-        return new RedirectResponse($this->urlGenerator->generate('admin.employees.index'));
+        if ($this->security->isGranted('ROLE_ADMIN')) {
+            $redirect_url = 'admin.employees.index';
+        } elseif ($this->security->isGranted('ROLE_SUPPORT')) {
+            $redirect_url = 'support.teachers.index';
+        }
+
+        return new RedirectResponse($this->urlGenerator->generate($redirect_url));
     }
 
     protected function getLoginUrl()

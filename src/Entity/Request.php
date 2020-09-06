@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -68,7 +70,7 @@ class Request
     private $sent;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=30)
      */
     private $status;
 
@@ -165,7 +167,17 @@ class Request
      *   @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
      * })
      */
-    private $parent;    
+    private $parent;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\RequestNote", mappedBy="request", orphanRemoval=true)
+     */
+    private $requestNotes;
+
+    public function __construct()
+    {
+        $this->requestNotes = new ArrayCollection();
+    }    
 
     public function getId(): ?int
     {
@@ -292,12 +304,12 @@ class Request
         return $this;
     }
 
-    public function getStatus(): ?int
+    public function getStatus(): ?string
     {
         return $this->status;
     }
 
-    public function setStatus(int $status): self
+    public function setStatus(string $status): self
     {
         $this->status = $status;
 
@@ -516,6 +528,37 @@ class Request
     public function setParent(?Family $parent): self
     {
         $this->parent = $parent;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|RequestNote[]
+     */
+    public function getRequestNotes(): Collection
+    {
+        return $this->requestNotes;
+    }
+
+    public function addRequestNote(RequestNote $requestNote): self
+    {
+        if (!$this->requestNotes->contains($requestNote)) {
+            $this->requestNotes[] = $requestNote;
+            $requestNote->setRequest($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRequestNote(RequestNote $requestNote): self
+    {
+        if ($this->requestNotes->contains($requestNote)) {
+            $this->requestNotes->removeElement($requestNote);
+            // set the owning side to null (unless already changed)
+            if ($requestNote->getRequest() === $this) {
+                $requestNote->setRequest(null);
+            }
+        }
 
         return $this;
     }    

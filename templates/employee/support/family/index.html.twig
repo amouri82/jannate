@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Families list{% endblock %}
+{% block body %}
+
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Parent Accounts</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="{{ path('home') }}">Home</a></li>
+                        <li class="breadcrumb-item active">List of Parent Accounts </li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+        <div class="col-xs-12 families-status">
+            <a href="parent-accounts" class="btn btn-info"><i class="fa fa-user"></i> Active accounts <b>(No. 10)</b></a>
+            <a href="parent-accounts-deactive" class="btn btn-warning"><i class="fa fa-user-times"></i> Accounts on leave <b>(No. 0)</b></a>
+            <a href="parent-accounts" class="btn btn-danger"><i class="fa fa-user"></i> Suspended <b>(No. 10)</b></a>
+        </div>
+        <!-- Default box -->
+        <div class="card">
+            <div class="card-body">
+                <table class="table table-striped projects">
+                    <thead>
+                    <tr>
+                        <th style="width: 5%">
+                            #
+                        </th>
+                        <th>
+                            Parent Name
+                        </th>
+                        <th>
+                            Email
+                        </th>
+                        <th>
+                            Status
+                        </th>
+                        <th>
+                            Local Time
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for family in regulars %}
+                        <tr bgcolor="{{ family.status.color }}">
+                            <td>
+                                # {{ family.id }}
+                            </td>
+                            <td>
+                                <a href="{{ path('support.family.view', {'id': family.id}) }}">
+                                    {{ family.name }} ({{ family.students|length }})
+                                </a>
+                            </td>
+                            <td>
+                                <a href="{{ path('support.family.view', {'id': family.id}) }}">
+                                    {{ family.email }}
+                                </a>
+                            </td>
+                            <td>
+                                {{ family.status.name }}
+                            </td>
+                            <td>
+                                {{ family.timezone.phpTimezone|localTime}}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            <!-- /.card-body -->
+            </div>            
+        <!-- /.card -->
+        </div>
+    </section>
+    <!-- /.content -->
+{% endblock %}

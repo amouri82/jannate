@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Time;
+use App\Entity\Employee;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -47,4 +48,21 @@ class TimeRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function getTeacherTimes(Employee $teacher)
+    {
+        return $this->createQueryBuilder('t')            
+            ->where('t.id >= :startTime1 AND t.id <= :endTime1')
+            ->orWhere('t.id >= :startTime2 AND t.id <= :endTime2')
+            ->orWhere('t.id >= :startTime3 AND t.id <= :endTime3')
+            ->setParameter('startTime1', $teacher->getStartTime1())
+            ->setParameter('endTime1', $teacher->getEndTime1())
+            ->setParameter('startTime2', $teacher->getStartTime2())
+            ->setParameter('endTime2', $teacher->getEndTime2())
+            ->setParameter('startTime3', $teacher->getStartTime3())
+            ->setParameter('endTime3', $teacher->getEndTime3())
+            ->getQuery()
+            ->getResult()
+        ;
+    }    
 }

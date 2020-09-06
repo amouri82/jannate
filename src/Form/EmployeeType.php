@@ -7,6 +7,7 @@ use App\Entity\Employee;
 use App\Entity\EmployeeCategory;
 use App\Entity\SalaryPackage;
 use App\Entity\Time;
+use App\Entity\Timezone;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -160,6 +161,13 @@ class EmployeeType extends AbstractType
             ->add('eobi')
             ->add('whatsup_group')
             ->add('hour_rate')
+            ->add('timezone', EntityType::class, [
+                // looks for choices from this entity
+                'class' => Timezone::class,
+                'choice_label' => 'name',
+                'placeholder' => 'Time Zone',
+                'required' => false
+            ])            
         ;
     }
 

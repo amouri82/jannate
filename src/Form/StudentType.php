@@ -4,7 +4,6 @@ namespace App\Form;
 
 use App\Entity\Course;
 use App\Entity\Employee;
-use App\Entity\Status;
 use App\Entity\Student;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\AbstractType;
@@ -108,13 +107,6 @@ class StudentType extends AbstractType
                     'month' => 'Month',
                     'day' => 'Day',
                 ]
-            ])
-            ->add('status', EntityType::class, [
-                'required' => false,
-                // looks for choices from this entity
-                'class' => Status::class,
-                'choice_label' => 'name',
-                'placeholder' => 'Status'
             ])
         ;
     }

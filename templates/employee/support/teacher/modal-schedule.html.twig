@@ -1,0 +1,108 @@
+<div class="modal fade" id="schedule-modal">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header bg-success">
+				<h4 class="modal-title">Add New Class</h4>
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+			</div>
+			<div class="modal-body">
+				<div class="portlet box green">
+					<div
+						class="portlet-body form">
+						<!-- BEGIN FORM-->
+						<form id="schedule-form">
+							<div class="form-body">
+								<div class="form-group">
+									<label class="control-label col-md-3">
+										<strong>Student</strong>
+									</label>
+									<div class="col-md-5">
+										<select class="form-control" name="student" id="student">
+											<option>-- Select a Student --</option>
+											{% for student in teacher.students %}
+												<option value='{{ student.id }}'>{{ student.name }}</option>
+											{% endfor %}
+										</select>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-md-3">
+										<strong>Course</strong>
+									</label>
+									<div class="col-md-5">
+										<select class="form-control" name="student-course" id="student-course">
+											<option>-- Select a Course --</option>
+										</select>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-md-3">
+										<strong>Time Start</strong>
+									</label>
+									<div class="col-md-5">
+										<input required type="time" class="form-control" value="" name="start_time" id="start_time">
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="form-group">
+										<label class="control-label col-md-3">
+											<strong>Time End</strong>
+										</label>
+										<div class="col-md-5">
+											<input required type="time" class="form-control" value="" name="end_time" id="end_time">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="control-label col-md-3">
+											<strong>Teacher Day</strong>
+										</label>
+										<div class="col-md-9">
+											{% for day in 1..7 %}
+												<div class="form-check form-check-inline">
+													<input class="form-check-input" name='daysCheckbox[]' type="checkbox" id="dayCheckbox{{day}}" value="{{day}}">
+													<label class="form-check-label" for="dayCheckbox{{day}}">{{getDayName(day)}}</label>
+												</div>
+											{% endfor %}
+										</div>
+									</div>
+									<input type="hidden" class="schedule_id" name="schedule_id" value=""/>
+									<input type="hidden" name="teacher_id" value="{{ teacher.id }}"/>
+								</form>
+								<!-- END FORM-->
+							</div>
+							<div class="form-actions">
+								<div class="row">
+									<div class="col-md-12">
+										<form method="post" action="{{ path('support.schedule.delete') }}" style="display: inline-block" onsubmit="return confirm('Are you sure to delete ?')">
+											<input type="hidden" name="_method" value="DELETE">
+											<input type="hidden" name="token" value="{{ csrf_token('delete') }}">
+											<input type="hidden" class="schedule_id" name="schedule_id" value=""/>
+											<button class="btn btn-block btn-danger btn-sm">
+												<i class="fas fa-trash">
+												</i>
+												Delete This Class
+											</button>
+										</form>
+										<form method="post" action="{{ path('support.schedule.deleteAll') }}" style="display: inline-block" onsubmit="return confirm('Are you sure to delete All student schedule ?')">
+											<input type="hidden" name="_method" value="DELETE">
+											<input type="hidden" name="token" value="{{ csrf_token('delete') }}">
+											<input type="hidden" class="student_id" name="student_id" value=""/>
+											<button class="btn btn-block btn-danger btn-sm">
+												<i class="fas fa-trash">
+												</i>
+												Delete All Classes of <span id=""></span>
+											</button>
+										</form>																		
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer justify-content-between">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary" id="submit-schedule">Submit</button>
+				</div>
+			</div>
+		</div>
+	</div>

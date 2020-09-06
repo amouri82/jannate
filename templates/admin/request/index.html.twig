@@ -5,6 +5,11 @@
 
     <!-- Content Header (Page header) -->
     <section class="content-header">
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}    
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
@@ -20,17 +25,17 @@
         </div><!-- /.container-fluid -->
     </section>
     <!-- Main content -->
-    <section class="content">
+    <section class="content requests">
         <div class="container-fluid">
             <div class="card card-default">
                 <div class="card-body">
                     <div class="col-12">
-                        <a href="list-of-new-request" class="btn btn-primary">Active ()</a>
-                        <a href="list-of-new-request" class="btn btn-danger">Responded ()</a>
-                        <a href="list-of-new-request" class="btn btn-success">Allocated ()</a>
-                        <a href="list-of-new-request" class="btn btn-secondary">Later ()</a>
-                        <a href="list-of-new-request" class="btn btn-light">Teaching Requests ()</a>
-                        <a href="list-of-new-request" class="btn btn-warning">Archives ()</a>
+                        <a href="{{ path( 'admin.requests.index') }}" class="btn btn-primary">Active ({{ count_active }})</a>
+                        <a href="{{ path( 'admin.requests.index') }}?status=responded" class="btn btn-danger">Responded ({{ count_responsed }})</a>
+                        <a href="{{ path( 'admin.requests.index') }}?status=allocated" class="btn btn-success">Allocated ({{ count_allocated }})</a>
+                        <a href="{{ path( 'admin.requests.index') }}?status=later" class="btn btn-secondary">Later ({{ count_later }})</a>
+                        <a href="{{ path( 'admin.requests.index') }}?status=teaching" class="btn btn-light">Teaching Requests ({{ count_teaching }})</a>
+                        <a href="{{ path( 'admin.requests.index') }}?status=archive" class="btn btn-warning">Archives ({{ count_archive }})</a>
                     </div>
                     <div class="row">
                         <div class="timeline">
@@ -49,33 +54,57 @@
                                     <div class="timeline-item">
                                         <div class="time">
                                             <div class="btn-group">
-                                                <button class="btn btn-circle green-haze btn-sm dropdown-toggle" type="button" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                                <button class="btn btn-circle green-haze btn-sm dropdown-toggle btn-success" type="button" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                                                 Actions
                                                 </button>
                                                 <ul class="dropdown-menu pull-right" role="menu">
                                                     <li>
-                                                        <a href="add-new-request-note?req=<?php echo $arequest_id; ?>&name=<?php echo $aname; ?>">Add Note </a>
+                                                        <a class="note-modal btn" data-toggle="modal" href="#note" data-request="{{request.id}}" data-name="{{request.name}}">Add Note</a>
                                                     </li>
                                                     <li>
-                                                        <a href="welcome-email?request=<?php echo $arequest_id; ?>">Send Email </a>
+                                                        <a class="btn" href="{{ path('admin.request.sendemail', {id: request.id}) }}">Send Email </a>
                                                     </li>
                                                     <li>
-                                                        <a class="allocation" href="#allocation-c" data-toggle="modal" data-target="#allocation-c" data-id="<?php echo $arequest_id; ?>" data-name="<?php echo $aname; ?>">Allocate CSR </a>
+                                                        <a class="btn" href="{{ path('admin.request.account', {id: request.id}) }}">Create Account </a>
                                                     </li>
                                                     <li>
-                                                        <a href="add-parent-account?req=<?php echo $arequest_id; ?>&name=<?php echo $aname; ?>&email=<?php echo $aemail; ?>&phone=<?php echo $aphone; ?>&skype=<?php echo $askype; ?>&city=<?php echo $acity; ?>">Create Account </a>
+                                                        <form method="post" action="{{ path('admin.request.status', {id: request.id}) }}" style="display: inline-block" onsubmit="return confirm('Are you sur to change this request status ?')">
+                                                            <input type="hidden" name="_method" value="Update">
+                                                            <input type="hidden" name="status" value="teaching">
+                                                            <input type="hidden" name="token" value="{{ csrf_token('status') }}">
+                                                            <button class="btn btn-sm">
+                                                                Teaching
+                                                            </button>
+                                                        </form>   
                                                     </li>
                                                     <li>
-                                                        <a href="teaching-request?req=<?php echo $arequest_id; ?>">Teaching </a>
+                                                        <form method="post" action="{{ path('admin.request.status', {id: request.id}) }}" style="display: inline-block" onsubmit="return confirm('Are you sure to change archive this request ?')">
+                                                            <input type="hidden" name="_method" value="Update">
+                                                            <input type="hidden" name="status" value="archive">
+                                                            <input type="hidden" name="token" value="{{ csrf_token('status') }}">
+                                                            <button class="btn btn-sm">
+                                                                Archive
+                                                            </button>
+                                                        </form>                                                        
                                                     </li>
                                                     <li>
-                                                        <a href="remove-request?req=<?php echo $arequest_id; ?>">Archive </a>
+                                                        <form method="post" action="{{ path('admin.request.status', {id: request.id}) }}" style="display: inline-block" onsubmit="return confirm('Are you sure to change status to Later ?')">
+                                                            <input type="hidden" name="_method" value="Update">
+                                                            <input type="hidden" name="status" value="later">
+                                                            <input type="hidden" name="token" value="{{ csrf_token('status') }}">
+                                                            <button class="btn btn-sm">
+                                                                Later
+                                                            </button>
+                                                        </form>                                                       
                                                     </li>
                                                     <li>
-                                                        <a href="later-request?req=<?php echo $arequest_id; ?>">Later </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="delete-request?req=<?php echo $arequest_id; ?>">Delete </a>
+                                                        <form method="post" action="{{ path('admin.request.delete', {id: request.id}) }}" style="display: inline-block" onsubmit="return confirm('Are you sure to delete ?')">
+                                                            <input type="hidden" name="_method" value="DELETE">
+                                                            <input type="hidden" name="token" value="{{ csrf_token('delete') }}">
+                                                            <button class="btn btn-sm">
+                                                                Delete
+                                                            </button>
+                                                        </form>                                                        
                                                     </li>
                                                 </ul>
                                             </div>
@@ -192,12 +221,11 @@
                                                                 {% else %}    
                                                                     <span class="label label-sm label-primary" title="Email Status"><i class="fa fa-envelope"></i> Sent</span>
                                                                 {% endif %}                                                                    
-                                                                <a class="notes" href="#notes-d" data-toggle="modal" data-target="#notes-d" data-id="9923" data-name="samantha barrie">
+                                                                <a class="notes-detail" href="#" data-request="{{ request.id }}" data-name="{{ request.name }}">
                                                                     <span class="label label-sm label-success" title="Note Details">
-                                                                        <i class="fa fa-comments"> 0</i>
+                                                                        <i class="fa fa-comments"> {{ request.RequestNotes | length }}</i>
                                                                     </span>
                                                                 </a>
-                                                                <span class="label label-sm label-danger" title="Allocation"> Not Allocated</span>
                                                             </td>
                                                         </tr>
                                                     </tbody>
@@ -218,4 +246,85 @@
         </div>
     </section>
     <!-- /.content -->
-{% endblock %}       
+
+    <!-- Add Note Modal Form -->
+    <div class="modal fade" id="note">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-info">
+                    <h4 class="modal-title">Add note</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">                
+                    <div class="form-body">
+                        <form id="requestNoteForm" name="requestNoteForm" role="form">
+                            <div class="form-group">
+                                <div class="col-4">
+                                    <label for="note">Request Name</label>
+                                </div>                                                
+                                <div class="col-8">
+                                    <input type="text" name="name" id="name" readOnly class="form-control input-circle" required="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-4">
+                                    <label for="note">Write Note <span class="required"></span></label>
+                                </div>
+                                <div class="col-8">
+                                    <textarea class="request-note form-control" name="note" required></textarea>
+                                </div>
+                            </div>                        
+                            <input type="hidden" value="" name="request_id" id="request_id"/>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button id="submit-request-note" type="button" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>    
+
+
+    <!-- Add Note Modal Form -->
+    <div class="modal fade" id="notes-list">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-success">
+                    <h4 class="modal-title">Request notes</h4>
+                    <h5 id="request-name"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">                
+                    <table class="table table-striped" id="notesTable">
+                        <thead class="thead-dark">
+                            <tr>                    
+                                <th>Comment</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>      
+    <script>
+        let addNoteUrl = '{{ path('admin.request.note') }}';
+        let notesListUrl = '{{ path('admin.request.noteslist') }}';
+    </script>    
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="/js/request.js"></script>
+{% endblock %}

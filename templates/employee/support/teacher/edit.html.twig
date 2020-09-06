@@ -1,0 +1,270 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Employee Account Profile{% endblock %}
+{% block body %}
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Employee Account</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="{{ path('home') }}">Home</a></li>
+                        <li class="breadcrumb-item active">Employees</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        {{ form_start(form) }}
+
+        <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="card card-success">
+                <div class="card-header">
+                    <h3 class="card-title">Employee Account Profile</h3>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                    </div>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form_row(form.gender) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(form.name) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(form.cnic) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(form.mobile) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(form.email) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(form.institute_email) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(form.qualification) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(form.experience) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(form.memorization) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(form.timezone) }}
+                            </div>                              
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form_row(form.marital_status) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(form.fatherName) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(form.telephone) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(form.birthday) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(form.ijaazah) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(form.nationality) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(form.salaryPackage) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(form.address) }}
+                            </div>                               
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+
+            <!-- general form elements -->
+            <div class="card card-warning collapsed-card">
+                <div class="card-header">
+                    <h3 class="card-title">Official Details</h3>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                    </div>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form_row(form.category) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(form.skype) }}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form_row(form.joining_at) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(form.zoom) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+            </div>
+
+            <!-- general form elements -->
+            <div class="card card-info collapsed-card">
+                <div class="card-header">
+                    <h3 class="card-title">Schedule Details</h3>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                    </div>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form_row(form.startTime1) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(form.startTime2) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(form.startTime3) }}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form_row(form.endTime1) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(form.endTime2) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(form.endTime3) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- general form elements -->
+            <div class="card card-secondary collapsed-card">
+                <div class="card-header">
+                    <h3 class="card-title">Salary Details</h3>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                    </div>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form_row(form.account_title) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(form.bank) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(form.branch) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(form.account_no) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(form.salary_amount) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(form.hour_rate) }}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form_row(form.eobi) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(form.currency) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(form.whatsup_group) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(form.medical) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(form.entertainment) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(form.misc) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- general form elements -->
+            <div class="card card-danger collapsed-card">
+                <div class="card-header">
+                    <h3 class="card-title">Login Details</h3>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                    </div>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form_row(form.user.username) }}
+                                {{ form_widget(form.user.roles) }}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form_row(form.user.plainPassword.first) }}
+                                {{ form_row(form.user.plainPassword.second) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+
+            <div class="card card-default">
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-info">Submit</button>
+                    <button type="submit" onclick="history.back()" class="btn btn-default">Back</button>
+                </div>
+            </div>
+
+        </div>
+        {{ form_end(form) }}
+    </section>
+    <!-- /.content -->
+{% endblock %}
