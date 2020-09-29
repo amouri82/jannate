@@ -66,12 +66,6 @@ class FamilyType extends AbstractType
                 'class' => Currency::class,
                 'choice_label' => 'code',
                 'placeholder' => 'Currency'
-            ])
-            ->add('status', EntityType::class, [
-                // looks for choices from this entity
-                'class' => Status::class,
-                'choice_label' => 'name',
-                'placeholder' => 'Status'
             ]);
     }
 

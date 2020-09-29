@@ -1,0 +1,120 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}List of Tasks
+{% endblock %}
+{% block body %}
+
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="container-fluid">
+			<div class="row mb-2">
+				<div class="col-sm-6">
+					<h1>Tasks</h1>
+				</div>
+				<div class="col-sm-6">
+					<ol class="breadcrumb float-sm-right">
+						<li class="breadcrumb-item">
+							<a href="{{ path('home') }}">Home</a>
+						</li>
+						<li class="breadcrumb-item active">Tasks</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+		<!-- /.container-fluid -->
+	</section>
+
+	<!-- Main content -->
+	<section class="content">
+		<div class="container-fluid">
+			{% for message in app.flashes('success') %}
+				<div class="alert alert-success">
+					{{ message }}
+				</div>
+			{% endfor %}
+			<!-- Default box -->
+			<div class="row">
+				<div class="col-md-12">
+					<!-- The time line -->
+					<div class="timeline">
+						<!-- timeline item -->
+						<div>
+							<i class="fas fa-user bg-green"></i>
+							<div class="timeline-item">
+								<span class="time">
+									<i class="fas fa-clock"></i>
+									{{ task.createdAt|date('Y-m-d H:i:s') }}</span>
+								<h3 class="timeline-header">
+									Created by:
+									<a href="#">{{ task.user.username }}</a>
+									for:
+									<a href="#">{{ task.employee.name }}</a>
+								</h3>
+
+								<div class="timeline-body">
+									Initial Job:
+									{{ task.message }}
+								</div>
+							</div>
+						</div>
+						<!-- END timeline item -->
+						{% for string in strings %}
+							<!-- timeline item -->
+							<div>
+								<i class="fas fa-user bg-warning"></i>
+								<div class="timeline-item">
+									<h3 class="timeline-header">
+										{{ string.user.username }} Responsed at: {{ string.createdAt|date('Y-m-d H:i:s') }}
+									</h3>
+									<div class="timeline-body">
+										{{ string.message }}
+									</div>									
+								</div>
+							</div>
+							<!-- END timeline item -->		
+						{% endfor %}
+						<div>
+							<div class="timeline-item">
+								<div class="timeline-body">
+									<div class="row">
+										<div class="col col-10">
+											<span class="font-success">No Action Required from your side...</span>
+										</div>
+										<div class="col col-2" style="text-align:right">
+											{% if task.status == 3 %}
+												<span class="text-danger">Task Closed</span>
+											{% else %}
+												<!-- Example single danger button -->
+												<div class="btn-group">
+													<button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+														Actions
+													</button>
+													<div class="dropdown-menu">
+														<a class="dropdown-item" href="#note" data-toggle="modal">Add New Comment</a>
+														<a class="dropdown-item" href="#task" data-toggle="modal">Re-Allocate</a>
+														<div class="dropdown-divider"></div>
+														<a class="dropdown-item" href="{{ path('support.task.close', {id: task.id}) }}">Close Task</a>
+													</div>
+												</div>
+											{% endif %}
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /.col -->
+			</div>
+		</div>
+	</section>
+	<!-- /.content -->
+	{% include 'employee/support/task/modal.html.twig' %}
+	<script>
+		let getEmployeesByCategoryUrl = '{{ path('support.family.employees_by_category') }}';
+	</script>
+{% endblock %}
+{% block javascripts %}
+	{{ parent() }}
+	<script src="/js/family.js"></script>
+{% endblock %}

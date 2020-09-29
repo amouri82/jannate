@@ -1,0 +1,110 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}List of Tasks
+{% endblock %}
+{% block body %}
+
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="container-fluid">
+			<div class="row mb-2">
+				<div class="col-sm-6">
+					<h1>Tasks</h1>
+				</div>
+				<div class="col-sm-6">
+					<ol class="breadcrumb float-sm-right">
+						<li class="breadcrumb-item">
+							<a href="{{ path('home') }}">Home</a>
+						</li>
+						<li class="breadcrumb-item active">Tasks</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+		<!-- /.container-fluid -->
+	</section>
+
+	<!-- Main content -->
+	<section class="content">
+		{% for message in app.flashes('success') %}
+			<div class="alert alert-success">
+				{{ message }}
+			</div>
+		{% endfor %}
+		<!-- Default box -->
+		<div class="row">
+			<div class="col-md-3">
+				<div class="card card-default">
+					<div class="card-header">
+						<h3 class="card-title">
+							<i class="fas fa-exclamation-triangle"></i>
+							TASK ISSUED
+						</h3>
+					</div>
+					<!-- /.card-header -->
+					<div class="card-body">
+						<ul class="task-categories">
+							<li {% if status == 2 %} class="active" {% endif %}>
+								<a href="{{ path('support.tasks.index', {status:2}) }}">ACTIVE ({{ countActive }})</a>
+							</li>
+							<li {% if status == 3 %} class="active" {% endif %}>
+								<a href="{{ path('support.tasks.index', {status:3}) }}">CLOSED ({{ countClosed }})</a>
+							</li>
+							<li {% if status == 1 %} class="active" {% endif %}>
+								<a href="{{ path('support.tasks.index', {status:1}) }}">AWAITING ({{ countAwaiting }})</a>
+							</li>
+						</ul>
+					</div>
+					<!-- /.card-body -->
+				</div>
+				<!-- /.card -->
+			</div>
+			<!-- /.col -->
+
+			<div class="col-md-9">
+				<div class="card card-default">
+					<div class="card-header">
+						<h3 class="card-title">
+							<i class="fas fa-bullhorn"></i>
+							Tasks
+						</h3>
+					</div>
+					<!-- /.card-header -->
+					<div class="card-body">
+						{% for task in tasks %}
+							<div class="task callout callout-danger">
+								<h5>
+									<font color="#A80707">
+										From:
+										{{task.user.username}}
+										To:
+										{{task.employee.name}}
+									</font>
+									<font color="#44B6AE">(Family Name:
+										<a href="{{ path('support.family.view', {id: task.family.id}) }}">{{ task.family.name }}</a>)</font>
+								</h5>
+								<p>{{ task.message }}</p>
+								<div class="row">
+									<div class="col-10">
+										<i class="fa fa-calendar"></i>
+										{{ task.createdAt|date("l d M Y")}}
+									</div>
+									<div class="col-2 text-right">
+										<a href="{{ path('support.task.string', {id: task.id}) }}">
+											<button type="button" class="btn btn-danger btn-xs">Open String</button>
+										</a>
+									</p>
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+				<!-- /.card-body -->
+			</div>
+			<!-- /.card -->
+		</div>
+		<!-- /.col -->
+	</div>
+
+</section>
+<!-- /.content -->{% endblock %}

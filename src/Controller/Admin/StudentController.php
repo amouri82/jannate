@@ -53,15 +53,15 @@ class StudentController extends AbstractController
     public function index(PaginatorInterface $paginator, Request $request)
     {
         $students = $paginator->paginate(
-            $this->repository->findBy(['status' => 1]),
+            $this->repository->findBy(['active' => 1]),
             $request->query->getInt('page', 1), /*page number*/
             10 /*limit per page*/
         );
 
         $inActivestudents = $paginator->paginate(
-            $this->repository->findBy(['status' => 0]),
-            $request->query->getInt('page', 1), /*page number*/
-            10 /*limit per page*/
+            $this->repository->findBy(['active' => 0]),
+            $request->query->getInt('page', 1),
+            10 
         );
 
         // parameters to template

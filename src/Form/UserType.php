@@ -29,8 +29,10 @@ class UserType extends AbstractType
                 'choices' =>
                     array
                     (
-                        'ROLE_MANAGER' => 'ROLE_MANAGER',
-                        'ROLE_TEACHER' => 'ROLE_TEACHER'
+                        'ROLE_HR' => 'ROLE_HR',
+                        'ROLE_SUPPORT' => 'ROLE_SUPPORT',
+                        'ROLE_QUALITY' => 'ROLE_QUALITY',
+                        'ROLE_TEACHER' => 'ROLE_TEACHER'                                               
                     ) ,
                 'multiple' => true,
                 'required' => true,
