@@ -1,0 +1,47 @@
+<ul class="feeds">
+	{% if family.tasks|length > 0 %}
+		{% for task in family.tasks %}
+			<li>
+				<div class="col1">
+					<div class="cont">
+						<div class="cont-col1">
+							<div class="label label-info">
+								{{ task.createdAt|date("Y-m-d") }}
+							</div>
+						</div>
+						<div class="cont-col2">
+							<div class="desc">
+								{{ task.message }}
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col2">
+					<div class="date">
+						{% if task.status == 3 %}
+							<a href="{{ path('support.task.string', {id: task.id}) }}">
+								<span class="label label-sm label-danger">Closed</span>
+							</a>
+						{% else %}
+							<a href="{{ path('support.task.string', {id: task.id}) }}">
+								<span class="label label-sm label-warning">Pending</span>
+							</a>
+						{% endif %}
+					</div>
+				</div>
+			</li>
+		{% endfor %}
+	{% else %}		
+			<li>
+				<div class="col1">
+					<div class="cont">
+						<div class="cont-col1">
+							<div class="label label-info">
+								No Pending Task Found!
+							</div>
+						</div>
+					</div>
+				</div>
+			</li>	
+	{% endif %}
+</ul>

@@ -109,6 +109,7 @@ ul.pagination {
 
 .label-info {
     background-color: #89C4F4;
+    font-size: 20px;
 }
 .label-info[href]:hover, .label-info[href]:focus {
     background-color: #5aadf0;
@@ -126,4 +127,124 @@ ul.pagination {
 }
 .label-danger[href]:hover, .label-danger[href]:focus {
     background-color: #f0262f;
+}
+
+.timeline {
+    margin-top: 30px;
+}
+
+.requests .dropdown-menu {
+    min-width: 8rem;
+}
+
+.requests .dropdown-menu li {
+    margin: 5px;
+}
+
+.requests .dropdown-menu li a, .requests .dropdown-menu li button {
+    font-size: 13px;
+}
+
+
+
+.md-check {
+    display: inline;
+}
+
+.form-actions {
+    display: none;
+    padding-bottom: 20px;
+    text-align: center;
+}
+
+.feeds {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+}
+
+.feeds li {
+    background-color: #fafafa;
+    color: #82949a;
+    margin-bottom: 7px;
+    padding:10px
+}
+
+.feeds li::after {
+    clear: both;
+}
+.feeds li::before, .feeds li::after {
+    display: table;
+    line-height: 0;
+    content: "";
+}
+.feeds li .col1 {
+    float: left;
+    clear: both;
+}
+.feeds li .col2 {
+    float: right;
+}
+.feeds li .col1 > .cont {
+    float: left;
+    margin-right: 75px;
+    overflow: hidden;
+}
+
+.feeds li .col1 > .cont > .cont-col1 {
+    float: left;
+}
+
+.feeds li .col1 > .cont > .cont-col2 {
+    float: right;
+}
+
+.feeds li .col1 > .cont > .cont-col1 > .label {
+    display: inline-block;
+    padding: 5px 4px 6px 5px;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.feeds li .col1 > .cont > .cont-col2 > .desc {
+    margin-left: 20px;
+    padding-top: 4px;
+    padding-bottom: 5px;
+    overflow: hidden;
+}
+
+ul.task-categories {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+ul.task-categories li {
+    padding: 10px;
+}
+
+ul.task-categories li:hover {
+    background-color: #eee;
+}
+
+ul.task-categories li.active {
+    background-color: #87a9c7
+}
+
+.task-date {
+    width: auto;
+    float: left;
+}
+
+.task-string {
+    width: auto;
+    float: right;
+}
+
+.timeline > div > .timeline-item > .time {
+    font-size: 14px !important;
+}
+
+.timeline > div > .timeline-item > .timeline-body, .timeline > div > .timeline-item > .timeline-footer {
+    padding: 20px 10px;
 }

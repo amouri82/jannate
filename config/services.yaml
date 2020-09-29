@@ -4,6 +4,12 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
+    email_sched: 'no-reply@jannatalquran.com'
+    email_pass_sched: vhe6LZSwWuZV
+    company_name_sched: 'Admin JannatAlQuran'
+    subject_sched: 'Online Quran Classes'
+    paypal_email: 'jannat.alquran@gmail.com'
+    TimeZoneCustome: 'Africa/Cairo'
 
 services:
     # default configuration for services in *this* file

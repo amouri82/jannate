@@ -4,3 +4,23 @@ twig:
     strict_variables: '%kernel.debug%'
     exception_controller:
     form_themes: ['bootstrap_4_layout.html.twig']
+    globals:
+        title: 'Jannat Al Quran | Online Learning Portal'
+        contact_name: 'Dina Essam'
+        site_nameC: 'JannatAlQuran.com'
+        site_nameS: 'jannatalquran.com'
+        site: 'https://www.jannatalquran.com'
+        CO_number: '0000000000'
+        email1: 'support@jannatalquran.com'
+        email2: 'accounts@jannatalquran.com'
+        email3: 'quality.control@jannatalquran.com'
+        social1: '<a href="https://www.facebook.com/jannatalquran1/" data-original-title="facebook" class="facebook"></a>'
+        social2: '<a href="https://twitter.com/jannatalquran1" data-original-title="twitter" class="twitter"></a>'
+        social3: '<a href="https://www.youtube.com/channel/UCni8n4XF1IC4kldDm9KIQ1w?view_as=subscriber" data-original-title="youtube" class="youtube"></a>'
+        about: 'JannatAlQuran is a humble effort to build online tuition community.'
+        phone1: 'UK Phone: +44 (0) 7466 833 746'
+        phone2: 'WhatsApp: +44 (0) 7466 833 746'
+        phone3: ''
+        blog_url: 'https://www.jannatalquran.com'
+        contact_url: 'https://www.jannatalquran.com/contact-us/'
+        skype_zoom: ''

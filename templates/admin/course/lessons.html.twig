@@ -60,7 +60,7 @@
                                         <a href="{{ path('admin.lesson.edit', {'course_id': course.id, 'id': lesson.id} ) }}" class="btn btn-sm bg-teal">
                                             <i class="fas fa-edit"></i> Edit lesson
                                         </a>
-                                        <form method="post" action="{{ path('admin.sms.delete', {id: lesson.id}) }}" style="display: inline-block" onsubmit="return confirm('Are you sure to delete ?')">
+                                        <form method="post" action="{{ path('admin.lesson.delete', {id: lesson.id}) }}" style="display: inline-block" onsubmit="return confirm('Are you sure to delete ?')">
                                             <input type="hidden" name="_method" value="DELETE">
                                             <input type="hidden" name="course_id" value="{{ course.id }}">
                                             <input type="hidden" name="token" value="{{ csrf_token('delete') }}">
