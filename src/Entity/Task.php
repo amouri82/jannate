@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -41,6 +43,21 @@ class Task
      * @ORM\Column(type="integer")
      */
     private $status;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     */
+    private $user;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\TaskString", mappedBy="task", orphanRemoval=true)
+     */
+    private $taskStrings;
+
+    public function __construct()
+    {
+        $this->taskStrings = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -116,5 +133,48 @@ class Task
     {
         $this->created_at = new \DateTime("now");
         $this->status = 1;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|TaskString[]
+     */
+    public function getTaskStrings(): Collection
+    {
+        return $this->taskStrings;
+    }
+
+    public function addTaskString(TaskString $taskString): self
+    {
+        if (!$this->taskStrings->contains($taskString)) {
+            $this->taskStrings[] = $taskString;
+            $taskString->setTask($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTaskString(TaskString $taskString): self
+    {
+        if ($this->taskStrings->contains($taskString)) {
+            $this->taskStrings->removeElement($taskString);
+            // set the owning side to null (unless already changed)
+            if ($taskString->getTask() === $this) {
+                $taskString->setTask(null);
+            }
+        }
+
+        return $this;
     }       
 }

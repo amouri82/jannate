@@ -2,26 +2,16 @@
 
 namespace App\Controller\Employee\Support;
 
-use App\Entity\Employee;
-use App\Entity\Schedule;
-use App\Form\EmployeeType;
-use App\Form\ScheduleType;
-use App\Repository\CourseRepository;
 use App\Repository\EmployeeRepository;
 use App\Repository\StudentRepository;
-use App\Repository\TimeRepository;
 use App\Repository\ScheduleRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
-use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Vich\UploaderBundle\Form\Type\VichFileType;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use \Exception;
 
 class ScheduleController extends AbstractController
@@ -36,21 +26,11 @@ class ScheduleController extends AbstractController
      * @var EntityManagerInterface
      */
     private $em;
-
-    /**
-     * @var TimeRepository
-     */
-    private $timeRepository;   
-    
+   
     /**
      * @var StudentRepository
      */
     private $studentRepository;
-
-    /**
-     * @var CourseRepository
-     */
-    private $courseRepository;
 
     /**
      * @var ScheduleRepository
@@ -60,16 +40,12 @@ class ScheduleController extends AbstractController
     public function __construct(
         EmployeeRepository $repository,
         EntityManagerInterface $em,
-        TimeRepository $timeRepository,
         StudentRepository $studentRepository,
-        CourseRepository $courseRepository,
         ScheduleRepository $scheduleRepository        
     ) {
         $this->repository = $repository;
         $this->em = $em;
-        $this->timeRepository = $timeRepository;
         $this->studentRepository = $studentRepository;
-        $this->courseRepository = $courseRepository;
         $this->scheduleRepository = $scheduleRepository;
     }
 
@@ -116,4 +92,19 @@ class ScheduleController extends AbstractController
 
     }
 
+    /**
+     * @param string $date
+     * @return Response
+     */    
+    public function schedules($date = null) 
+    {
+        $date = $date ?? date('Y-m-d');
+        $schedules = $this->scheduleRepository->findBy(['create_date_admin' => new \DateTime($date)]);
+
+        return $this->render('employee/support/schedule/schedules.html.twig', [
+            'schedules' => $schedules,
+            'date' => $date
+        ]);
+        
+    } 
 }

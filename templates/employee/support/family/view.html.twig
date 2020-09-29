@@ -1,465 +1,400 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Family profile{% endblock %}
+{% block title %}Family profile
+{% endblock %}
 {% block body %}
 
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1>
-                        Parent Account Profile
-                    </h1>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ path('home') }}">Home</a></li>
-                        <li class="breadcrumb-item active">Families</li>
-                    </ol>
-                </div>
-            </div>
-        </div><!-- /.container-fluid -->
-    </section>
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="container-fluid">
+			<div class="row mb-2">
+				<div class="col-sm-6">
+					<h1>
+						Parent Account Profile
+					</h1>
+				</div>
+				<div class="col-sm-6">
+					<ol class="breadcrumb float-sm-right">
+						<li class="breadcrumb-item">
+							<a href="{{ path('home') }}">Home</a>
+						</li>
+						<li class="breadcrumb-item active">Families</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+		<!-- /.container-fluid -->
+	</section>
 
-    <section class="content">
-        <div class="container-fluid">
-            {% for message in app.flashes('success') %}
-                <div class="alert alert-success">
-                    {{ message }}
-                </div>
-            {% endfor %}
-            <div class="row">
-                <div class="col-md-3">
+	<section class="content">
+		<div class="container-fluid">
+			{% for message in app.flashes('success') %}
+				<div class="alert alert-success">
+					{{ message }}
+				</div>
+			{% endfor %}
+			<div class="row">
+				<div
+					class="col-md-3">
 
-                    <!-- Profile Image -->
-                    <div class="card card-primary card-outline">
-                        <div class="card-body box-profile">
-                            <ul class="list-group list-group-unbordered mb-3">
-                                <li class="list-group-item family-avatar">
-                                    <img src="{{ asset('img/profile-img.png') }}" alt="{{ family.name }}">
-                                </li>
-                                <li class="list-group-item">
-                                    <a href="{{ path('admin.student.new', {'family_id': family.id}) }}">
-                                    <i class="fa fa-plus"></i> Add New Student</a>
-                                </li>
-                                <li class="list-group-item">
-                                    <a href="#"><i class="fa fa-ban" aria-hidden="true"></i> Suspend Classes</a>
-                                </li>
-                            </ul>
+					<!-- Profile Image -->
+					<div class="card card-primary card-outline">
+						<div class="card-body box-profile">
+							<ul class="list-group list-group-unbordered mb-3">
+								<li class="list-group-item family-avatar">
+									<img src="{{ asset('img/profile-img.png') }}" alt="{{ family.name }}">
+								</li>
+								<li class="list-group-item">
+									<a href="{{ path('support.student.new', {'family_id': family.id}) }}">
+										<i class="fa fa-plus"></i>
+										Add New Student
+									</a>
+								</li>
+								<li class="list-group-item">
+									<a href="#">
+										<i class="fa fa-ban" aria-hidden="true"></i>
+										Suspend Classes</a>
+								</li>
+							</ul>
 
-                        </div>
-                        <!-- /.card-body -->
-                    </div>
-                    <!-- /.card -->
-                </div>
-                <!-- /.col -->
-                <div class="col-md-9">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="tab-content">
-                                <div class="tab-pane active" id="activity">
-                                    <div class="post">
-                                        <div class="row">
-                                            <div class="col-md-8">
-                                                <h1>
-                                                    {{ family.name }}
-                                                    <span class="label label-sm label-danger" style='font-size: 12px;'>{{ countRequests }}</span>
-                                                    
-                                                    {% if family.status.name == 'On Trial' and date() > family.trialDate %}
-                                                        <font color="FE2E2E"><b>(Trial Over)</b></font>
-                                                    {% elseif family.status.name == 'On Trial' and date() < t_date %}
-                                                        (On Trial)
-                                                    {% elseif family.status.name == 'On Trial' and date() == t_date %}
-                                                        (Last On Trial)
-                                                    {% endif %}    
+						</div>
+						<!-- /.card-body -->
+					</div>
+					<!-- /.card -->
+				</div>
+				<!-- /.col -->
+				<div class="col-md-9">
+					<div class="card">
+						<div class="card-body">
+							<div class="tab-content">
+								<div class="tab-pane active" id="activity">
+									<div class="post">
+										<div class="row">
+											<div class="col-md-8">
+												<h1>
+													{{ family.name }}
+													<span class="label label-sm label-danger" style='font-size: 12px;'>{{ countRequests }}</span>
 
-                                                    {% if family.status.name == 'Regular' %}
-                                                        <button type="button" class="btn green btn-xs" title="System will send regular invoice">
-                                                        <i class="fa fa-money"></i> <i class="fa fa-check"></i></button>
-                                                    {% else %}
-                                                        <button type="button" class="btn btn-danger btn-xs" title="System will not send regular invoice">
-                                                        <i class="fas fa-money-bill-alt"></i> <i class="fas fa-times"></i></button>
-                                                    {% endif %}    
-                                                    
-                                                    {% if family.paymentMode == 'Bank' %}
-                                                        <span class="label label-sm label-info">Bank</span>
-                                                    {% elseif family.paymentMode == 'Paypal' %}
-                                                        <span class="label label-sm label-success">PayPal</span>
-                                                    {% endif %}
+													{% if family.status.name == 'On Trial' and date() > family.trialDate %}
+														<font color="FE2E2E">
+															<b>(Trial Over)</b>
+														</font>
+													{% elseif family.status.name == 'On Trial' and date() < t_date %}
+														(On Trial)
+													{% elseif family.status.name == 'On Trial' and date() == t_date %}
+														(Last On Trial)
+													{% endif %}
+
+													{% if family.status.name == 'Regular' %}
+														<button type="button" class="btn green btn-xs" title="System will send regular invoice">
+															<i class="fa fa-money"></i>
+															<i class="fa fa-check"></i>
+														</button>
+													{% else %}
+														<button type="button" class="btn btn-danger btn-xs" title="System will not send regular invoice">
+															<i class="fas fa-money-bill-alt"></i>
+															<i class="fas fa-times"></i>
+														</button>
+													{% endif %}
+
+													{% if family.paymentMode == 'Bank' %}
+														<span class="label label-sm label-info">Bank</span>
+													{% elseif family.paymentMode == 'Paypal' %}
+														<span class="label label-sm label-success">PayPal</span>
+													{% endif %}
 
 												</h1>
 												{% if family.status.name == 'On Trial' %}
-                                                    <p>
-                                                        <a data-toggle="modal" href="#trial">
-                                                            <button type="button" class="btn btn-sm btn-danger"><i class="far fa-clock"></i> Change Trial Date</button>
-                                                        </a>
-                                                    </p>
-                                                {% endif %}
+													<p>
+														<a data-toggle="modal" href="#trial">
+															<button type="button" class="btn btn-sm btn-danger">
+																<i class="far fa-clock"></i>
+																Change Trial Date</button>
+														</a>
+													</p>
+												{% endif %}
 
-                                                <ul class="list-group" style="list-style:none">
-                                                    <li class="">
-                                                        <b>Invoice type: </b>
-                                                            {{ family.invoiceType.type }}
-                                                    </li>
-                                                    <li class="">
-                                                        <b>Created by: </b>
-                                                            {{ family.createdBy.username }}
-                                                    </li>                                                    
-                                                </ul>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="portlet sale-summary">
-                                                    <div class="portlet-title">
-                                                        <div class="caption">
-                                                            Status:
-                                                            {% if family.status.name == 'On Trial' %}
-                                                                <span class="label label-warning"><strong>{{ family.status.name }}</strong></span>
-                                                            {% elseif family.status.name == 'On Holidays' %}
-                                                                <span class="label label-info"><strong>{{ family.status.name }}</strong></span>
-                                                            {% elseif family.status.name == 'Deactived' %}
-                                                                <span class="label label-danger"><strong>{{ family.status.name }}</strong></span>
-                                                            {% elseif family.status.name == 'Suspended' %}
-                                                                <span class="label label-danger"><strong>{{ family.status.name }}</strong></span>
-                                                            {% else %}
-                                                                <span class="label label-success"><strong>{{ family.status.name }}</strong></span>
-                                                            {% endif %}
-                                                        </div>
-                                                    </div>
-                                                    <div class="portlet-body">
-                                                        <ul class="list-unstyled">
-                                                            <li>
-                                                                <span class="sale-num">
-                                                                    {% if family.status.name == 'On Trial' or family.status.name == 'On Holidays' or family.status.name == 'Deactived' or family.status.name == 'Regular' %}
-                                                                        <a data-toggle="modal" href="#deactivation">
-                                                                            <button type="button"
-                                                                                    class="btn btn-danger"><i
-                                                                                        class="fa fa-ban"></i> Deactivate</button>
-                                                                        </a>
-                                                                    {% endif %}
-                                                                    {% if family.status.name == 'Deactived' %}
-                                                                        <a href=""
-                                                                           onclick="return confirm('Are you sure about activation of Account');">
-                                                                            <button type="button"
-                                                                                    class="btn btn-info"><i
-                                                                                        class="fa fa-user"></i> Activate</button>
-                                                                        </a>
-                                                                    {% endif %}
-                                                                </span>
-                                                            </li>
-                                                            <li>
-                                                                <span class="sale-num">
-                                                                    {% if family.status.name == 'On Trial' %}
-                                                                        <a href="">
-                                                                            <button type="button"
-                                                                                    class="btn btn-success"><i
-                                                                                        class="fa fa-user"></i> Make Regular</button>
-                                                                        </a>
-                                                                    {% endif %}
+												<ul class="list-group" style="list-style:none">
+													<li class="">
+														<b>Invoice type:
+														</b>
+														{{ family.invoiceType.type }}
+													</li>
+													<li class="">
+														<b>Created by:
+														</b>
+														{{ family.createdBy.username }}
+													</li>
+												</ul>
+											</div>
+											<div class="col-md-4">
+												<div class="portlet sale-summary">
+													<div class="portlet-title">
+														<div class="caption">
+															Status:
+															{% if family.status.name == 'On Trial' %}
+																<span class="label label-warning">
+																	<strong>{{ family.status.name }}</strong>
+																</span>
+															{% elseif family.status.name == 'On Holidays' %}
+																<span class="label label-info">
+																	<strong>{{ family.status.name }}</strong>
+																</span>
+															{% elseif family.status.name == 'Deactived' %}
+																<span class="label label-danger">
+																	<strong>{{ family.status.name }}</strong>
+																</span>
+															{% elseif family.status.name == 'Suspended' %}
+																<span class="label label-danger">
+																	<strong>{{ family.status.name }}</strong>
+																</span>
+															{% else %}
+																<span class="label label-success">
+																	<strong>{{ family.status.name }}</strong>
+																</span>
+															{% endif %}
+														</div>
+													</div>
+													<div class="portlet-body">
+														<ul class="list-unstyled">
+															<li>
+																<span class="sale-num">
+																	{% if family.status.name == 'On Trial' or family.status.name == 'On Holidays' or family.status.name == 'Regular' %}
+																		<a data-toggle="modal" href="#deactivation">
+																			<button type="button" class="btn btn-danger">
+																				<i class="fa fa-ban"></i>
+																				Deactivate</button>
+																		</a>
+																	{% elseif family.status.name == 'Deactived' %}
+																		<a href="{{ path('support.family.active', {id: family.id}) }}" onclick="return confirm('Are you sure about activation of Account');">
+																			<button type="button" class="btn btn-info">
+																				<i class="fa fa-user"></i>
+																				Activate</button>
+																		</a>
+																	{% endif %}
+																</span>
+															</li>
+															<li>
+																<span class="sale-num">
+																	{% if family.status.name == 'On Trial' %}
+																		<a href="">
+																			<button type="button" class="btn btn-success">
+																				<i class="fa fa-user"></i>
+																				Make Regular</button>
+																		</a>
+																	{% endif %}
 
-                                                                    {% if family.status.name == 'Make on Holiday' %}
-                                                                        <a href="make-off-leave?t_id=<?php echo $pid; ?>">
-                                                                            <button type="button"
-                                                                                    class="btn btn-success"><i
-                                                                                        class="fa fa-user"></i> Make off Holiday</button>
-                                                                        </a>
-                                                                    {% endif %}
+																	{% if family.status.name == 'On Holidays' %}
+																		<a href="{{ path('support.family.offholiday', { id: family.id }) }}">
+																			<button type="button" class="btn btn-success">
+																				<i class="fa fa-user"></i>
+																				Make off Holiday</button>
+																		</a>
+																	{% endif %}
 
-                                                                    {% if family.status.name == 'Regular' %}
-                                                                        <a data-toggle="modal" href="#leave">
-                                                                            <button type="button"
-                                                                                    class="btn btn-info"><i
-                                                                                        class="fa fa-user"></i> Make on Holiday</button>
-                                                                        </a>
-                                                                    {% endif %}
+																	{% if family.status.name == 'Regular' %}
+																		<a data-toggle="modal" href="#leave">
+																			<button type="button" class="btn btn-info">
+																				<i class="fa fa-user"></i>
+																				Make on Holiday</button>
+																		</a>
+																	{% endif %}
 
-                                                                    {% if family.status.name == 'Deactived' %}
-                                                                        <span class="label label-warning"><strong>Not Applicable</strong></span>
-                                                                    {% endif %}
-                                                                </span>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Post -->
-                                    <div class="post">
-                                        <div class="user-block">
-                                            <span class="username">
-                                              <a href="#">Personal Bio Date</a>
-                                            </span>
-                                        </div>
-                                        <ul class="list-inline">
-                                            <li>
-                                                <b>Name: </b>{{ family.name }}
-                                            </li>
-                                            <li>
-                                                <b>Email: </b>{{ family.email }}
-                                            </li>
-                                        </ul>
-                                        <ul class="list-inline">
-                                            <li>
-                                                <b>Telephone: </b>{{ family.studentBank }}
-                                            </li>
-                                            <li>
-                                               <b>Student Bank: </b>{{ family.telephone }}
-                                            </li>
-                                            <li>
-                                                <b>Admin Bank: </b>{{ family.bank }}
-                                            </li>
-                                        </ul>
-                                        <ul class="list-inline">
-                                            <li>
-                                                <b>Mobile: </b>{{ family.mobile }}
-                                            </li>
-                                            <li>
-                                                <b>Zoom: </b>{{ family.zoom }}
-                                            </li>
-                                            <li>
-                                                <b>Skype:  </b>{{ family.skype }}
-                                            </li>
-                                        </ul>
-                                        <ul class="list-inline">
-                                            <li>
-                                                <b>Hours: </b>*****/Month
-                                            </li>
-                                            <li>
-                                                <b>Fee: </b>***** / {{ family.currency.code }}
-                                            </li>
-                                        </ul>
-                                        <ul class="list-inline">
-                                            <li>
-                                                <b>Country: </b>{{ family.country.name }}
-                                            </li>
-                                            <li>
-                                                <b>City: </b>{{ family.city }}
-                                            </li>
-                                            <li>
-                                                <b>Timezone: </b>{{ family.timezone.name }}
-                                            </li>
-                                        </ul>
-                                        <ul class="list-inline">
-                                            <li>
-                                                <b>Username: </b>{{ family.user.username }}
-                                            </li>
-                                        </ul>
-                                        <!-- /.user-block -->
-                                    </div>
-                                    <!-- /.post -->
+																	{% if family.status.name == 'Deactived' %}
+																		<span class="label label-warning">
+																			<strong>Not Applicable</strong>
+																		</span>
+																	{% endif %}
+																</span>
+															</li>
+														</ul>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!-- Post -->
+									<div class="post">
+										<div class="user-block">
+											<span class="username">
+												<a href="#">Personal Bio Date</a>
+											</span>
+										</div>
+										<ul class="list-inline">
+											<li>
+												<b>Name:
+												</b>
+												{{ family.name }}
+											</li>
+											<li>
+												<b>Email:
+												</b>
+												{{ family.email }}
+											</li>
+										</ul>
+										<ul class="list-inline">
+											<li>
+												<b>Telephone:
+												</b>
+												{{ family.studentBank }}
+											</li>
+											<li>
+												<b>Student Bank:
+												</b>
+												{{ family.telephone }}
+											</li>
+											<li>
+												<b>Admin Bank:
+												</b>
+												{{ family.bank }}
+											</li>
+										</ul>
+										<ul class="list-inline">
+											<li>
+												<b>Mobile:
+												</b>
+												{{ family.mobile }}
+											</li>
+											<li>
+												<b>Zoom:
+												</b>
+												{{ family.zoom }}
+											</li>
+											<li>
+												<b>Skype:
+												</b>
+												{{ family.skype }}
+											</li>
+										</ul>
+										<ul class="list-inline">
+											<li>
+												<b>Hours:
+												</b>*****/Month
+											</li>
+											<li>
+												<b>Fee:
+												</b>***** /
+												{{ family.currency.code }}
+											</li>
+										</ul>
+										<ul class="list-inline">
+											<li>
+												<b>Country:
+												</b>
+												{{ family.country.name }}
+											</li>
+											<li>
+												<b>City:
+												</b>
+												{{ family.city }}
+											</li>
+											<li>
+												<b>Timezone:
+												</b>
+												{{ family.timezone.name }}
+											</li>
+										</ul>
+										<ul class="list-inline">
+											<li>
+												<b>Username:
+												</b>
+												{{ family.user.username }}
+											</li>
+										</ul>
+										<!-- /.user-block -->
+									</div>
+									<!-- /.post -->
+									<!-- Post -->
+									<div class="post">
+										<ul class="list-inline">
+											<li>
+												<a href="{{ path('support.student.new', {'family_id': family.id}) }}">
+													<button type="button" class="btn btn-info btn-sm">
+														<i class="fa fa-plus"></i>
+														Add New Student</button>
+												</a>
+											</li>
+											<li>
+												<a data-toggle="modal" href="#add-note">
+													<button type="button" class="btn btn-danger btn-sm">
+														<i class="fa fa-comments"></i>
+														Add Notes</button>
+												</a>
+											</li>
+											<li>
+												<a data-toggle="modal" href="#add-task">
+													<button type="button" class="btn btn-primary btn-sm">
+														<i class="fa fa-tasks"></i>
+														Add Task</button>
+												</a>
+											</li>
+										</ul>
+									</div>
+									<!-- /.post -->
+								</div>
+								<!-- /.tab-pane -->
+							</div>
+							<!-- /.tab-content -->
+						</div>
+						<!-- /.card-body -->
+					</div>
+					<div class="card card-primary card-outline">
+						<div class="card-body">
+							<ul class="nav nav-tabs" id="custom-content-below-tab" role="tablist">
+								<li class="nav-item">
+									<a class="nav-link" id="students-list-tab" data-toggle="pill" href="#students-list" role="tab" aria-selected="true">List of Students
+										<span class="label label-sm label-success">{{ family.students|length }}</span>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" id="manager-notes-tab" data-toggle="pill" href="#manager-notes" role="tab" aria-selected="false">Manager Notes
+										<span class="label label-sm label-danger">{{ family.notes|length }}</span>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" id="teacher-notes-tab" data-toggle="pill" href="#teacher-notes" role="tab" aria-selected="false">Teacher Notes
+										<span class="label label-sm label-danger">0</span>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" id="tasks-tab" data-toggle="pill" href="#tasks" role="tab" aria-selected="false">Tasks
+										<span class="label label-sm label-primary">{{ family.tasks|length }}</span>
+									</a>
+								</li>
+							</ul>
+							<div class="tab-content" id="custom-content-below-tabContent">
+								<div class="tab-pane fade" id="students-list" role="tabpanel" aria-labelledby="students-list-tab">
+									{% include 'employee/support/family/includes/students-list.html.twig' %}
+								</div>
+								<div class="tab-pane fade" id="manager-notes" role="tabpanel" aria-labelledby="manager-notes-tab">
+									{% include 'employee/support/family/includes/manager-notes.html.twig' %}
+								</div>
+								<div class="tab-pane fade" id="teacher-notes" role="tabpanel" aria-labelledby="teacher-notes-tab">
+									{% include 'employee/support/family/includes/teacher-notes.html.twig' %}
+								</div>
+								<div class="tab-pane fade" id="tasks" role="tabpanel" aria-labelledby="tasks-tab">
+									{% include 'employee/support/family/includes/tasks.html.twig' %}
+								</div>
+							</div>
+						</div>
+						<!-- /.card -->
+					</div>
+					<!-- /.nav-tabs-custom -->
+				</div>
+				<!-- /.col -->
+			</div>
+			<!-- /.row -->
+		</div>
+		<!-- /.container-fluid -->
+	</section>
+	<!-- Main content -->
+	{% include 'employee/support/family/modals.html.twig' %}
 
-                                </div>
-                                <!-- /.tab-pane -->
-                            </div>
-                            <!-- /.tab-content -->
-                        </div><!-- /.card-body -->
-                    </div>
-                    <!-- /.nav-tabs-custom -->
-                    <table class="table table-striped projects">
-                        <thead>
-                        <tr>
-                            <th style="width: 5%">
-                                #
-                            </th>
-                            <th>
-                                Name
-                            </th>
-                            <th>
-                                Subscription
-                            </th>
-                            <th>
-                                Teacher
-                            </th>
-                            <th>
-                                Rate
-                            </th>
-                            <th style="width: 30%"></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for student in family.students %}
-                            <tr>
-                                <td>
-                                    # {{ student.id }}
-                                </td>
-                                <td>
-                                    <a href="{{ path('admin.family.edit', {'id': student.id}) }}">
-                                        {{ student.name }}
-                                    </a>
-                                </td>
-                                <td>
-                                    <a class="addsubs" href="#invoice" data-toggle="modal" data-target="#invoice"
-                                       data-id="29">
-                                        <span class="label label-sm label-danger">Add</span>
-                                    </a>
-                                </td>
-                                <td>
-                                    {{ student.teacher.name }}
-                                </td>
-                                <td>
-                                    <span class="label label-sm label-success"
-                                          title="Teacher Rate"><b>{{ student.teacherRate }}</b></span>                                </td>
-                                <td class="project-actions text-right">
-                                    <a class="btn btn-info btn-sm"
-                                       href="{{ path('admin.family.view', {'id': family.id}) }}"
-                                       title="Quarterly Report">
-                                        QR
-                                    </a>
-                                    <a class="btn btn-info btn-sm"
-                                       href="{{ path('admin.family.view', {'id': family.id}) }}" title="Test Results">
-                                        TR
-                                    </a>
-                                    <a class="btn btn-info btn-sm"
-                                       href="{{ path('admin.family.view', {'id': family.id}) }}" title="Class Summary">
-                                        CS
-                                    </a>
-                                    <a class="btn btn-warning btn-sm"
-                                       href="{{ path('admin.student.edit', {'id': student.id, 'family_id': family.id}) }}"
-                                       title="Edit Student Data">
-                                        <i class="fas fa-pencil-alt">
-                                        </i>
-                                    </a>
-                                    <form method="post" action="{{ path('admin.family.delete', {id: family.id}) }}"
-                                          style="display: inline-block"
-                                          onsubmit="return confirm('Are you sure about Un-Suspension of Student {{ student.name }} ?')">
-                                        <input type="hidden" name="_method" value="DELETE">
-                                        <input type="hidden" name="token" value="{{ csrf_token('delete') }}">
-                                        <button class="btn btn-danger btn-sm" title="Deactivate this student">
-                                            <i class="fas fa-ban">
-                                            </i>
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-                <!-- /.col -->
-            </div>
-            <!-- /.row -->
-        </div><!-- /.container-fluid -->
-    </section>    <!-- Main content -->
-
-
-    <!-- DEACTIVATION NOTE -->
-    <div class="modal fade" id="deactivation">
-        <div class="modal-dialog modal-lg">
-            <form id="makeOnHolidayForm" name="onHoliday" role="form">
-                <div class="modal-content">
-                    <div class="modal-header bg-danger">
-                        <h4 class="modal-title">Add Note About Deactivation of {{ family.name }}</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <p>Why are you deactivating {{ family.name }} ?</p>
-                        <div class="form-body">
-                            <div class="form-group">
-                                <label class="control-label col-4"><strong>Parent Name</strong></label>
-                                <div class="col-8">
-                                    <input type="text" placeholder="{{ family.name }}" name="parent_name"
-                                           id="parent_name" class="form-control input-circle" readonly/>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-4 control-label">
-                                    <strong>Your Comments</strong>
-                                </label>
-                                <div class="col-12">
-                                            <textarea class="form-control input-circle" cols="10"
-                                                      placeholder="Enter Your Comments" name="comment"
-                                                      id="comment"></textarea>
-                                </div>
-                            </div>
-                            <input type="hidden" value="{{ family.id }}" name="parent_id" id="parent_id"
-                                   class="form-control input-circle"/>
-                        </div>
-                    </div>
-                    <div class="modal-footer justify-content-between">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save</button>
-                    </div>
-            </form>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-    </div>
-
-    <!-- MAKE ON HOLIDAY -->
-    <div class="modal fade" id="leave">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header bg-info">
-                    <h4 class="modal-title">Enter Date When Will {{ family.name }} Return For Classes</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p>Add date for </p>
-                    <div class="form-body">
-                        <div class="form-group">
-                            <div class="col-8">
-                                <input type="date" name="date" id="date" class="form-control input-circle" required pattern="\d{4}-\d{2}-\d{2}">
-                            </div>
-                        </div>
-                        <input type="hidden" value="{{ family.id }}" name="parent_id" id="parent_id"
-                               class="form-control input-circle"></input>
-                    </div>
-                </div>
-                <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save</button>
-                </div>
-            </div>
-            <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-    </div>
-    <!-- Change Trial Date -->
-    <div class="modal fade" id="trial">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header bg-danger">
-                    <h4 class="modal-title">Change in trial date of {{ family.name }}</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p>Add date for </p>
-                    <div class="form-body">
-                        <div class="form-group">
-                            <div class="col-8">
-                                <input type="date" name="date" id="date" class="form-control input-circle" required pattern="\d{4}-\d{2}-\d{2}">
-                            </div>
-                        </div>
-                        <input type="hidden" value="{{ family.id }}" name="family_id" id="family_id"
-                               class="form-control input-circle"></input>
-                    </div>
-                </div>
-                <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary submit">Submit</button>
-                </div>
-            </div>
-            <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-    </div>  
-    
-    <!-- /.content -->
-    <script>
-        let statusForm = '{{ path('admin.family.status') }}';
-        let changeTrialDateUrl = '{{ path('admin.family.changeTrialDate') }}';
-    </script>
-{% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
-    <script src="/js/family-status.js"></script>
-{% endblock %}
+	<!-- /.modal-dialog -->
+</div>
+<!-- /.content -->
+<script>
+	let getEmployeesByCategoryUrl = '{{ path('support.family.employees_by_category') }}';
+</script>{% endblock %}{% block javascripts %}
+{{ parent() }}
+<script src="/js/family.js"></script>{% endblock %}

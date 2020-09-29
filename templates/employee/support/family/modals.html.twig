@@ -1,7 +1,7 @@
     <!-- DEACTIVATION NOTE -->
     <div class="modal fade" id="deactivation">
         <div class="modal-dialog modal-lg">
-            <form method="post" action="{{ path('admin.family.deactive', {id: family.id}) }}">
+            <form method="post" action="{{ path('support.family.deactive', {id: family.id}) }}">
                 <div class="modal-content">
                     <div class="modal-header bg-danger">
                         <h4 class="modal-title">Add Note About Deactivation of {{ family.name }}</h4>
@@ -46,7 +46,7 @@
     <div class="modal fade" id="leave">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <form method="post" action="{{path('admin.family.onholiday', { id: family.id })}}">
+                <form method="post" action="{{path('support.family.onholiday', { id: family.id })}}">
                     <div class="modal-header bg-info">
                         <h4 class="modal-title">Enter Leaving Date for {{ family.name }}</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -115,7 +115,7 @@
     <div class="modal fade" id="add-note">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <form method="post" action="{{ path('admin.family.addnote', {id: family.id}) }}">
+                <form method="post" action="{{ path('support.family.addnote', {id: family.id}) }}">
                     <div class="modal-header bg-danger">
                         <h4 class="modal-title">Add Note for {{ family.name }}</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -159,7 +159,7 @@
     <div class="modal fade" id="add-task">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <form method="post" action="{{ path('admin.family.addtask', {id: family.id}) }}">
+                <form method="post" action="{{ path('support.family.addtask', {id: family.id}) }}">
                     <div class="modal-header bg-primary">
                         <h4 class="modal-title">Change in trial date of {{ family.name }}</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">

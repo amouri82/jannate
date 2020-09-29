@@ -951,6 +951,7 @@ class Employee
     {
         $this->createdAt = new \DateTime("now");
         $this->updatedAt = new \DateTime("now");
+        $this->active = 1;
     }
 
     /**

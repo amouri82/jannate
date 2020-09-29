@@ -3,14 +3,16 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Task;
+use App\Entity\TaskString;
 use App\Form\TaskType;
 use App\Repository\TaskRepository;
 use App\Repository\EmployeeCategoryRepository;
+use App\Repository\EmployeeRepository;
+use App\Repository\TaskStringRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Knp\Component\Pager\PaginatorInterface;
 
 
 class TaskController extends AbstractController
@@ -27,39 +29,57 @@ class TaskController extends AbstractController
     private $employeeCatRepository;
 
     /**
+     * @var EmployeeRepository
+     */
+    private $employeeRepository;
+
+    /**
      * @var EntityManagerInterface
      */
     private $em;
 
+    /**
+     * @var TaskStringRepository
+     */
+    private $taskStringRepository;
+
     public function __construct(
         TaskRepository $repository,
         EntityManagerInterface $em,
-        EmployeeCategoryRepository $employeeCatRepository
+        EmployeeCategoryRepository $employeeCatRepository,
+        TaskStringRepository $taskStringRepository,
+        EmployeeRepository $employeeRepository
     ) {
         $this->repository = $repository;
         $this->employeeCatRepository = $employeeCatRepository;
+        $this->taskStringRepository = $taskStringRepository;
+        $this->employeeRepository = $employeeRepository;
         $this->em = $em;
     }
 
     /**
-     * @Route("/admin/tasks", name="admin.tasks.index")
-     * @param PaginatorInterface $paginator
+     * @Route("/admin/tasks/index/{status}", name="admin.tasks.index")
      * @param Request            $request
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function index(PaginatorInterface $paginator, Request $request)
+    public function index($status = 1, Request $request)
     {
-        $count = $this->repository->count([]);        
-        $tasks = $paginator->paginate(
-            $this->repository->findAll(),
-            $request->query->getInt('page', 1), /*page number*/
-            20 /*limit per page*/
-        );
-        // parameters to template
+        // Awaiting
+        $countAwaiting = $this->repository->count(['status' => 1]);
+        // Active
+        $countActive = $this->repository->count(['status' => 2]);
+        // Closed
+        $countClosed = $this->repository->count(['status' => 3]);        
+        
+        $tasks = $this->repository->findBy(['status' => $status]);
+
         return $this->render('admin/task/index.html.twig', [
             'tasks' => $tasks,
-            'count' => $count
+            'countAwaiting' => $countAwaiting,
+            'countActive' => $countActive,
+            'countClosed' => $countClosed,
+            'status' => $status
         ]);
     }
 
@@ -83,7 +103,7 @@ class TaskController extends AbstractController
             $this->addFlash('success' , "Task successfully created");            
             return $this->redirectToRoute('support.task.new');
         }
-        return $this->render('employee/support/Task/create.html.twig', [
+        return $this->render('employee/support/task/create.html.twig', [
             'form' => $form->createView(),
             'employee_categories' => $employee_categories
         ]);
@@ -104,5 +124,98 @@ class TaskController extends AbstractController
             $this->addFlash('success' , "task Successfully deleted");
         }
         return $this->redirectToRoute('admin.tasks.index');
-    }    
+    }
+    
+    /**
+     * @Route("/admin/task/string/{id}", name="admin.task.string")
+     * @param Task  $task
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function taskString(Task $task, Request $request)
+    {
+        $strings = $this->taskStringRepository->findBy(['task' => $task]);
+        $employee_categories = $this->employeeCatRepository->findAll();
+
+        return $this->render('admin/task/task-string.html.twig', [
+            'task' => $task,
+            'strings' => $strings,
+            'employee_categories' => $employee_categories
+        ]);
+    }     
+
+    /**
+     * @Route("/admin/task/reallocate/{id}", name="admin.task.reallocate")
+     * @param Task  $task
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function reallocateTask(Task $task, Request $request)
+    {        
+        $comment = $request->request->get('comment');
+        $employee_id = $request->request->get('employees');
+        $employee = $this->employeeRepository->find($employee_id);
+        
+        // Update Task
+        $task->setEmployee($employee);
+        $this->em->persist($task);
+        $this->em->flush();
+        
+        // Save Task String
+        $taskString = new TaskString();
+        $taskString->setTask($task);
+        $taskString->setUser($this->getUser());
+        $taskString->setMessage($comment);
+        $this->em->persist($taskString);
+        $this->em->flush();        
+
+        $this->addFlash('success', 'Task successfully re-allocated');
+        $referer = $request->headers->get('referer');
+        return $this->redirect($referer);
+
+    }   
+    
+
+    /**
+     * @Route("/admin/task/addComment/{id}", name="admin.task.addComment")
+     * @param Task  $task
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function addComment(Task $task, Request $request)
+    {        
+        $comment = $request->request->get('comment');              
+        // Save Task String
+        $taskString = new TaskString();
+        $taskString->setTask($task);
+        $taskString->setUser($this->getUser());
+        $taskString->setMessage($comment);
+        $this->em->persist($taskString);
+        $this->em->flush();        
+
+        $this->addFlash('success', 'Task String successfully Added');
+        $referer = $request->headers->get('referer');
+        return $this->redirect($referer);
+
+    }       
+    
+    /**
+     * @Route("/admin/task/close/{id}", name="admin.task.close")
+     * @param Task  $task
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function close(Task $task, Request $request)
+    {        
+        // Close Task
+        $task->setStatus(3);
+        $this->em->persist($task);
+        $this->em->flush();
+        
+        $this->addFlash('success', 'Task successfully closed');
+        $referer = $request->headers->get('referer');
+        return $this->redirect($referer);
+
+    }      
 }

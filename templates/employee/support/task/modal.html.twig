@@ -1,0 +1,98 @@
+<!-- Add Task -->
+<div class="modal fade" id="note">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<!-- BEGIN FORM-->
+			<form action="{{ path('support.task.addComment', { id: task.id }) }}" method="post" class="form-horizontal form-row-seperated">
+				<div class="modal-header bg-primary">
+					<h4 class="modal-title">Add New Comment for
+						{{ task.employee.name }}</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="form-body">
+						<div class="form-body">
+							<div class="form-group">
+								<label class="col-md-3 control-label">
+									<strong>Your Comments</strong>
+								</label>
+								<div class="col-md-9">
+									<textarea class="form-control input-circle required" required placeholder="Enter Your Comments" name="comment" id="comment"></textarea>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer justify-content-between">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary submit">Submit</button>
+				</div>
+			</form>
+			<!-- END FORM-->
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+
+<!-- START ALLOCATION -->
+<div class="modal fade" id="task">
+	<div class="modal-dialog modal-lg">
+		<!-- BEGIN FORM-->
+		<form action="{{ path('support.task.reallocate', {id:task.id}) }}" method="post" class="form-horizontal form-row-seperated">
+			<div class="modal-content">
+				<div class="modal-header bg-primary">
+					<h4 class="modal-title">Re-Allocate this Task</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="form-body">
+						<div class="form-group">
+							<label class="control-label col-md-3">
+								<strong>Employee Category</strong>
+							</label>
+							<div class="col-md-4">
+								<select class="form-control" id="employee-category" required>
+									<option value="" default>-- Select an employee category --</option>
+									{% for categorie in employee_categories %}
+										<option value="{{ categorie.id }}">{{ categorie.name }}</option>
+									{% endfor %}
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3">
+								<strong>To</strong>
+							</label>
+							<div class="col-md-4">
+								<select class="form-control" name="employees" id="employees" required>
+									<option value="">-- Employess --</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">
+								<strong>Your Comments</strong>
+							</label>
+							<div class="col-md-9">
+								<textarea class="form-control input-circle" required placeholder="Enter Your Comments" name="comment" id="comment"></textarea>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer justify-content-between">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary submit">Submit</button>
+				</div>
+			</form>
+			<!-- END FORM-->
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!-- END ALLOCATION -->

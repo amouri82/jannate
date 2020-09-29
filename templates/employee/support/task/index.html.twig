@@ -45,13 +45,13 @@
 					<div class="card-body">
 						<ul class="task-categories">
 							<li {% if status == 2 %} class="active" {% endif %}>
-								<a href="{{ path('admin.tasks.index', {status:2}) }}">ACTIVE ({{ countActive }})</a>
+								<a href="{{ path('support.tasks.index', {status:2}) }}">ACTIVE ({{ countActive }})</a>
 							</li>
 							<li {% if status == 3 %} class="active" {% endif %}>
-								<a href="{{ path('admin.tasks.index', {status:3}) }}">CLOSED ({{ countClosed }})</a>
+								<a href="{{ path('support.tasks.index', {status:3}) }}">CLOSED ({{ countClosed }})</a>
 							</li>
 							<li {% if status == 1 %} class="active" {% endif %}>
-								<a href="{{ path('admin.tasks.index', {status:1}) }}">AWAITING ({{ countAwaiting }})</a>
+								<a href="{{ path('support.tasks.index', {status:1}) }}">AWAITING ({{ countAwaiting }})</a>
 							</li>
 						</ul>
 					</div>
@@ -81,7 +81,7 @@
 										{{task.employee.name}}
 									</font>
 									<font color="#44B6AE">(Family Name:
-										<a href="{{ path('admin.family.view', {id: task.family.id}) }}">{{ task.family.name }}</a>)</font>
+										<a href="{{ path('support.family.view', {id: task.family.id}) }}">{{ task.family.name }}</a>)</font>
 								</h5>
 								<p>{{ task.message }}</p>
 								<div class="row">
@@ -90,7 +90,7 @@
 										{{ task.createdAt|date("l d M Y")}}
 									</div>
 									<div class="col-2 text-right">
-										<a href="{{ path('admin.task.string', {id: task.id}) }}">
+										<a href="{{ path('support.task.string', {id: task.id}) }}">
 											<button type="button" class="btn btn-danger btn-xs">Open String</button>
 										</a>
 									</p>

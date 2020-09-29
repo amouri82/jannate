@@ -1,22 +1,22 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Family;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
-class AdminController extends AbstractController
+class HomeController extends AbstractController
 {
     /**
-     * @Route("/admin", name="admin")
-     * @IsGranted("ROLE_ADMIN")
+     * @Route("/family", name="family.home.index")
+     * @IsGranted("ROLE_USER")
      */
     public function index()
     {
-        return $this->render('admin/home/index.html.twig', [
-            'controller_name' => 'AdminController',
+        return $this->render('family/home/index.html.twig', [
+            'controller_name' => 'HomeController',
         ]);
     }
 }

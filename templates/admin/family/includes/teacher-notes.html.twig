@@ -1,27 +1,39 @@
 <ul class="feeds">
-	{% for task in family.tasks %}
-		<li>
-			<div class="col1">
-				<div class="cont">
-					<div class="cont-col1">
-						<div class="label label-info">
-							{{ task.createdAt|date("Y-m-d") }}
+	{% if family.notes|length > 0 %}
+		{% for note in family.notes %}
+			<li>
+				<div class="col1">
+					<div class="cont">
+						<div class="cont-col1">
+							<div class="label label-info">
+								{{ note.createdAt|date("Y-m-d") }}
+							</div>
 						</div>
-					</div>
-					<div class="cont-col2">
-						<div class="desc">
-							{{ task.message }}
+						<div class="cont-col2">
+							<div class="desc">
+								{{ note.comment }}
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="col2">
-				<div class="date">
-					<a href="">
-						<span class="label label-sm label-warning">Pending</span>
-					</a>
+				<div class="col2">
+					<div class="date">
+						<span class="label label-sm label-info">{{ note.time|date('h:i a') }}</span>
+					</div>
 				</div>
-			</div>
-		</li>
-	{% endfor %}
+			</li>
+		{% endfor %}
+	{% else %}		
+			<li>
+				<div class="col1">
+					<div class="cont">
+						<div class="cont-col1">
+							<div class="label label-info">
+								No Note Found!
+							</div>
+						</div>
+					</div>
+				</div>
+			</li>	
+	{% endif %}
 </ul>

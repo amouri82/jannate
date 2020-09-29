@@ -87,6 +87,12 @@
 													<a href="{{ path('support.family.view', {id: teacher_schedule.family.id}) }}" target="_blank">
 														<i class="fa fa-user"></i>
 													</a>
+													{% if teacher_schedule.status == 1 %}
+														<font color="#FFFFFF">*</font>
+													{% endif %}
+													{% if teacher_schedule.status == 2 %}
+														<font color="#FFFFFF">#</font>
+													{% endif %}
 												{% endif %}
 											</td>
 										{% endfor %}

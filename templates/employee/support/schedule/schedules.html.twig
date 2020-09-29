@@ -1,0 +1,50 @@
+<div class="card">
+	<div class="card-header">
+		<h3 class="card-title">Responsive Hover Table</h3>
+
+		<div class="card-tools">
+			<div class="input-group input-group-sm" style="width: 150px;">
+				<input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+				<div class="input-group-append">
+					<button type="submit" class="btn btn-default">
+						<i class="fas fa-search"></i>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /.card-header -->
+	<div class="card-body table-responsive p-0">
+		<table class="table table-hover text-nowrap">
+			<thead>
+				<tr>
+					<th>A-Time</th>
+					<th>T-Time</th>
+					<th>S-Time</th>
+					<th>Online Time</th>
+					<th>Student</th>
+					<th>Summary</th>
+					<th>Teacher</th>
+					<th>Status</th>
+				</tr>
+			</thead>
+			<tbody>
+        {% for schedule in schedules %}
+				<tr>
+					<td>{{ schedule.adminTimeStart|date('H:i') }} ({{ schedule.duration|date('H:i') }})</td>
+					<td>{{ schedule.timeStart|date('H:i') }}</td>
+					<td>{{ schedule.studentTimeStart|date('H:i') }}</td>
+					<td><span class="tag tag-success">Approved</span></td>
+					<td>{{ schedule.student.name }}</td>
+					<td>Summary</td>
+					<td>{{ schedule.teacher.name }}</td>
+					<td>183</td>
+				</tr>
+        {% endfor %}
+			</tbody>
+		</table>
+	</div>
+	<!-- /.card-body -->
+</div>
+<!-- /.card --></div></div>

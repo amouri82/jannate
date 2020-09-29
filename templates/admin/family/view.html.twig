@@ -205,8 +205,8 @@
 																		</a>
 																	{% endif %}
 
-																	{% if family.status.name == 'Make on Holiday' %}
-																		<a href="make-off-leave?t_id=<?php echo $pid; ?>">
+																	{% if family.status.name == 'On Holidays' %}
+																		<a href="{{ path('admin.family.offholiday', { id: family.id }) }}">
 																			<button type="button" class="btn btn-success">
 																				<i class="fa fa-user"></i>
 																				Make off Holiday</button>
@@ -437,7 +437,7 @@
 </div>
 <!-- /.content -->
 <script>
-	let getEmployeesByCategoryUrl = '{{ path('admin.family.employees_by_category', {id: family.id}) }}';
+	let getEmployeesByCategoryUrl = '{{ path('admin.family.employees_by_category') }}';
 </script>{% endblock %}{% block javascripts %}
 {{ parent() }}
 <script src="/js/family.js"></script>{% endblock %}

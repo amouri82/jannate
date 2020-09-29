@@ -1,0 +1,75 @@
+<table class="table table-striped projects">
+	<thead>
+		<tr>
+			<th style="width: 5%">
+				#
+			</th>
+			<th>
+				Name
+			</th>
+			<th>
+				Subscription
+			</th>
+			<th>
+				Teacher
+			</th>
+			<th>
+				(Rate x Hours) Fee
+			</th>
+			<th style="width: 30%"></th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for student in family.students %}
+			<tr>
+				<td>
+					#
+					{{ student.id }}
+				</td>
+				<td>
+					<a href="{{ path('support.student.edit', {'family_id': family.id, 'id': student.id}) }}">
+						{{ student.name }}
+					</a>
+				</td>
+				<td>
+					<span class="label label-sm label-success" title="Teacher Rate">
+						<b>{{ student.teacherRate }}</b>
+					</span>
+					{{ student.teacher.name }}
+				</td>
+				<td>
+					(7 x 6)
+					{{ student.family.currency.code }}
+				</td>
+				<td class="project-actions text-right">
+					<a class="btn btn-info btn-sm" href="{{ path('support.family.view', {'id': family.id}) }}" title="Quarterly Report">
+						QR
+					</a>
+					<a class="btn btn-info btn-sm" href="{{ path('support.family.view', {'id': family.id}) }}" title="Test Results">
+						TR
+					</a>
+					<a class="btn btn-info btn-sm" href="{{ path('support.family.view', {'id': family.id}) }}" title="Class Summary">
+						CS
+					</a>
+					<a class="btn btn-warning btn-sm" href="{{ path('support.student.edit', {'id': student.id, 'family_id': family.id}) }}" title="Edit Student Data">
+						<i class="fas fa-pencil-alt"></i>
+					</a>
+					<form method="post" action="#" style="display: inline-block" onsubmit="return confirm('Are you sure about Suspension of Student {{ student.name }} ?')">
+						<input type="hidden" name="_method" value="DELETE">
+						<input type="hidden" name="token" value="{{ csrf_token('delete') }}">
+						<button class="btn btn-danger btn-sm" title="Suspend this student">
+							<i class="fa fa-thumbs-o-down"></i>
+						</button>
+					</form>
+					<form method="post" action="#', {id: family.id}) }}" style="display: inline-block" onsubmit="return confirm('Are you sure about Un-Suspension of Student {{ student.name }} ?')">
+						<input type="hidden" name="_method" value="DELETE">
+						<input type="hidden" name="token" value="{{ csrf_token('delete') }}">
+						<button class="btn btn-danger btn-sm" title="Deactivate this student">
+							<i class="fas fa-ban"></i>
+						</button>
+					</form>
+				</td>
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>

@@ -145,9 +145,7 @@ ul.pagination {
     font-size: 13px;
 }
 
-.timeline > div > .timeline-item > .time {
-    padding: 4px !important;
-}
+
 
 .md-check {
     display: inline;
@@ -213,4 +211,40 @@ ul.pagination {
     padding-top: 4px;
     padding-bottom: 5px;
     overflow: hidden;
+}
+
+ul.task-categories {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+ul.task-categories li {
+    padding: 10px;
+}
+
+ul.task-categories li:hover {
+    background-color: #eee;
+}
+
+ul.task-categories li.active {
+    background-color: #87a9c7
+}
+
+.task-date {
+    width: auto;
+    float: left;
+}
+
+.task-string {
+    width: auto;
+    float: right;
+}
+
+.timeline > div > .timeline-item > .time {
+    font-size: 14px !important;
+}
+
+.timeline > div > .timeline-item > .timeline-body, .timeline > div > .timeline-item > .timeline-footer {
+    padding: 20px 10px;
 }

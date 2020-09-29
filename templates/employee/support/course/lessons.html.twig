@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'base-employee.html.twig' %}
 
 {% block title %}Course Lessons{% endblock %}
 {% block body %}
@@ -47,7 +47,7 @@
                                         </div>
                                         <div class="col-8">
                                             <h2 class="lead">
-                                                <a href="{{ path('admin.course.lessons', {'id': course.id}) }}">
+                                                <a href="{{ path('support.course.lessons', {'id': course.id}) }}">
                                                     <b>{{ lesson.name }}</b>
                                                 </a>
                                             </h2>
@@ -57,10 +57,10 @@
                                 </div>
                                 <div class="card-footer">
                                     <div class="text-right">
-                                        <a href="{{ path('admin.lesson.edit', {'course_id': course.id, 'id': lesson.id} ) }}" class="btn btn-sm bg-teal">
+                                        <a href="{{ path('support.lesson.edit', {'course_id': course.id, 'id': lesson.id} ) }}" class="btn btn-sm bg-teal">
                                             <i class="fas fa-edit"></i> Edit lesson
                                         </a>
-                                        <form method="post" action="{{ path('admin.sms.delete', {id: lesson.id}) }}" style="display: inline-block" onsubmit="return confirm('Are you sure to delete ?')">
+                                        <form method="post" action="{{ path('support.lesson.delete', {id: lesson.id}) }}" style="display: inline-block" onsubmit="return confirm('Are you sure to delete ?')">
                                             <input type="hidden" name="_method" value="DELETE">
                                             <input type="hidden" name="course_id" value="{{ course.id }}">
                                             <input type="hidden" name="token" value="{{ csrf_token('delete') }}">

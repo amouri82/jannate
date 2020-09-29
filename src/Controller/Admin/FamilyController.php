@@ -5,7 +5,6 @@ namespace App\Controller\Admin;
 use App\Entity\Family;
 use App\Entity\Note;
 use App\Entity\Task;
-use App\Entity\EmployeeCategory;
 use App\Repository\StatusRepository;
 use App\Repository\RequestRepository;
 use App\Repository\EmployeeRepository;
@@ -275,6 +274,52 @@ class FamilyController extends AbstractController
     }    
 
     /**
+     * @Route("/admin/family/onholiday/{id}", name="admin.family.onholiday")
+     * @param Family  $family
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function makeOnHoliday(Family $family, Request $request)
+    {
+        $leaving_date = $request->request->get('leaving_date');
+        $family->setLeaveDate(new \DateTime($leaving_date));
+        $status = $this->getStatusbyStatusId(3);
+        $family->setStatus($status);
+        $message = "Family account successfully leaved on holidays";       
+        $this->em->persist($family);
+        $this->em->flush();
+        $this->addFlash('success', $message);
+
+        return $this->redirectToRoute(
+            'admin.family.view',
+            ['id' => $family->getId()]
+        );
+    }   
+    
+    /**
+     * @Route("/admin/family/offholiday/{id}", name="admin.family.offholiday")
+     * @param Family  $family
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function makeOffHoliday(Family $family, Request $request)
+    {
+        $status = $this->getStatusbyStatusId(1);
+        $family->setStatus($status);
+        $message = "Family account successfully return back from holiday";       
+        $this->em->persist($family);
+        $this->em->flush();
+        $this->addFlash('success', $message);
+
+        return $this->redirectToRoute(
+            'admin.family.view',
+            ['id' => $family->getId()]
+        );
+    }      
+
+    /**
      * @param int $status_id
      */
     private function getStatusbyStatusId($status_id)
@@ -310,6 +355,7 @@ class FamilyController extends AbstractController
     public function addNote(Family $family, Request $request)
     {
         $this->saveNote($family, $request);
+        $this->addFlash('success', 'Note successfully added');
         $referer = $request->headers->get('referer');
         return $this->redirect($referer);
     }
@@ -323,27 +369,29 @@ class FamilyController extends AbstractController
         $note = new Note();
         
         $comment = $request->request->get('comment');
+        date_default_timezone_set("Asia/Karachi");
+        $time = date('h:i a', time());
 
         $note->setComment($comment);
         $note->setFamily($family);
         $note->setUser($this->getUser());
+        $note->setTime(new \DateTime($time));
 
         $this->em->persist($note);
         $this->em->flush();
     }
 
     /**
-     * @Route("/admin/family/employees-by-category/{id}", name="admin.family.employees_by_category")
-     * @param Family  $family
+     * @Route("/admin/request/employees-by-category", name="admin.family.employees_by_category")
      * @param Request $request
      *
      * @return Symfony\Component\HttpFoundation\JsonResponse
      */
-    public function employeesByCategory(Family $family, Request $request)
+    public function employeesByCategory(Family $family = null, Request $request)
     {
         $category_id = $request->request->get('category_id');
         $category = $this->employeeCatRepository->find($category_id);
-        $employees = $this->employeeRepository->findBy(['category' => $category]);
+        $employees = $this->employeeRepository->findBy(['category' => $category, 'active' => 1]);
         count($employees);
         $employeesData = [];
         foreach ($employees as $employee) {
@@ -374,7 +422,7 @@ class FamilyController extends AbstractController
 
         $this->em->persist($task);
         $this->em->flush();
-
+        $this->addFlash('success', 'Task successfully added');
         $referer = $request->headers->get('referer');
         return $this->redirect($referer);
     }

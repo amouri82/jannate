@@ -116,11 +116,13 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements
 
         // redirect to some "app_homepage" route - of wherever you want
         if ($this->security->isGranted('ROLE_ADMIN')) {
-            $redirect_url = 'admin.employees.index';
+            $redirect_url = 'home';
         } elseif ($this->security->isGranted('ROLE_SUPPORT')) {
-            $redirect_url = 'support.teachers.index';
+            $redirect_url = 'employee.support.home';
+        } elseif ($this->security->isGranted('ROLE_USER')) {
+            $redirect_url = 'family.home.index';
         }
-
+        
         return new RedirectResponse($this->urlGenerator->generate($redirect_url));
     }
 

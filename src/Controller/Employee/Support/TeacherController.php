@@ -190,7 +190,7 @@ class TeacherController extends AbstractController
         $this->addFlash('success', $message);
 
         return $this->redirectToRoute(
-            'admin.employee.view',
+            'support.employee.view',
             ['id' => $teacher->getId()]
         );
     }
